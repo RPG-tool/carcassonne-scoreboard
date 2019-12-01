@@ -123,7 +123,6 @@ var vm = new Vue( {
       [3, 4, 5, 6, 7],   // Starwars
       [0, 1, 2, 3, 4, 5] // Classic
     ],
-    current_selected_players: [],
     game_available_status: ['settings', 'started', 'ended'],
     game_status: 'settings'
   },
@@ -133,8 +132,13 @@ var vm = new Vue( {
   created: function () {
     //this.current_game_mode = this.available_game_modes[0];
     //console.log( this.available_game_modes );
+    this.initialize();
   },
   methods: {
+    initialize() {
+      this.game_status = 'settings';
+      console.log( 'App initialize' );
+    },
     playerUpdateTest: function ( val ) {
       this.all_player_colors.push( 'purple' );
       console.log( this.all_player_colors );
