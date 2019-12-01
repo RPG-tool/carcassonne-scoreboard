@@ -71,7 +71,7 @@ Vue.component( 'player-score-tab', {
       <input v-on:change="updatePlayerStatus" type="checkbox" :name=player_color :id=player_color> {{ player_color }}
     </label>
     <br>
-    <button v-on:click="playerScoreUpdate(-1)">-1</button>
+    <button :disabled.boolean="player_score === 0" v-on:click="playerScoreUpdate(-1)">-1</button>
     <input readonly type="text" class="score" :value="player_score">
     <button v-on:click="playerScoreUpdate(1)">+1</button>
   </div>
@@ -104,7 +104,8 @@ var vm = new Vue( {
     player_colors_set: [
       [3, 4, 5, 6, 7],   // Starwars
       [0, 1, 2, 3, 4, 5] // Classic
-    ]
+    ],
+    current_selected_players: []
   },
   // components: {
   //   'choose-players': 'choose-players'
