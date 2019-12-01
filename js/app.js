@@ -24,6 +24,7 @@ Vue.component( 'choose-players', {
         <label :for=player_color>
           <input type="checkbox" :name=player_color :id=player_color> {{ player_color }}
         </label>
+        <player-score-tab></player-score-tab>
       </li>
     </ul>
     <div class="action">
@@ -49,19 +50,25 @@ Vue.component( 'player-score-tab', {
       player_score: 0
     }
   },
+  props: [
+    'player_color'
+  ],
   template: `
-  <div class="player" id="player-{{ player_idx }}">
-    <button v-on:click="scoreUpdate(-1)">-1</button>
-    <input type="text" class="score" :value="player_score">
-    <button v-on:click="scoreUpdate(1)">+1</button>
+  <div class="player">
+    <button v-on:click="playerScoreUpdate(-1)">-1</button>
+    <input readonly type="text" class="score" :value="player_score">
+    <button v-on:click="playerScoreUpdate(1)">+1</button>
   </div>
   `,
   methods: {
-    scoreUpdate: function ( val ) {
+    playerScoreUpdate: function ( val ) {
       this.player_score = this.player_score + val;
       if ( this.player_score < 0 ) {
         this.player_score = 0;
       }
+    },
+    resetPlayerScore: function () {
+      this.player_score = 0;
     }
   }
 } );
