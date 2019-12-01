@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Carcassonne Scoreboard</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Carcassonne Scoreboard</h1>
+  <div id="main-app">
+    <choose-players v-bind:class=available_game_modes[current_game_mode] v-bind:all_player_colors=all_player_colors>
+    </choose-players>
+
+    <button v-on:click="gameModeUpdateTest">Change mode</button>
+    <button v-on:click="playerUpdateTest">Add player</button>
+  </div>
+
+
+
+  <!-- <div id="player-scores-container">
+    <player-score-tab></player-score-tab>
+  </div> -->
+
+</body>
+<script src="/js/app.js"> </script>
+
+</html>
