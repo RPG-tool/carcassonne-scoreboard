@@ -16,8 +16,11 @@
     <choose-players v-bind:class=available_game_modes[current_game_mode] v-bind:all_player_colors=all_player_colors>
     </choose-players>
 
+    <hr>
+
     <button v-on:click="gameModeUpdateTest">Change mode</button>
     <button v-on:click="playerUpdateTest">Add player</button>
+    <button v-on:click="resetAllScoresTest">Reset all scores</button>
   </div>
 
 

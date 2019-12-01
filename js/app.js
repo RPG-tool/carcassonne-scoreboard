@@ -22,9 +22,9 @@ Vue.component( 'choose-players', {
     <ul class="player-list">
       <li v-for="player_color in all_player_colors">
         <label :for=player_color>
-          <input type="checkbox" :name=player_color :id=player_color> {{ player_color }}
+          <input v-on:change="updateStatus" type="checkbox" :name=player_color :id=player_color> {{ player_color }}
         </label>
-        <player-score-tab></player-score-tab>
+        <player-score-tab v-bind:player_color=player_color></player-score-tab>
       </li>
     </ul>
     <div class="action">
@@ -39,7 +39,15 @@ Vue.component( 'choose-players', {
       if ( this.player_score < 0 ) {
         this.player_score = 0;
       }
+    },
+    updateStatus: function () {
+      console.log( 'fired!' );
     }
+  },
+  created: function () {
+    this.$on( 'resetPlayerScore', function () {
+      console.log( 'children!' );
+    } );
   }
 } );
 
@@ -54,7 +62,7 @@ Vue.component( 'player-score-tab', {
     'player_color'
   ],
   template: `
-  <div class="player">
+  <div ref="player-score" class="player" :id="'player-score-' + player_color">
     <button v-on:click="playerScoreUpdate(-1)">-1</button>
     <input readonly type="text" class="score" :value="player_score">
     <button v-on:click="playerScoreUpdate(1)">+1</button>
@@ -70,6 +78,9 @@ Vue.component( 'player-score-tab', {
     resetPlayerScore: function () {
       this.player_score = 0;
     }
+  },
+  mounted: function () {
+    this.$root.$on( 'resetPlayerScore', this.resetPlayerScore );
   }
 } );
 
@@ -77,7 +88,7 @@ Vue.component( 'player-score-tab', {
 //   el: '#player-scores-container'
 // } );
 
-var main_app = new Vue( {
+var vm = new Vue( {
   el: '#main-app',
   data: {
     available_game_modes: ['starwars', 'classic'],
@@ -88,6 +99,9 @@ var main_app = new Vue( {
       'startwars': [3, 4, 5, 6, 7]
     }
   },
+  // components: {
+  //   'choose-players': 'choose-players'
+  // },
   created: function () {
     //this.current_game_mode = this.available_game_modes[0];
     //console.log( this.available_game_modes );
@@ -99,6 +113,10 @@ var main_app = new Vue( {
     },
     gameModeUpdateTest() {
       this.current_game_mode = +!this.current_game_mode; // Switchs between 0 <=> 1
+    },
+    resetAllScoresTest() {
+      console.log( 'Reset!' );
+      this.$root.$emit( 'resetPlayerScore' );
     }
   }
 } );
