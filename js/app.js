@@ -6,7 +6,7 @@ $( document ).ready( function () {
 Vue.component( 'choose-players', {
   data: function () {
     return {
-      selected_players: []
+      selected_players: 0
     }
   },
   props: [
@@ -15,7 +15,7 @@ Vue.component( 'choose-players', {
   ],
   template: `
   <div id="choose-players" :class="current_game_mode">
-    <div class="tabs">
+    <div class="tabs" v-show="!isGameStarted()">
       <label>
       <input type="radio" v-on:change="updateGameMode(0)" name="current-game-mode" value="0" checked>
         Starwars
@@ -31,8 +31,9 @@ Vue.component( 'choose-players', {
       </li>
     </ul>
     <div class="action">
-      <button id="player-reset">Reset</button>
-      <button id="start-game">Start game</button>
+      <button v-show="!isGameStarted()" id="player-reset" v-on:click="resetAll">Reset</button>
+      <button v-show="!isGameStarted()" :disabled.boolean="selected_players < 2" id="start-game" v-on:click="startGame">Start game</button>
+      <button v-show="isGameStarted()" id="end-game">End game</button>
     </div>
   </div>
   `,
@@ -46,6 +47,20 @@ Vue.component( 'choose-players', {
     updateGameMode: function ( val ) {
       console.log( val );
       this.$root.updateGameMode( val );
+    },
+    updateActivePlayers: function () {
+      console.log( 'Update active players' );
+      this.selected_players = $( '#choose-players li.selected' ).length;
+    },
+    resetAll: function () {
+      console.log( 'Reset All!' );
+    },
+    isGameStarted: function () {
+      return this.$root.game_status === 'started';
+    },
+    startGame: function () {
+      console.log( 'Start game' );
+      this.$root.game_status = 'started';
     }
   },
   created: function () {
@@ -59,21 +74,23 @@ Vue.component( 'choose-players', {
 Vue.component( 'player-score-tab', {
   data: function () {
     return {
-      player_score: 0
+      player_score: 0,
+      'player_checked': false
     }
   },
   props: [
     'player_color'
   ],
   template: `
-  <div ref="player-score" class="player" :id="'player-score-' + player_color">
+  <div class="player-score" :id="'player-score-' + player_color" :data-color="player_color">
     <label :for=player_color>
-      <input v-on:change="updatePlayerStatus" type="checkbox" :name=player_color :id=player_color> {{ player_color }}
+      <input v-model="player_checked" v-on:change="updatePlayerStatus" type="checkbox" :name=player_color :id=player_color @click="$event.target.closest('li').classList.toggle('selected')"> {{ player_color }}
     </label>
-    <br>
-    <button :disabled.boolean="player_score === 0" v-on:click="playerScoreUpdate(-1)">-1</button>
-    <input readonly type="text" class="score" :value="player_score">
-    <button v-on:click="playerScoreUpdate(1)">+1</button>
+    <fieldset :disabled="!player_checked">
+      <button :disabled.boolean="player_score === 0" v-on:click="playerScoreUpdate(-1)">-1</button>
+      <input readonly type="text" class="score" :value="player_score">
+      <button v-on:click="playerScoreUpdate(1)">+1</button>
+    </fieldset>
   </div>
   `,
   methods: {
@@ -88,6 +105,7 @@ Vue.component( 'player-score-tab', {
     },
     updatePlayerStatus: function () {
       console.log( 'Update Player Status' );
+      this.$parent.updateActivePlayers();
     }
   },
   mounted: function () {
@@ -105,7 +123,9 @@ var vm = new Vue( {
       [3, 4, 5, 6, 7],   // Starwars
       [0, 1, 2, 3, 4, 5] // Classic
     ],
-    current_selected_players: []
+    current_selected_players: [],
+    game_available_status: ['settings', 'started', 'ended'],
+    game_status: 'settings'
   },
   // components: {
   //   'choose-players': 'choose-players'
