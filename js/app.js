@@ -16,13 +16,19 @@ Vue.component( 'choose-players', {
   template: `
   <div id="choose-players" :class="current_game_mode">
     <div class="tabs">
-      <button class="tab" id="play-classic">Classic</button>
-      <button class="tab" id="play-star-wars">StarWars</button>
+      <label>
+      <input type="radio" v-on:change="updateGameMode(0)" name="current-game-mode" value="0" checked>
+        Starwars
+      </label>
+      <label>
+      <input type="radio" v-on:change="updateGameMode(1)" name="current-game-mode" value="1">
+        Classic
+      </label>
     </div>
     <ul class="player-list">
       <li v-for="player_color in all_player_colors">
         <label :for=player_color>
-          <input v-on:change="updateStatus" type="checkbox" :name=player_color :id=player_color> {{ player_color }}
+          <input v-on:change="updatePlayerStatus" type="checkbox" :name=player_color :id=player_color> {{ player_color }}
         </label>
         <player-score-tab v-bind:player_color=player_color></player-score-tab>
       </li>
@@ -40,8 +46,12 @@ Vue.component( 'choose-players', {
         this.player_score = 0;
       }
     },
-    updateStatus: function () {
-      console.log( 'fired!' );
+    updatePlayerStatus: function () {
+      console.log( 'Update Player Status' );
+    },
+    updateGameMode: function ( val ) {
+      console.log( val );
+      this.$root.updateGameMode( val );
     }
   },
   created: function () {
@@ -84,10 +94,6 @@ Vue.component( 'player-score-tab', {
   }
 } );
 
-// new Vue( {
-//   el: '#player-scores-container'
-// } );
-
 var vm = new Vue( {
   el: '#main-app',
   data: {
@@ -111,7 +117,10 @@ var vm = new Vue( {
       this.all_player_colors.push( 'purple' );
       console.log( this.all_player_colors );
     },
-    gameModeUpdateTest() {
+    updateGameMode( val ) {
+      this.current_game_mode = val; // Switchs between 0 <=> 1
+    },
+    toggleGameMode() {
       this.current_game_mode = +!this.current_game_mode; // Switchs between 0 <=> 1
     },
     resetAllScoresTest() {
