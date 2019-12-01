@@ -27,9 +27,6 @@ Vue.component( 'choose-players', {
     </div>
     <ul class="player-list">
       <li v-for="player_color in all_player_colors">
-        <label :for=player_color>
-          <input v-on:change="updatePlayerStatus" type="checkbox" :name=player_color :id=player_color> {{ player_color }}
-        </label>
         <player-score-tab v-bind:player_color=player_color></player-score-tab>
       </li>
     </ul>
@@ -45,9 +42,6 @@ Vue.component( 'choose-players', {
       if ( this.player_score < 0 ) {
         this.player_score = 0;
       }
-    },
-    updatePlayerStatus: function () {
-      console.log( 'Update Player Status' );
     },
     updateGameMode: function ( val ) {
       console.log( val );
@@ -73,6 +67,10 @@ Vue.component( 'player-score-tab', {
   ],
   template: `
   <div ref="player-score" class="player" :id="'player-score-' + player_color">
+    <label :for=player_color>
+      <input v-on:change="updatePlayerStatus" type="checkbox" :name=player_color :id=player_color> {{ player_color }}
+    </label>
+    <br>
     <button v-on:click="playerScoreUpdate(-1)">-1</button>
     <input readonly type="text" class="score" :value="player_score">
     <button v-on:click="playerScoreUpdate(1)">+1</button>
@@ -87,6 +85,9 @@ Vue.component( 'player-score-tab', {
     },
     resetPlayerScore: function () {
       this.player_score = 0;
+    },
+    updatePlayerStatus: function () {
+      console.log( 'Update Player Status' );
     }
   },
   mounted: function () {
@@ -100,10 +101,10 @@ var vm = new Vue( {
     available_game_modes: ['starwars', 'classic'],
     current_game_mode: 0, // 0 -> sw, 1 -> classic
     all_player_colors: ['yellow', 'grey', 'blue', 'black', 'green', 'red', 'orange', 'white'],
-    player_colors_set: {
-      'classic': [0, 1, 2, 3, 4, 5],
-      'startwars': [3, 4, 5, 6, 7]
-    }
+    player_colors_set: [
+      [3, 4, 5, 6, 7],   // Starwars
+      [0, 1, 2, 3, 4, 5] // Classic
+    ]
   },
   // components: {
   //   'choose-players': 'choose-players'
@@ -126,6 +127,16 @@ var vm = new Vue( {
     resetAllScoresTest() {
       console.log( 'Reset!' );
       this.$root.$emit( 'resetPlayerScore' );
+    },
+    filtered_player_colors() {
+      var filtered = this.all_player_colors.filter( ( elemento, idx ) => {
+        // debugger;
+        if ( this.player_colors_set[this.current_game_mode].indexOf( idx ) > -1 ) {
+          return elemento;
+        }
+      } );
+      // console.log( filtered );
+      return filtered;
     }
   }
 } );

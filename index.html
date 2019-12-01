@@ -13,7 +13,8 @@
 <body>
   <h1>Carcassonne Scoreboard</h1>
   <div id="main-app">
-    <choose-players v-bind:class=available_game_modes[current_game_mode] v-bind:all_player_colors=all_player_colors>
+    <choose-players v-bind:class=available_game_modes[current_game_mode]
+      v-bind:all_player_colors="filtered_player_colors()">
     </choose-players>
 
     <hr>
