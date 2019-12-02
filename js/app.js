@@ -1,9 +1,12 @@
 import Vue from 'vue';
-import App from './js/app.vue';
-new Vue({ render: createElement => createElement(app) }).$mount('#main-app');
-
-$(document).ready(function () {
-  // La magia aquí
-  console.log('Ready!');
+import app from './js/app.vue';
+let vm = new Vue({
+  el: "#main-app",
+  render: createElement => createElement(app)
 });
+
+// $(document).ready(function () {
+//   // La magia aquí
+//   console.log('Ready!');
+// });
 
