@@ -20,7 +20,7 @@
 </template>
 
 <script>
-Vue.component("player-score-tab", {
+export default {
   data: function() {
     return {
       player_score: 0,
@@ -28,6 +28,9 @@ Vue.component("player-score-tab", {
     };
   },
   props: ["player_color", "player_selected"],
+  mounted: function() {
+    this.$root.$on("resetPlayerScore", this.resetPlayerScore);
+  },
   methods: {
     playerScoreUpdate: function(val) {
       this.player_score = this.player_score + val;
@@ -42,9 +45,6 @@ Vue.component("player-score-tab", {
       console.log("Update Player Status");
       this.$parent.updateActivePlayers();
     }
-  },
-  mounted: function() {
-    this.$root.$on("resetPlayerScore", this.resetPlayerScore);
   }
-});
+};
 </script>

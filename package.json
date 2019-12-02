@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/carloscabo/carcassonne-scoreboard/issues"
   },
-  "homepage": "https://github.com/carloscabo/carcassonne-scoreboard#readme"
+  "homepage": "https://github.com/carloscabo/carcassonne-scoreboard#readme",
+  "dependencies": {
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.0.2",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
+  }
 }
