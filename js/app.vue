@@ -17,31 +17,33 @@
 import ChoosePlayers from "./choose-players.vue";
 
 export default {
-  data: {
-    available_game_modes: ["starwars", "classic"],
-    current_game_mode: 0, // 0 -> sw, 1 -> classic
-    all_player_colors: [
-      "yellow",
-      "grey",
-      "blue",
-      "black",
-      "green",
-      "red",
-      "orange",
-      "white"
-    ],
-    player_colors_set: [
-      [3, 4, 5, 6, 7], // Starwars
-      [0, 1, 2, 3, 4, 5] // Classic
-    ],
-    game_available_status: ["settings", "started", "ended"],
-    game_status: "settings"
+  data() {
+    return {
+      available_game_modes: ["starwars", "classic"],
+      current_game_mode: 0, // 0 -> sw, 1 -> classic
+      all_player_colors: [
+        "yellow",
+        "grey",
+        "blue",
+        "black",
+        "green",
+        "red",
+        "orange",
+        "white"
+      ],
+      player_colors_set: [
+        [3, 4, 5, 6, 7], // Starwars
+        [0, 1, 2, 3, 4, 5] // Classic
+      ],
+      game_available_status: ["settings", "started", "ended"],
+      game_status: "settings"
+    };
   },
   computed: {},
   watch: {},
   created: function() {
     //this.current_game_mode = this.available_game_modes[0];
-    //console.log( this.available_game_modes );
+    console.log(this.$store.state.players);
     // this.initialize();
   },
   methods: {
