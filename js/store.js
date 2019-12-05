@@ -17,6 +17,7 @@ export default new Vuex.Store({
     game_state: 'welcome',
     game_modes: ["starwars", "classic"],
     current_game_mode: -1, // 0 -> sw, 1 -> classic
+    players_selected: [],
     /* playerGroups: [
       [3, 4, 5, 6, 7], // Sw
       [0, 1, 2, 3, 4, 5] // Classic
@@ -26,30 +27,35 @@ export default new Vuex.Store({
         color: "yellow",
         score: 0,
         active: false,
+        is_checked: false,
         available_in: [1]
       },
       {
         color: "grey",
         score: 0,
         active: false,
+        is_checked: false,
         available_in: [1]
       },
       {
         color: "blue",
         score: 0,
         active: false,
+        is_checked: false,
         available_in: [1]
       },
       {
         color: "black",
         score: 0,
         active: false,
+        is_checked: false,
         available_in: [0, 1]
       },
       {
         color: "green",
         score: 0,
         active: false,
+        is_checked: false,
         available_in: [0, 1]
       },
       {
@@ -62,12 +68,14 @@ export default new Vuex.Store({
         color: "orange",
         score: 0,
         active: false,
+        is_checked: false,
         available_in: [0]
       },
       {
         color: "white",
         score: 0,
         active: false,
+        is_checked: false,
         available_in: [0]
       }
     ]
