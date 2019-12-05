@@ -1,21 +1,8 @@
 <template>
   <div class="player-score" :id="'player-score-' + player_color" :data-color="player_color">
-    <label :for="player_color">
-      <input
-        v-model="player_checked"
-        v-on:change="updatePlayerStatus"
-        type="checkbox"
-        :name="player_color"
-        :id="player_color"
-        @click="$event.target.closest('li').classList.toggle('selected')"
-      />
-      {{ player_color }}
-    </label>
-    <fieldset :disabled="!player_checked">
-      <button :disabled="player_score === 0" v-on:click="playerScoreUpdate(-1)">-1</button>
-      <input readonly type="text" class="score" :value="player_score" />
-      <button v-on:click="playerScoreUpdate(1)">+1</button>
-    </fieldset>
+    <button :disabled="player_score === 0" v-on:click="playerScoreUpdate(-1)">-1</button>
+    <input readonly type="text" class="score" :value="player_score" />
+    <button v-on:click="playerScoreUpdate(1)">+1</button>
   </div>
 </template>
 
@@ -23,8 +10,7 @@
 export default {
   data: function() {
     return {
-      player_score: 0,
-      player_checked: false
+      player_score: 0
     };
   },
   props: ["player_color", "player_selected"],
@@ -40,10 +26,6 @@ export default {
     },
     resetPlayerScore: function() {
       this.player_score = 0;
-    },
-    updatePlayerStatus: function() {
-      console.log("Update Player Status");
-      this.$parent.updateActivePlayers();
     }
   }
 };

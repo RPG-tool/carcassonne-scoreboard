@@ -19,9 +19,11 @@
           <PlayerSelectRow v-bind:idx="idx" v-bind:player_color="player.color"></PlayerSelectRow>
         </li>
       </ul>
+      Players selected: {{ $store.state.players_selected }} ( {{ $store.state.players_selected.length }} )
+      <hr />
     </template>
     <button
-      :disabled="this.$store.state.current_game_mode < 0 && true"
+      :disabled="this.$store.state.current_game_mode < 0 || $store.state.players_selected.length < 2"
       @click="startGame"
     >Start game</button>
   </div>
@@ -50,7 +52,7 @@ export default {
   },
   methods: {
     startGame() {
-      console.log(this.$store.getters.testA);
+      this.$store.commit("SET_GAME_STATE", "playing");
     },
     getActivePlayerGroup(group_id) {
       console.log(this.$store.state.current_game_mode);

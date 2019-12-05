@@ -95,11 +95,13 @@ export default new Vuex.Store({
     RESET_GAME: state => {
       state.game_state = 'welcome';
       state.current_game_mode = -1;
+      state.players_selected = [];
     },
     INIT_GAME: state => state.game_state = 'choosing_players_and_mode',
     RESET_PLAYER_SCORE: state => state.players = state.players.map(player => player.score = 0),
     RESET_PLAYER_STATUS: state => state.players = state.players.map(player => player.active = false),
     SET_GAME_MODE(state, current_game_mode) {
+      state.players_selected = [];
       state.current_game_mode = parseInt(current_game_mode, 10);
       // Actuliza tb la lista de players activos
       state.players.forEach((player, idx) => {
@@ -109,6 +111,23 @@ export default new Vuex.Store({
           player.active = false;
         }
       });
+    },
+
+    SET_GAME_STATE(state, game_state) {
+      state.game_state = game_state;
+    },
+
+    UPDATE_CHECKBOX(state, data) {
+      console.log(data);
+      if (data.value) {
+        if (!state.players_selected.includes(data.player_color)) {
+          state.players_selected.push(data.player_color);
+        }
+      } else {
+        if (state.players_selected.includes(data.player_color)) {
+          state.players_selected.splice(state.players_selected.indexOf(data.player_color), 1);
+        }
+      }
     }
   },
   actions: {

@@ -9923,6 +9923,7 @@ var _default = new _vuex.default.Store({
     RESET_GAME: function RESET_GAME(state) {
       state.game_state = 'welcome';
       state.current_game_mode = -1;
+      state.players_selected = [];
     },
     INIT_GAME: function INIT_GAME(state) {
       return state.game_state = 'choosing_players_and_mode';
@@ -9938,6 +9939,7 @@ var _default = new _vuex.default.Store({
       });
     },
     SET_GAME_MODE: function SET_GAME_MODE(state, current_game_mode) {
+      state.players_selected = [];
       state.current_game_mode = parseInt(current_game_mode, 10); // Actuliza tb la lista de players activos
 
       state.players.forEach(function (player, idx) {
@@ -9947,6 +9949,22 @@ var _default = new _vuex.default.Store({
           player.active = false;
         }
       });
+    },
+    SET_GAME_STATE: function SET_GAME_STATE(state, game_state) {
+      state.game_state = game_state;
+    },
+    UPDATE_CHECKBOX: function UPDATE_CHECKBOX(state, data) {
+      console.log(data);
+
+      if (data.value) {
+        if (!state.players_selected.includes(data.player_color)) {
+          state.players_selected.push(data.player_color);
+        }
+      } else {
+        if (state.players_selected.includes(data.player_color)) {
+          state.players_selected.splice(state.players_selected.indexOf(data.player_color), 1);
+        }
+      }
     }
   },
   actions: {
@@ -10345,14 +10363,26 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   data: function data() {
-    return {
-      player_score: 0,
-      player_checked: false
+    return {// player_score: 0
     };
   },
-  props: ["idx", "player_color", "player_selected"],
+  computed: {
+    message: {
+      get: function get() {
+        return false; // return this.$store.state.obj.message;
+      },
+      set: function set(value) {
+        this.$store.commit("UPDATE_CHECKBOX", {
+          value: value,
+          player_color: this.player_color
+        });
+      }
+    }
+  },
+  props: ["idx", "player_color"],
   mounted: function mounted() {},
   methods: {}
 };
@@ -10382,40 +10412,46 @@ exports.default = _default;
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.player_checked,
-              expression: "player_checked"
+              value: _vm.message,
+              expression: "message"
             }
           ],
           attrs: {
             type: "checkbox",
-            name: "player-color-" + _vm.player_color,
-            id: "player-color-" + _vm.player_color,
+            name:
+              "player-color-" +
+              _vm.player_color +
+              "-" +
+              _vm.$store.state.current_game_mode,
+            id:
+              "player-color-" +
+              _vm.player_color +
+              "-" +
+              _vm.$store.state.current_game_mode,
             "data-color": _vm.player_color,
             "data-idx": _vm.idx
           },
           domProps: {
-            checked: Array.isArray(_vm.player_checked)
-              ? _vm._i(_vm.player_checked, null) > -1
-              : _vm.player_checked
+            checked: Array.isArray(_vm.message)
+              ? _vm._i(_vm.message, null) > -1
+              : _vm.message
           },
           on: {
             change: function($event) {
-              var $$a = _vm.player_checked,
+              var $$a = _vm.message,
                 $$el = $event.target,
                 $$c = $$el.checked ? true : false
               if (Array.isArray($$a)) {
                 var $$v = null,
                   $$i = _vm._i($$a, $$v)
                 if ($$el.checked) {
-                  $$i < 0 && (_vm.player_checked = $$a.concat([$$v]))
+                  $$i < 0 && (_vm.message = $$a.concat([$$v]))
                 } else {
                   $$i > -1 &&
-                    (_vm.player_checked = $$a
-                      .slice(0, $$i)
-                      .concat($$a.slice($$i + 1)))
+                    (_vm.message = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
                 }
               } else {
-                _vm.player_checked = $$c
+                _vm.message = $$c
               }
             }
           }
@@ -10425,8 +10461,9 @@ exports.default = _default;
             _vm._s(_vm.idx) +
             " ) " +
             _vm._s(_vm.player_color) +
-            "\n  "
-        )
+            "\n    "
+        ),
+        _c("br")
       ])
     ]
   )
@@ -10501,6 +10538,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   data: function data() {
     return {};
@@ -10521,7 +10560,7 @@ var _default = {
   },
   methods: {
     startGame: function startGame() {
-      console.log(this.$store.getters.testA);
+      this.$store.commit("SET_GAME_STATE", "playing");
     },
     getActivePlayerGroup: function getActivePlayerGroup(group_id) {
       console.log(this.$store.state.current_game_mode);
@@ -10634,14 +10673,26 @@ exports.default = _default;
                 )
               }),
               0
-            )
+            ),
+            _vm._v(
+              "\n    Players selected: " +
+                _vm._s(_vm.$store.state.players_selected) +
+                " ( " +
+                _vm._s(_vm.$store.state.players_selected.length) +
+                " )\n    "
+            ),
+            _c("hr")
           ]
         : _vm._e(),
       _vm._v(" "),
       _c(
         "button",
         {
-          attrs: { disabled: this.$store.state.current_game_mode < 0 && true },
+          attrs: {
+            disabled:
+              this.$store.state.current_game_mode < 0 ||
+              _vm.$store.state.players_selected.length < 2
+          },
           on: { click: _vm.startGame }
         },
         [_vm._v("Start game")]
@@ -10679,7 +10730,263 @@ render._withStripped = true
         
       }
     })();
-},{"./player-select-row":"js/player-select-row.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
+},{"./player-select-row":"js/player-select-row.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/player-score-row.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {
+      player_score: 0
+    };
+  },
+  props: ["player_color", "player_selected"],
+  mounted: function mounted() {
+    this.$root.$on("resetPlayerScore", this.resetPlayerScore);
+  },
+  methods: {
+    playerScoreUpdate: function playerScoreUpdate(val) {
+      this.player_score = this.player_score + val;
+
+      if (this.player_score < 0) {
+        this.player_score = 0;
+      }
+    },
+    resetPlayerScore: function resetPlayerScore() {
+      this.player_score = 0;
+    }
+  }
+};
+exports.default = _default;
+        var $68a224 = exports.default || module.exports;
+      
+      if (typeof $68a224 === 'function') {
+        $68a224 = $68a224.options;
+      }
+    
+        /* template */
+        Object.assign($68a224, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "player-score",
+      attrs: {
+        id: "player-score-" + _vm.player_color,
+        "data-color": _vm.player_color
+      }
+    },
+    [
+      _c(
+        "button",
+        {
+          attrs: { disabled: _vm.player_score === 0 },
+          on: {
+            click: function($event) {
+              return _vm.playerScoreUpdate(-1)
+            }
+          }
+        },
+        [_vm._v("-1")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "score",
+        attrs: { readonly: "", type: "text" },
+        domProps: { value: _vm.player_score }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              return _vm.playerScoreUpdate(1)
+            }
+          }
+        },
+        [_vm._v("+1")]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$68a224', $68a224);
+          } else {
+            api.reload('$68a224', $68a224);
+          }
+        }
+
+        
+      }
+    })();
+},{"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/playing.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _playerScoreRow = _interopRequireDefault(require("./player-score-row.vue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {};
+  },
+  prop: {},
+  computed: {},
+  watch: {},
+  created: function created() {// console.log(this.$store.getters.activePlayers);
+  },
+  methods: {
+    stopGame: function stopGame() {
+      this.$store.commit("SET_GAME_STATE", "ended");
+    }
+  },
+  components: {
+    PlayerScoreRow: _playerScoreRow.default
+  }
+};
+exports.default = _default;
+        var $b5c64d = exports.default || module.exports;
+      
+      if (typeof $b5c64d === 'function') {
+        $b5c64d = $b5c64d.options;
+      }
+    
+        /* template */
+        Object.assign($b5c64d, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._v(
+      "\n  Game mode " +
+        _vm._s(
+          _vm.$store.state.game_modes[_vm.$store.state.current_game_mode]
+        ) +
+        "\n  "
+    ),
+    _c("br"),
+    _vm._v(
+      "\n\n  Vuex store value: " +
+        _vm._s(_vm.$store.state.current_game_mode) +
+        "\n  "
+    ),
+    _c(
+      "ul",
+      { staticClass: "player-list" },
+      _vm._l(_vm.$store.getters.activePlayers, function(player, idx) {
+        return _c(
+          "li",
+          { key: idx },
+          [
+            _c("PlayerScoreRow", {
+              attrs: { idx: idx, player_color: player.color }
+            })
+          ],
+          1
+        )
+      }),
+      0
+    ),
+    _vm._v(
+      "\n  Players selected: " +
+        _vm._s(_vm.$store.state.players_selected) +
+        " ( " +
+        _vm._s(_vm.$store.state.players_selected.length) +
+        " )\n  "
+    ),
+    _c("hr"),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.stopGame } }, [_vm._v("Stop game")])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$b5c64d', $b5c64d);
+          } else {
+            api.reload('$b5c64d', $b5c64d);
+          }
+        }
+
+        
+      }
+    })();
+},{"./player-score-row.vue":"js/player-score-row.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10690,6 +10997,8 @@ exports.default = void 0;
 var _welcome = _interopRequireDefault(require("./welcome.vue"));
 
 var _choosingPlayersAndMode = _interopRequireDefault(require("./choosing-players-and-mode.vue"));
+
+var _playing = _interopRequireDefault(require("./playing.vue"));
 
 var _vuex = require("vuex");
 
@@ -10716,7 +11025,8 @@ var _default = {
   methods: _objectSpread({}, (0, _vuex.mapActions)(["resetGame"])),
   components: {
     Welcome: _welcome.default,
-    ChoosingPlayersAndMode: _choosingPlayersAndMode.default
+    ChoosingPlayersAndMode: _choosingPlayersAndMode.default,
+    Playing: _playing.default
   }
 };
 exports.default = _default;
@@ -10738,7 +11048,7 @@ exports.default = _default;
       this.$store.state.game_state == "choosing_players_and_mode"
         ? [_c("ChoosingPlayersAndMode")]
         : this.$store.state.game_state == "playing"
-        ? [_vm._v("Playing!")]
+        ? [_c("Playing")]
         : this.$store.state.game_state == "ended"
         ? [_vm._v("Ended! Show winner")]
         : [_c("Welcome")],
@@ -10779,7 +11089,7 @@ render._withStripped = true
         
       }
     })();
-},{"./welcome.vue":"js/welcome.vue","./choosing-players-and-mode.vue":"js/choosing-players-and-mode.vue","vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
+},{"./welcome.vue":"js/welcome.vue","./choosing-players-and-mode.vue":"js/choosing-players-and-mode.vue","./playing.vue":"js/playing.vue","vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -10828,7 +11138,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52764" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51031" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
