@@ -128,6 +128,10 @@ export default new Vuex.Store({
           state.players_selected.splice(state.players_selected.indexOf(data.player_color), 1);
         }
       }
+    },
+
+    UPDATE_PLAYER_SCORE(state, data) {
+      console.log(data);
     }
   },
   actions: {

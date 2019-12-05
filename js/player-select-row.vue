@@ -2,7 +2,7 @@
   <div class="player-select-row" :id="'player-select-' + player_color">
     <label :for="'player-color-' + player_color">
       <input
-        v-model="message"
+        v-model="update_cb_status"
         type="checkbox"
         :name="'player-color-' + player_color +'-'+ $store.state.current_game_mode"
         :id="'player-color-' + player_color +'-'+ $store.state.current_game_mode"
@@ -23,7 +23,7 @@ export default {
     };
   },
   computed: {
-    message: {
+    update_cb_status: {
       get() {
         return false;
         // return this.$store.state.obj.message;

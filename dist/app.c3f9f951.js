@@ -9965,6 +9965,9 @@ var _default = new _vuex.default.Store({
           state.players_selected.splice(state.players_selected.indexOf(data.player_color), 1);
         }
       }
+    },
+    UPDATE_PLAYER_SCORE: function UPDATE_PLAYER_SCORE(state, data) {
+      console.log(data);
     }
   },
   actions: {
@@ -10370,7 +10373,7 @@ var _default = {
     };
   },
   computed: {
-    message: {
+    update_cb_status: {
       get: function get() {
         return false; // return this.$store.state.obj.message;
       },
@@ -10412,8 +10415,8 @@ exports.default = _default;
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.message,
-              expression: "message"
+              value: _vm.update_cb_status,
+              expression: "update_cb_status"
             }
           ],
           attrs: {
@@ -10432,26 +10435,28 @@ exports.default = _default;
             "data-idx": _vm.idx
           },
           domProps: {
-            checked: Array.isArray(_vm.message)
-              ? _vm._i(_vm.message, null) > -1
-              : _vm.message
+            checked: Array.isArray(_vm.update_cb_status)
+              ? _vm._i(_vm.update_cb_status, null) > -1
+              : _vm.update_cb_status
           },
           on: {
             change: function($event) {
-              var $$a = _vm.message,
+              var $$a = _vm.update_cb_status,
                 $$el = $event.target,
                 $$c = $$el.checked ? true : false
               if (Array.isArray($$a)) {
                 var $$v = null,
                   $$i = _vm._i($$a, $$v)
                 if ($$el.checked) {
-                  $$i < 0 && (_vm.message = $$a.concat([$$v]))
+                  $$i < 0 && (_vm.update_cb_status = $$a.concat([$$v]))
                 } else {
                   $$i > -1 &&
-                    (_vm.message = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                    (_vm.update_cb_status = $$a
+                      .slice(0, $$i)
+                      .concat($$a.slice($$i + 1)))
                 }
               } else {
-                _vm.message = $$c
+                _vm.update_cb_status = $$c
               }
             }
           }
@@ -10753,7 +10758,7 @@ var _default = {
       player_score: 0
     };
   },
-  props: ["player_color", "player_selected"],
+  props: ["player_color"],
   mounted: function mounted() {// this.$root.$on("resetPlayerScore", this.resetPlayerScore);
   },
   methods: {
@@ -10763,6 +10768,11 @@ var _default = {
       if (this.player_score < 0) {
         this.player_score = 0;
       }
+
+      this.$store.commit("UPDATE_PLAYER_SCORE", {
+        value: this.player_score,
+        player_color: this.player_color
+      });
     },
     resetPlayerScore: function resetPlayerScore() {
       this.player_score = 0;
@@ -11010,11 +11020,33 @@ var _vuex = require("vuex");
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {};
   },
-  computed: {},
+  computed: {
+    getSortedListByScore: function getSortedListByScore() {
+      return [{
+        color: "yellow",
+        score: 28,
+        active: false,
+        is_checked: false,
+        available_in: [1]
+      }, {
+        color: "grey",
+        score: 26,
+        active: false,
+        is_checked: false,
+        available_in: [1]
+      }];
+    }
+  },
   watch: {},
   methods: {
     startNewGame: function startNewGame() {
@@ -11039,6 +11071,23 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("h1", [_vm._v("Mostrar al ganador")]),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "player-list winner-list" },
+      _vm._l(_vm.getSortedListByScore, function(player, idx) {
+        return _c("li", { key: idx }, [
+          _vm._v(
+            _vm._s(idx) +
+              " " +
+              _vm._s(player.color) +
+              " " +
+              _vm._s(player.score)
+          )
+        ])
+      }),
+      0
+    ),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -11231,7 +11280,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52380" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56289" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

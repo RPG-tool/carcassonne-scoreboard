@@ -15,7 +15,7 @@ export default {
       player_score: 0
     };
   },
-  props: ["player_color", "player_selected"],
+  props: ["player_color"],
   mounted: function() {
     // this.$root.$on("resetPlayerScore", this.resetPlayerScore);
   },
@@ -25,6 +25,10 @@ export default {
       if (this.player_score < 0) {
         this.player_score = 0;
       }
+      this.$store.commit("UPDATE_PLAYER_SCORE", {
+        value: this.player_score,
+        player_color: this.player_color
+      });
     },
     resetPlayerScore: function() {
       this.player_score = 0;
