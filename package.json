@@ -19,7 +19,8 @@
   "homepage": "https://github.com/carloscabo/carcassonne-scoreboard#readme",
   "dependencies": {
     "vue-hot-reload-api": "^2.3.4",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.2",

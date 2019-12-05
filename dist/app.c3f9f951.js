@@ -9699,6 +9699,126 @@ var index_esm = {
 };
 var _default = index_esm;
 exports.default = _default;
+},{}],"node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var r = function (r) {
+  return function (r) {
+    return !!r && "object" == typeof r;
+  }(r) && !function (r) {
+    var t = Object.prototype.toString.call(r);
+    return "[object RegExp]" === t || "[object Date]" === t || function (r) {
+      return r.$$typeof === e;
+    }(r);
+  }(r);
+},
+    e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;
+
+function t(r, e) {
+  return !1 !== e.clone && e.isMergeableObject(r) ? c(Array.isArray(r) ? [] : {}, r, e) : r;
+}
+
+function n(r, e, n) {
+  return r.concat(e).map(function (r) {
+    return t(r, n);
+  });
+}
+
+function o(r) {
+  return Object.keys(r).concat(function (r) {
+    return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {
+      return r.propertyIsEnumerable(e);
+    }) : [];
+  }(r));
+}
+
+function u(r, e) {
+  try {
+    return e in r;
+  } catch (r) {
+    return !1;
+  }
+}
+
+function c(e, i, a) {
+  (a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;
+  var f = Array.isArray(i);
+  return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {
+    var i = {};
+    return n.isMergeableObject(r) && o(r).forEach(function (e) {
+      i[e] = t(r[e], n);
+    }), o(e).forEach(function (o) {
+      (function (r, e) {
+        return u(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));
+      })(r, o) || (i[o] = u(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {
+        if (!e.customMerge) return c;
+        var t = e.customMerge(r);
+        return "function" == typeof t ? t : c;
+      }(o, n)(r[o], e[o], n) : t(e[o], n));
+    }), i;
+  }(e, i, a) : t(i, a);
+}
+
+c.all = function (r, e) {
+  if (!Array.isArray(r)) throw new Error("first argument should be an array");
+  return r.reduce(function (r, t) {
+    return c(r, t, e);
+  }, {});
+};
+
+var i = c;
+
+function a(r, e, t) {
+  return void 0 === (r = (e.split ? e.split(".") : e).reduce(function (r, e) {
+    return r && r[e];
+  }, r)) ? t : r;
+}
+
+function _default(r, e, t) {
+  if (e = (r = r || {}).storage || window && window.localStorage, t = r.key || "vuex", !function (r) {
+    try {
+      return r.setItem("@@", 1), r.removeItem("@@"), !0;
+    } catch (r) {}
+
+    return !1;
+  }(e)) throw new Error("Invalid storage instance given");
+  var n = a(r, "getState", function (r, e, t) {
+    try {
+      return (t = e.getItem(r)) && void 0 !== t ? JSON.parse(t) : void 0;
+    } catch (r) {}
+  })(t, e);
+  return function (o) {
+    "object" == typeof n && null !== n && (o.replaceState(i(o.state, n, {
+      arrayMerge: r.arrayMerger || function (r, e) {
+        return e;
+      },
+      clone: !1
+    })), (r.rehydrated || function () {})(o)), (r.subscriber || function (r) {
+      return function (e) {
+        return r.subscribe(e);
+      };
+    })(o)(function (n, o) {
+      (r.filter || function () {
+        return !0;
+      })(n) && (r.setState || function (r, e, t) {
+        return t.setItem(r, JSON.stringify(e));
+      })(t, (r.reducer || function (r, e) {
+        return 0 === e.length ? r : e.reduce(function (e, t) {
+          return function (r, e, t, n) {
+            return (e = e.split ? e.split(".") : e).slice(0, -1).reduce(function (r, e) {
+              return r[e] = r[e] || {};
+            }, r)[e.pop()] = t, r;
+          }(e, t, a(r, t));
+        }, {});
+      })(o, r.paths || []), e);
+    });
+  };
+}
 },{}],"js/store.js":[function(require,module,exports) {
 "use strict";
 
@@ -9711,45 +9831,59 @@ var _vue = _interopRequireDefault(require("vue"));
 
 var _vuex = _interopRequireDefault(require("vuex"));
 
+var _vuexPersistedstate = _interopRequireDefault(require("vuex-persistedstate"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue.default.use(_vuex.default);
 
 var _default = new _vuex.default.Store({
+  plugins: [(0, _vuexPersistedstate.default)()],
   state: {
-    game_state: 'start',
+    game_state: false,
+    game_modes: ["starwars", "classic"],
+    current_game_mode: 0,
+    // 0 -> sw, 1 -> classic
     players: [{
       color: "yellow",
       score: 0,
-      active: false
+      status: false,
+      available_in: [1]
     }, {
       name: "grey",
       score: 0,
-      active: false
+      status: false,
+      available_in: [1]
     }, {
       name: "blue",
       score: 0,
-      active: false
+      status: false,
+      available_in: [1]
     }, {
       name: "black",
       score: 0,
-      active: false
+      status: false,
+      available_in: [0, 1]
     }, {
       name: "green",
       score: 0,
-      active: false
+      status: false,
+      available_in: [0, 1]
     }, {
       name: "red",
       score: 0,
-      active: false
+      status: false,
+      available_in: [0, 1]
     }, {
       name: "orange",
       score: 0,
-      active: false
+      status: false,
+      available_in: [0, 1]
     }, {
       name: "white",
       score: 0,
-      active: false
+      status: false,
+      available_in: [0, 1]
     }]
   },
   getters: {
@@ -9763,11 +9897,39 @@ var _default = new _vuex.default.Store({
         return p == player;
       }).active;
     }
+  },
+  mutations: {
+    resetGame: function resetGame(state) {
+      return state.game_state = false;
+    },
+    initGame: function initGame(state) {
+      return state.game_state = true;
+    },
+    resetPlayersScore: function resetPlayersScore(state) {
+      return state.players = state.players.map(function (player) {
+        return player.score = 0;
+      });
+    },
+    resetPlayersStatus: function resetPlayersStatus(state) {
+      return state.players = state.players.map(function (player) {
+        return player.status = false;
+      });
+    }
+  },
+  actions: {
+    initializeGame: function initializeGame(ctx) {
+      ctx.commit('initGame');
+      ctx.commit('resetPlayersScore');
+      ctx.commit('resetPlayersStatus');
+    },
+    resetGame: function resetGame(ctx) {
+      ctx.commit('resetGame');
+    }
   }
 });
 
 exports.default = _default;
-},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","vuex":"node_modules/vuex/dist/vuex.esm.js"}],"node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","vuex":"node_modules/vuex/dist/vuex.esm.js","vuex-persistedstate":"node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js"}],"node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = Object.create(null)
@@ -10042,7 +10204,92 @@ function patchScopedSlots (instance) {
   }
 }
 
-},{}],"js/player-score-tab.vue":[function(require,module,exports) {
+},{}],"js/welcome.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _vuex = require("vuex");
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _default = {
+  data: function data() {
+    return {};
+  },
+  computed: {},
+  watch: {},
+  methods: _objectSpread({}, (0, _vuex.mapMutations)(["initGame"])),
+  components: {// ChoosePlayers
+  }
+};
+exports.default = _default;
+        var $21203d = exports.default || module.exports;
+      
+      if (typeof $21203d === 'function') {
+        $21203d = $21203d.options;
+      }
+    
+        /* template */
+        Object.assign($21203d, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("ul", [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("li", [
+        _c("button", { on: { click: _vm.initGame } }, [_vm._v("Start game")])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("button", [_vm._v("About")])])
+  }
+]
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$21203d', $21203d);
+          } else {
+            api.reload('$21203d', $21203d);
+          }
+        }
+
+        
+      }
+    })();
+},{"vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/choose-game-style.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10053,159 +10300,31 @@ exports.default = void 0;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   data: function data() {
-    return {
-      player_score: 0,
-      player_checked: false
-    };
+    return {};
   },
-  props: ["player_color", "player_selected"],
-  mounted: function mounted() {
-    this.$root.$on("resetPlayerScore", this.resetPlayerScore);
+  computed: {},
+  watch: {},
+  methods: {// startGame() {}
   },
-  methods: {
-    playerScoreUpdate: function playerScoreUpdate(val) {
-      this.player_score = this.player_score + val;
-
-      if (this.player_score < 0) {
-        this.player_score = 0;
-      }
-    },
-    resetPlayerScore: function resetPlayerScore() {
-      this.player_score = 0;
-    },
-    updatePlayerStatus: function updatePlayerStatus() {
-      console.log("Update Player Status");
-      this.$parent.updateActivePlayers();
-    }
+  components: {// ChoosePlayers
   }
 };
 exports.default = _default;
-        var $59c1c2 = exports.default || module.exports;
+        var $ca45fb = exports.default || module.exports;
       
-      if (typeof $59c1c2 === 'function') {
-        $59c1c2 = $59c1c2.options;
+      if (typeof $ca45fb === 'function') {
+        $ca45fb = $ca45fb.options;
       }
     
         /* template */
-        Object.assign($59c1c2, (function () {
+        Object.assign($ca45fb, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "player-score",
-      attrs: {
-        id: "player-score-" + _vm.player_color,
-        "data-color": _vm.player_color
-      }
-    },
-    [
-      _c("label", { attrs: { for: _vm.player_color } }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.player_checked,
-              expression: "player_checked"
-            }
-          ],
-          attrs: {
-            type: "checkbox",
-            name: _vm.player_color,
-            id: _vm.player_color
-          },
-          domProps: {
-            checked: Array.isArray(_vm.player_checked)
-              ? _vm._i(_vm.player_checked, null) > -1
-              : _vm.player_checked
-          },
-          on: {
-            change: [
-              function($event) {
-                var $$a = _vm.player_checked,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 && (_vm.player_checked = $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      (_vm.player_checked = $$a
-                        .slice(0, $$i)
-                        .concat($$a.slice($$i + 1)))
-                  }
-                } else {
-                  _vm.player_checked = $$c
-                }
-              },
-              _vm.updatePlayerStatus
-            ],
-            click: function($event) {
-              $event.target.closest("li").classList.toggle("selected")
-            }
-          }
-        }),
-        _vm._v("\n    " + _vm._s(_vm.player_color) + "\n  ")
-      ]),
-      _vm._v(" "),
-      _c("fieldset", { attrs: { disabled: !_vm.player_checked } }, [
-        _c(
-          "button",
-          {
-            attrs: { disabled: _vm.player_score === 0 },
-            on: {
-              click: function($event) {
-                return _vm.playerScoreUpdate(-1)
-              }
-            }
-          },
-          [_vm._v("-1")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "score",
-          attrs: { readonly: "", type: "text" },
-          domProps: { value: _vm.player_score }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function($event) {
-                return _vm.playerScoreUpdate(1)
-              }
-            }
-          },
-          [_vm._v("+1")]
-        )
-      ])
-    ]
-  )
+  return _c("div", [_vm._v("Choose style")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10227,16 +10346,16 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$59c1c2', $59c1c2);
+            api.createRecord('$ca45fb', $ca45fb);
           } else {
-            api.reload('$59c1c2', $59c1c2);
+            api.reload('$ca45fb', $ca45fb);
           }
         }
 
         
       }
     })();
-},{"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/choose-players.vue":[function(require,module,exports) {
+},{"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10244,329 +10363,37 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _playerScoreTab = _interopRequireDefault(require("./player-score-tab.vue"));
+var _welcome = _interopRequireDefault(require("./welcome.vue"));
+
+var _chooseGameStyle = _interopRequireDefault(require("./choose-game-style.vue"));
+
+var _vuex = require("vuex");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _default = {
   data: function data() {
-    return {
-      selected_players: 0
-    };
-  },
-  props: ["current_game_mode", "all_player_colors"],
-  created: function created() {
-    this.$on("resetPlayerScore", function () {
-      console.log("children!");
-    });
-  },
-  methods: {
-    scoreUpdate: function scoreUpdate(val) {
-      this.player_score = this.player_score + val;
+    return {// ...mapState()
 
-      if (this.player_score < 0) {
-        this.player_score = 0;
-      }
-    },
-    updateGameMode: function updateGameMode(val) {
-      console.log(val);
-      this.$root.updateGameMode(val);
-    },
-    updateActivePlayers: function updateActivePlayers() {
-      console.log("Update active players");
-      this.selected_players = $("#choose-players li.selected").length;
-    },
-    resetAll: function resetAll() {
-      console.log("Reset All!");
-    },
-    isGameStarted: function isGameStarted() {
-      return this.$root.game_status === "started";
-    },
-    startGame: function startGame() {
-      console.log("Start game");
-      this.$root.game_status = "started";
-    }
-  },
-  components: {
-    PlayerScoreTab: _playerScoreTab.default
-  }
-};
-exports.default = _default;
-        var $4174f6 = exports.default || module.exports;
-      
-      if (typeof $4174f6 === 'function') {
-        $4174f6 = $4174f6.options;
-      }
-    
-        /* template */
-        Object.assign($4174f6, (function () {
-          var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { class: _vm.current_game_mode, attrs: { id: "choose-players" } },
-    [
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.isGameStarted(),
-              expression: "!isGameStarted()"
-            }
-          ],
-          staticClass: "tabs"
-        },
-        [
-          _c("label", [
-            _c("input", {
-              attrs: {
-                type: "radio",
-                name: "current-game-mode",
-                value: "0",
-                checked: ""
-              },
-              on: {
-                change: function($event) {
-                  return _vm.updateGameMode(0)
-                }
-              }
-            }),
-            _vm._v("\n      Starwars\n    ")
-          ]),
-          _vm._v(" "),
-          _c("label", [
-            _c("input", {
-              attrs: { type: "radio", name: "current-game-mode", value: "1" },
-              on: {
-                change: function($event) {
-                  return _vm.updateGameMode(1)
-                }
-              }
-            }),
-            _vm._v("\n      Classic\n    ")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "player-list" },
-        _vm._l(_vm.all_player_colors, function(player_color, idx) {
-          return _c(
-            "li",
-            { key: idx },
-            [_c("PlayerScoreTab", { attrs: { player_color: player_color } })],
-            1
-          )
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "action" }, [
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.isGameStarted(),
-                expression: "!isGameStarted()"
-              }
-            ],
-            attrs: { id: "player-reset" },
-            on: { click: _vm.resetAll }
-          },
-          [_vm._v("Reset")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.isGameStarted(),
-                expression: "!isGameStarted()"
-              }
-            ],
-            attrs: { disabled: _vm.selected_players < 2, id: "start-game" },
-            on: { click: _vm.startGame }
-          },
-          [_vm._v("Start game")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isGameStarted(),
-                expression: "isGameStarted()"
-              }
-            ],
-            attrs: { id: "end-game" }
-          },
-          [_vm._v("End game")]
-        )
-      ])
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-          return {
-            render: render,
-            staticRenderFns: staticRenderFns,
-            _compiled: true,
-            _scopeId: null,
-            functional: undefined
-          };
-        })());
-      
-    /* hot reload */
-    (function () {
-      if (module.hot) {
-        var api = require('vue-hot-reload-api');
-        api.install(require('vue'));
-        if (api.compatible) {
-          module.hot.accept();
-          if (!module.hot.data) {
-            api.createRecord('$4174f6', $4174f6);
-          } else {
-            api.reload('$4174f6', $4174f6);
-          }
-        }
-
-        
-      }
-    })();
-},{"./player-score-tab.vue":"js/player-score-tab.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _choosePlayers = _interopRequireDefault(require("./choose-players.vue"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  data: function data() {
-    return {
-      available_game_modes: ["starwars", "classic"],
-      current_game_mode: 0,
-      // 0 -> sw, 1 -> classic
-      all_player_colors: ["yellow", "grey", "blue", "black", "green", "red", "orange", "white"],
-      player_colors_set: [[3, 4, 5, 6, 7], // Starwars
-      [0, 1, 2, 3, 4, 5] // Classic
-      ],
-      game_available_status: ["settings", "started", "ended"],
-      game_status: "settings"
+      /* game_available_status: ["settings", "started", "ended"],
+      game_status: "settings" */
     };
   },
   computed: {},
   watch: {},
   created: function created() {
-    //this.current_game_mode = this.available_game_modes[0];
-    console.log(this.$store.state.players); // this.initialize();
+    console.log(this.$store.state.players);
   },
-  methods: {
-    initialize: function initialize() {
-      // this.game_status = "settings";
-      console.log("App initialize");
-    },
-    playerUpdateTest: function playerUpdateTest(val) {
-      this.all_player_colors.push("purple");
-      console.log(this.all_player_colors);
-    },
-    updateGameMode: function updateGameMode(val) {
-      this.current_game_mode = val; // Switchs between 0 <=> 1
-    },
-    toggleGameMode: function toggleGameMode() {
-      this.current_game_mode = +!this.current_game_mode; // Switchs between 0 <=> 1
-    },
-    resetAllScoresTest: function resetAllScoresTest() {
-      console.log("Reset!");
-      this.$root.$emit("resetPlayerScore");
-    },
-    filtered_player_colors: function filtered_player_colors() {
-      var _this = this;
-
-      var filtered = this.all_player_colors.filter(function (elemento, idx) {
-        // debugger;
-        if (_this.player_colors_set[_this.current_game_mode].indexOf(idx) > -1) {
-          return elemento;
-        }
-      }); // console.log( filtered );
-
-      return filtered;
-    }
-  },
+  methods: _objectSpread({}, (0, _vuex.mapActions)(["resetGame"])),
   components: {
-    ChoosePlayers: _choosePlayers.default
+    Welcome: _welcome.default,
+    ChooseGameStyle: _chooseGameStyle.default
   }
 };
 exports.default = _default;
@@ -10585,26 +10412,13 @@ exports.default = _default;
   return _c(
     "div",
     [
-      _c("ChoosePlayers", {
-        class: _vm.available_game_modes[_vm.current_game_mode],
-        attrs: { all_player_colors: _vm.filtered_player_colors() }
-      }),
+      !this.$store.state.game_state ? [_c("Welcome")] : [_c("ChooseGameStyle")],
       _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.toggleGameMode } }, [
-        _vm._v("Toggle game mode")
-      ]),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.playerUpdateTest } }, [
-        _vm._v("Add player")
-      ]),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.resetAllScoresTest } }, [
-        _vm._v("Reset all scores")
+      _c("button", { on: { click: _vm.resetGame } }, [
+        _vm._v("DEBUG: Reset game")
       ])
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -10636,7 +10450,7 @@ render._withStripped = true
         
       }
     })();
-},{"./choose-players.vue":"js/choose-players.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
+},{"./welcome.vue":"js/welcome.vue","./choose-game-style.vue":"js/choose-game-style.vue","vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -10685,7 +10499,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51636" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56538" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
