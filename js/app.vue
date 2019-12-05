@@ -6,7 +6,9 @@
     <template v-else-if="this.$store.state.game_state == 'playing'">
       <Playing></Playing>
     </template>
-    <template v-else-if="this.$store.state.game_state == 'ended'">Ended! Show winner</template>
+    <template v-else-if="this.$store.state.game_state == 'ended'">
+      <Ended></Ended>
+    </template>
     <template v-else>
       <Welcome></Welcome>
     </template>
@@ -18,6 +20,7 @@
 import Welcome from "./welcome.vue";
 import ChoosingPlayersAndMode from "./choosing-players-and-mode.vue";
 import Playing from "./playing.vue";
+import Ended from "./ended.vue";
 import { mapMutations, mapState, mapActions } from "vuex";
 
 export default {
@@ -40,7 +43,8 @@ export default {
   components: {
     Welcome,
     ChoosingPlayersAndMode,
-    Playing
+    Playing,
+    Ended
   }
 };
 </script>

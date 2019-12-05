@@ -10745,6 +10745,8 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -10752,8 +10754,7 @@ var _default = {
     };
   },
   props: ["player_color", "player_selected"],
-  mounted: function mounted() {
-    this.$root.$on("resetPlayerScore", this.resetPlayerScore);
+  mounted: function mounted() {// this.$root.$on("resetPlayerScore", this.resetPlayerScore);
   },
   methods: {
     playerScoreUpdate: function playerScoreUpdate(val) {
@@ -10791,6 +10792,12 @@ exports.default = _default;
       }
     },
     [
+      _c("label", { attrs: { for: _vm.player_color } }, [
+        _vm._v(_vm._s(_vm.player_color))
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c(
         "button",
         {
@@ -10806,7 +10813,7 @@ exports.default = _default;
       _vm._v(" "),
       _c("input", {
         staticClass: "score",
-        attrs: { readonly: "", type: "text" },
+        attrs: { readonly: "", name: _vm.player_color, type: "text" },
         domProps: { value: _vm.player_score }
       }),
       _vm._v(" "),
@@ -10882,7 +10889,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 var _default = {
   data: function data() {
     return {};
@@ -10924,20 +10930,20 @@ exports.default = _default;
     ),
     _c("br"),
     _vm._v(
-      "\n\n  Vuex store value: " +
+      "\n  Vuex store value: " +
         _vm._s(_vm.$store.state.current_game_mode) +
         "\n  "
     ),
     _c(
       "ul",
       { staticClass: "player-list" },
-      _vm._l(_vm.$store.getters.activePlayers, function(player, idx) {
+      _vm._l(_vm.$store.state.players_selected, function(player_color, idx) {
         return _c(
           "li",
           { key: idx },
           [
             _c("PlayerScoreRow", {
-              attrs: { idx: idx, player_color: player.color }
+              attrs: { idx: idx, player_color: player_color }
             })
           ],
           1
@@ -10986,7 +10992,91 @@ render._withStripped = true
         
       }
     })();
-},{"./player-score-row.vue":"js/player-score-row.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
+},{"./player-score-row.vue":"js/player-score-row.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/ended.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _vuex = require("vuex");
+
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {};
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    startNewGame: function startNewGame() {
+      this.$store.commit("SET_GAME_STATE", "choosing_players_and_mode");
+    }
+  },
+  components: {// ChoosePlayers
+  }
+};
+exports.default = _default;
+        var $c155b9 = exports.default || module.exports;
+      
+      if (typeof $c155b9 === 'function') {
+        $c155b9 = $c155b9.options;
+      }
+    
+        /* template */
+        Object.assign($c155b9, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h1", [_vm._v("Mostrar al ganador")]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.startNewGame } }, [
+      _vm._v("Start new game")
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$c155b9', $c155b9);
+          } else {
+            api.reload('$c155b9', $c155b9);
+          }
+        }
+
+        
+      }
+    })();
+},{"vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10999,6 +11089,8 @@ var _welcome = _interopRequireDefault(require("./welcome.vue"));
 var _choosingPlayersAndMode = _interopRequireDefault(require("./choosing-players-and-mode.vue"));
 
 var _playing = _interopRequireDefault(require("./playing.vue"));
+
+var _ended = _interopRequireDefault(require("./ended.vue"));
 
 var _vuex = require("vuex");
 
@@ -11026,7 +11118,8 @@ var _default = {
   components: {
     Welcome: _welcome.default,
     ChoosingPlayersAndMode: _choosingPlayersAndMode.default,
-    Playing: _playing.default
+    Playing: _playing.default,
+    Ended: _ended.default
   }
 };
 exports.default = _default;
@@ -11050,7 +11143,7 @@ exports.default = _default;
         : this.$store.state.game_state == "playing"
         ? [_c("Playing")]
         : this.$store.state.game_state == "ended"
-        ? [_vm._v("Ended! Show winner")]
+        ? [_c("Ended")]
         : [_c("Welcome")],
       _vm._v(" "),
       _c("button", { on: { click: _vm.resetGame } }, [
@@ -11089,7 +11182,7 @@ render._withStripped = true
         
       }
     })();
-},{"./welcome.vue":"js/welcome.vue","./choosing-players-and-mode.vue":"js/choosing-players-and-mode.vue","./playing.vue":"js/playing.vue","vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
+},{"./welcome.vue":"js/welcome.vue","./choosing-players-and-mode.vue":"js/choosing-players-and-mode.vue","./playing.vue":"js/playing.vue","./ended.vue":"js/ended.vue","vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -11138,7 +11231,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51031" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52380" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

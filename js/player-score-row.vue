@@ -1,7 +1,9 @@
 <template>
   <div class="player-score" :id="'player-score-' + player_color" :data-color="player_color">
+    <label :for="player_color">{{ player_color }}</label>
+    <br />
     <button :disabled="player_score === 0" v-on:click="playerScoreUpdate(-1)">-1</button>
-    <input readonly type="text" class="score" :value="player_score" />
+    <input readonly :name="player_color" type="text" class="score" :value="player_score" />
     <button v-on:click="playerScoreUpdate(1)">+1</button>
   </div>
 </template>
@@ -15,7 +17,7 @@ export default {
   },
   props: ["player_color", "player_selected"],
   mounted: function() {
-    this.$root.$on("resetPlayerScore", this.resetPlayerScore);
+    // this.$root.$on("resetPlayerScore", this.resetPlayerScore);
   },
   methods: {
     playerScoreUpdate: function(val) {
