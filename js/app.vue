@@ -5,8 +5,6 @@
     </template>
     <template v-else>
       <ChooseGameStyle></ChooseGameStyle>
-
-      
     </template>
     <button @click="resetGame">DEBUG: Reset game</button>
   </div>
@@ -28,7 +26,7 @@ export default {
   computed: {},
   watch: {},
   created: function() {
-    console.log(this.$store.state.players);
+    // console.log(this.$store.state.players);
   },
   methods: {
     ...mapActions(["resetGame"])

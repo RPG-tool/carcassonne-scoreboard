@@ -9842,45 +9842,50 @@ var _default = new _vuex.default.Store({
   state: {
     game_state: false,
     game_modes: ["starwars", "classic"],
-    current_game_mode: 0,
+    current_game_mode: 1,
     // 0 -> sw, 1 -> classic
+
+    /* playerGroups: [
+      [3, 4, 5, 6, 7], // Sw
+      [0, 1, 2, 3, 4, 5] // Classic
+    ], */
     players: [{
       color: "yellow",
       score: 0,
       status: false,
       available_in: [1]
     }, {
-      name: "grey",
+      color: "grey",
       score: 0,
       status: false,
       available_in: [1]
     }, {
-      name: "blue",
+      color: "blue",
       score: 0,
       status: false,
       available_in: [1]
     }, {
-      name: "black",
+      color: "black",
       score: 0,
       status: false,
       available_in: [0, 1]
     }, {
-      name: "green",
+      color: "green",
       score: 0,
       status: false,
       available_in: [0, 1]
     }, {
-      name: "red",
+      color: "red",
       score: 0,
       status: false,
       available_in: [0, 1]
     }, {
-      name: "orange",
+      color: "orange",
       score: 0,
       status: false,
       available_in: [0, 1]
     }, {
-      name: "white",
+      color: "white",
       score: 0,
       status: false,
       available_in: [0, 1]
@@ -9891,6 +9896,11 @@ var _default = new _vuex.default.Store({
       return state.players.filter(function (player) {
         return player.active;
       });
+    },
+    activePlayersCount: function activePlayersCount(state) {
+      return state.players.filter(function (player) {
+        return player.active;
+      }).length;
     },
     playerIsActive: function playerIsActive(state, player) {
       return state.players.find(function (p) {
@@ -9914,6 +9924,9 @@ var _default = new _vuex.default.Store({
       return state.players = state.players.map(function (player) {
         return player.status = false;
       });
+    },
+    SET_GAME_MODE: function SET_GAME_MODE(state, current_game_mode) {
+      state.current_game_mode = current_game_mode;
     }
   },
   actions: {
@@ -10289,7 +10302,7 @@ render._withStripped = true
         
       }
     })();
-},{"vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/choose-game-style.vue":[function(require,module,exports) {
+},{"vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/player-select-row.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10300,15 +10313,205 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  data: function data() {
+    return {
+      player_score: 0,
+      player_checked: false
+    };
+  },
+  props: ["idx", "player_color", "player_selected"],
+  mounted: function mounted() {},
+  methods: {}
+};
+exports.default = _default;
+        var $e39417 = exports.default || module.exports;
+      
+      if (typeof $e39417 === 'function') {
+        $e39417 = $e39417.options;
+      }
+    
+        /* template */
+        Object.assign($e39417, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "player-select-row",
+      attrs: { id: "player-select-" + _vm.player_color }
+    },
+    [
+      _c("label", { attrs: { for: "player-color-" + _vm.player_color } }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.player_checked,
+              expression: "player_checked"
+            }
+          ],
+          attrs: {
+            type: "checkbox",
+            name: "player-color-" + _vm.player_color,
+            id: "player-color-" + _vm.player_color,
+            "data-color": _vm.player_color,
+            "data-idx": _vm.idx
+          },
+          domProps: {
+            checked: Array.isArray(_vm.player_checked)
+              ? _vm._i(_vm.player_checked, null) > -1
+              : _vm.player_checked
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.player_checked,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.player_checked = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.player_checked = $$a
+                      .slice(0, $$i)
+                      .concat($$a.slice($$i + 1)))
+                }
+              } else {
+                _vm.player_checked = $$c
+              }
+            }
+          }
+        }),
+        _vm._v(
+          "\n    ( " +
+            _vm._s(_vm.idx) +
+            " ) " +
+            _vm._s(_vm.player_color) +
+            "\n  "
+        )
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$e39417', $e39417);
+          } else {
+            api.reload('$e39417', $e39417);
+          }
+        }
+
+        
+      }
+    })();
+},{"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/choose-game-style.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _playerSelectRow = _interopRequireDefault(require("./player-select-row"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {};
   },
-  computed: {},
-  watch: {},
-  methods: {// startGame() {}
+  prop: {},
+  computed: {
+    current_game_mode: {
+      get: function get() {
+        return this.$store.state.current_game_mode;
+      },
+      set: function set(value) {
+        this.$store.commit("SET_GAME_MODE", value);
+      }
+    }
   },
-  components: {// ChoosePlayers
+  watch: {},
+  created: function created() {// console.log(this.$store.getters.activePlayers);
+  },
+  methods: {
+    activePlayers: function activePlayers() {
+      console.log(this.$store.state.players);
+    },
+    getActivePlayerGroup: function getActivePlayerGroup(group_id) {
+      console.log(this.$store.state.current_game_mode);
+
+      if (this.$store.state.current_game_mode !== null) {// return this.$store.getters.activePlayers;
+      } else {
+        console.log("Current game mode is null");
+      }
+    }
+  },
+  components: {
+    PlayerSelectRow: _playerSelectRow.default
   }
 };
 exports.default = _default;
@@ -10324,7 +10527,101 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("Choose style")])
+  return _c(
+    "div",
+    [
+      _c("div", [_vm._v("Choose style and number of players")]),
+      _vm._v(" "),
+      _c("label", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.current_game_mode,
+              expression: "current_game_mode"
+            }
+          ],
+          attrs: {
+            name: "game-style",
+            value: "0",
+            type: "radio",
+            id: "rb-starwars"
+          },
+          domProps: { checked: _vm._q(_vm.current_game_mode, "0") },
+          on: {
+            change: function($event) {
+              _vm.current_game_mode = "0"
+            }
+          }
+        }),
+        _vm._v(" Starwars\n  ")
+      ]),
+      _vm._v(" "),
+      _c("label", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.current_game_mode,
+              expression: "current_game_mode"
+            }
+          ],
+          attrs: {
+            name: "game-style",
+            value: "1",
+            type: "radio",
+            id: "rb-classic"
+          },
+          domProps: { checked: _vm._q(_vm.current_game_mode, "1") },
+          on: {
+            change: function($event) {
+              _vm.current_game_mode = "1"
+            }
+          }
+        }),
+        _vm._v(" Classic\n  ")
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(
+        "\n  Vuex store value: " +
+          _vm._s(_vm.$store.state.current_game_mode) +
+          "\n  "
+      ),
+      _c("br"),
+      _vm._v(
+        "\n  Computed property value: " + _vm._s(_vm.current_game_mode) + "\n  "
+      ),
+      this.$store.state.current_game_mode > -1
+        ? [
+            _c(
+              "ul",
+              { staticClass: "player-list" },
+              _vm._l(this.$store.state.players, function(player, idx) {
+                return _c(
+                  "li",
+                  { key: idx },
+                  [
+                    _c("PlayerSelectRow", {
+                      attrs: { idx: idx, player_color: player.color }
+                    })
+                  ],
+                  1
+                )
+              }),
+              0
+            )
+          ]
+        : _vm._e(),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.activePlayers } }, [
+        _vm._v("Active playerSet")
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10355,7 +10652,7 @@ render._withStripped = true
         
       }
     })();
-},{"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
+},{"./player-select-row":"js/player-select-row.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10387,8 +10684,7 @@ var _default = {
   },
   computed: {},
   watch: {},
-  created: function created() {
-    console.log(this.$store.state.players);
+  created: function created() {// console.log(this.$store.state.players);
   },
   methods: _objectSpread({}, (0, _vuex.mapActions)(["resetGame"])),
   components: {
@@ -10499,7 +10795,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56538" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60860" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

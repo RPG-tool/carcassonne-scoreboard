@@ -11,7 +11,11 @@ export default new Vuex.Store({
   state: {
     game_state: false,
     game_modes: ["starwars", "classic"],
-    current_game_mode: 0, // 0 -> sw, 1 -> classic
+    current_game_mode: 1, // 0 -> sw, 1 -> classic
+    /* playerGroups: [
+      [3, 4, 5, 6, 7], // Sw
+      [0, 1, 2, 3, 4, 5] // Classic
+    ], */
     players: [
       {
         color: "yellow",
@@ -20,43 +24,43 @@ export default new Vuex.Store({
         available_in: [1]
       },
       {
-        name: "grey",
+        color: "grey",
         score: 0,
         status: false,
         available_in: [1]
       },
       {
-        name: "blue",
+        color: "blue",
         score: 0,
         status: false,
         available_in: [1]
       },
       {
-        name: "black",
+        color: "black",
         score: 0,
         status: false,
         available_in: [0, 1]
       },
       {
-        name: "green",
+        color: "green",
         score: 0,
         status: false,
         available_in: [0, 1]
       },
       {
-        name: "red",
+        color: "red",
         score: 0,
         status: false,
         available_in: [0, 1]
       },
       {
-        name: "orange",
+        color: "orange",
         score: 0,
         status: false,
         available_in: [0, 1]
       },
       {
-        name: "white",
+        color: "white",
         score: 0,
         status: false,
         available_in: [0, 1]
@@ -65,13 +69,17 @@ export default new Vuex.Store({
   },
   getters: {
     activePlayers: state => state.players.filter(player => player.active),
+    activePlayersCount: state => state.players.filter(player => player.active).length,
     playerIsActive: (state, player) => state.players.find(p => p == player).active
   },
   mutations: {
     resetGame: state => state.game_state = false,
     initGame: state => state.game_state = true,
     resetPlayersScore: state => state.players = state.players.map(player => player.score = 0),
-    resetPlayersStatus: state => state.players = state.players.map(player => player.status = false)
+    resetPlayersStatus: state => state.players = state.players.map(player => player.status = false),
+    SET_GAME_MODE(state, current_game_mode) {
+      state.current_game_mode = current_game_mode;
+    }
   },
   actions: {
     initializeGame: (ctx) => {
