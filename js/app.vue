@@ -1,10 +1,12 @@
 <template>
   <div>
-    <template v-if="!this.$store.state.game_state">
-      <Welcome></Welcome>
+    <template v-if="this.$store.state.game_state == 'choosing_players_and_mode'">
+      <ChoosingPlayersAndMode></ChoosingPlayersAndMode>
     </template>
+    <template v-else-if="this.$store.state.game_state == 'playing'">Playing!</template>
+    <template v-else-if="this.$store.state.game_state == 'ended'">Ended! Show winner</template>
     <template v-else>
-      <ChooseGameStyle></ChooseGameStyle>
+      <Welcome></Welcome>
     </template>
     <button @click="resetGame">DEBUG: Reset game</button>
   </div>
@@ -12,7 +14,7 @@
 
 <script>
 import Welcome from "./welcome.vue";
-import ChooseGameStyle from "./choose-game-style.vue";
+import ChoosingPlayersAndMode from "./choosing-players-and-mode.vue";
 import { mapMutations, mapState, mapActions } from "vuex";
 
 export default {
@@ -30,11 +32,11 @@ export default {
   },
   methods: {
     ...mapActions(["resetGame"])
-    // ...mapMutations(["initGame"])
+    // ...mapMutations(["INIT_GAME"])
   },
   components: {
     Welcome,
-    ChooseGameStyle
+    ChoosingPlayersAndMode
   }
 };
 </script>

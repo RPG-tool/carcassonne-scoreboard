@@ -5,7 +5,7 @@
         <button>About</button>
       </li>
       <li>
-        <button @click="initGame">Start game</button>
+        <button @click="INIT_GAME">Start game</button>
       </li>
     </ul>
   </div>
@@ -21,8 +21,8 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    // this.$store.mutations.initGame
-    ...mapMutations(["initGame"])
+    // this.$store.mutations.INIT_GAME
+    ...mapMutations(["INIT_GAME"])
   },
   components: {
     // ChoosePlayers

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>Choose style and number of players</div>
+    <div>Choose game variant and number of players</div>
     <label>
       <input name="game-style" value="0" type="radio" id="rb-starwars" v-model="current_game_mode" /> Starwars
     </label>
@@ -15,13 +15,15 @@
       v-if="this.$store.state.current_game_mode > -1"
     >
       <ul class="player-list">
-        <li v-for="(player, idx) in this.$store.state.players" v-bind:key="idx">
+        <li v-for="(player, idx) in $store.getters.activePlayers" v-bind:key="idx">
           <PlayerSelectRow v-bind:idx="idx" v-bind:player_color="player.color"></PlayerSelectRow>
         </li>
       </ul>
     </template>
-
-    <button @click="activePlayers">Active playerSet</button>
+    <button
+      :disabled="this.$store.state.current_game_mode < 0 && true"
+      @click="startGame"
+    >Start game</button>
   </div>
 </template>
 
@@ -47,8 +49,8 @@ export default {
     // console.log(this.$store.getters.activePlayers);
   },
   methods: {
-    activePlayers() {
-      console.log(this.$store.state.players);
+    startGame() {
+      console.log(this.$store.getters.testA);
     },
     getActivePlayerGroup(group_id) {
       console.log(this.$store.state.current_game_mode);

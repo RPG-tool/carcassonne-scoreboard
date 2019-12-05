@@ -9840,9 +9840,14 @@ _vue.default.use(_vuex.default);
 var _default = new _vuex.default.Store({
   plugins: [(0, _vuexPersistedstate.default)()],
   state: {
-    game_state: false,
+    // Posible states
+    // "welcome" -> Pantalla inicial
+    // "choosing_players_and_mode" -> Eligiedo jugadores y modo de juego
+    // "playing" -> Juego corriendo, partida normal
+    // "ended" -> Juego terminado, mostrar vencedor, volver a jugar
+    game_state: 'welcome',
     game_modes: ["starwars", "classic"],
-    current_game_mode: 1,
+    current_game_mode: -1,
     // 0 -> sw, 1 -> classic
 
     /* playerGroups: [
@@ -9852,55 +9857,53 @@ var _default = new _vuex.default.Store({
     players: [{
       color: "yellow",
       score: 0,
-      status: false,
+      active: false,
       available_in: [1]
     }, {
       color: "grey",
       score: 0,
-      status: false,
+      active: false,
       available_in: [1]
     }, {
       color: "blue",
       score: 0,
-      status: false,
+      active: false,
       available_in: [1]
     }, {
       color: "black",
       score: 0,
-      status: false,
+      active: false,
       available_in: [0, 1]
     }, {
       color: "green",
       score: 0,
-      status: false,
+      active: false,
       available_in: [0, 1]
     }, {
       color: "red",
       score: 0,
-      status: false,
+      active: true,
       available_in: [0, 1]
     }, {
       color: "orange",
       score: 0,
-      status: false,
-      available_in: [0, 1]
+      active: false,
+      available_in: [0]
     }, {
       color: "white",
       score: 0,
-      status: false,
-      available_in: [0, 1]
+      active: false,
+      available_in: [0]
     }]
   },
   getters: {
+    testA: function testA(state) {
+      return state.players;
+    },
     activePlayers: function activePlayers(state) {
       return state.players.filter(function (player) {
         return player.active;
       });
-    },
-    activePlayersCount: function activePlayersCount(state) {
-      return state.players.filter(function (player) {
-        return player.active;
-      }).length;
     },
     playerIsActive: function playerIsActive(state, player) {
       return state.players.find(function (p) {
@@ -9909,34 +9912,43 @@ var _default = new _vuex.default.Store({
     }
   },
   mutations: {
-    resetGame: function resetGame(state) {
-      return state.game_state = false;
+    RESET_GAME: function RESET_GAME(state) {
+      state.game_state = 'welcome';
+      state.current_game_mode = -1;
     },
-    initGame: function initGame(state) {
-      return state.game_state = true;
+    INIT_GAME: function INIT_GAME(state) {
+      return state.game_state = 'choosing_players_and_mode';
     },
-    resetPlayersScore: function resetPlayersScore(state) {
+    RESET_PLAYER_SCORE: function RESET_PLAYER_SCORE(state) {
       return state.players = state.players.map(function (player) {
         return player.score = 0;
       });
     },
-    resetPlayersStatus: function resetPlayersStatus(state) {
+    RESET_PLAYER_STATUS: function RESET_PLAYER_STATUS(state) {
       return state.players = state.players.map(function (player) {
-        return player.status = false;
+        return player.active = false;
       });
     },
     SET_GAME_MODE: function SET_GAME_MODE(state, current_game_mode) {
-      state.current_game_mode = current_game_mode;
+      state.current_game_mode = parseInt(current_game_mode, 10); // Actuliza tb la lista de players activos
+
+      state.players.forEach(function (player, idx) {
+        if (player.available_in.includes(state.current_game_mode)) {
+          player.active = true;
+        } else {
+          player.active = false;
+        }
+      });
     }
   },
   actions: {
     initializeGame: function initializeGame(ctx) {
-      ctx.commit('initGame');
-      ctx.commit('resetPlayersScore');
-      ctx.commit('resetPlayersStatus');
+      ctx.commit('INIT_GAME');
+      ctx.commit('RESET_PLAYER_SCORE');
+      ctx.commit('RESET_PLAYER_STATUS');
     },
     resetGame: function resetGame(ctx) {
-      ctx.commit('resetGame');
+      ctx.commit('RESET_GAME');
     }
   }
 });
@@ -10239,7 +10251,7 @@ var _default = {
   },
   computed: {},
   watch: {},
-  methods: _objectSpread({}, (0, _vuex.mapMutations)(["initGame"])),
+  methods: _objectSpread({}, (0, _vuex.mapMutations)(["INIT_GAME"])),
   components: {// ChoosePlayers
   }
 };
@@ -10261,7 +10273,7 @@ exports.default = _default;
       _vm._m(0),
       _vm._v(" "),
       _c("li", [
-        _c("button", { on: { click: _vm.initGame } }, [_vm._v("Start game")])
+        _c("button", { on: { click: _vm.INIT_GAME } }, [_vm._v("Start game")])
       ])
     ])
   ])
@@ -10440,7 +10452,7 @@ render._withStripped = true
         
       }
     })();
-},{"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/choose-game-style.vue":[function(require,module,exports) {
+},{"vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/choosing-players-and-mode.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10452,6 +10464,8 @@ var _playerSelectRow = _interopRequireDefault(require("./player-select-row"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -10498,8 +10512,8 @@ var _default = {
   created: function created() {// console.log(this.$store.getters.activePlayers);
   },
   methods: {
-    activePlayers: function activePlayers() {
-      console.log(this.$store.state.players);
+    startGame: function startGame() {
+      console.log(this.$store.getters.testA);
     },
     getActivePlayerGroup: function getActivePlayerGroup(group_id) {
       console.log(this.$store.state.current_game_mode);
@@ -10515,14 +10529,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $ca45fb = exports.default || module.exports;
+        var $425131 = exports.default || module.exports;
       
-      if (typeof $ca45fb === 'function') {
-        $ca45fb = $ca45fb.options;
+      if (typeof $425131 === 'function') {
+        $425131 = $425131.options;
       }
     
         /* template */
-        Object.assign($ca45fb, (function () {
+        Object.assign($425131, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -10530,7 +10544,7 @@ exports.default = _default;
   return _c(
     "div",
     [
-      _c("div", [_vm._v("Choose style and number of players")]),
+      _c("div", [_vm._v("Choose game variant and number of players")]),
       _vm._v(" "),
       _c("label", [
         _c("input", {
@@ -10599,7 +10613,7 @@ exports.default = _default;
             _c(
               "ul",
               { staticClass: "player-list" },
-              _vm._l(this.$store.state.players, function(player, idx) {
+              _vm._l(_vm.$store.getters.activePlayers, function(player, idx) {
                 return _c(
                   "li",
                   { key: idx },
@@ -10616,9 +10630,14 @@ exports.default = _default;
           ]
         : _vm._e(),
       _vm._v(" "),
-      _c("button", { on: { click: _vm.activePlayers } }, [
-        _vm._v("Active playerSet")
-      ])
+      _c(
+        "button",
+        {
+          attrs: { disabled: this.$store.state.current_game_mode < 0 && true },
+          on: { click: _vm.startGame }
+        },
+        [_vm._v("Start game")]
+      )
     ],
     2
   )
@@ -10643,9 +10662,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$ca45fb', $ca45fb);
+            api.createRecord('$425131', $425131);
           } else {
-            api.reload('$ca45fb', $ca45fb);
+            api.reload('$425131', $425131);
           }
         }
 
@@ -10662,7 +10681,7 @@ exports.default = void 0;
 
 var _welcome = _interopRequireDefault(require("./welcome.vue"));
 
-var _chooseGameStyle = _interopRequireDefault(require("./choose-game-style.vue"));
+var _choosingPlayersAndMode = _interopRequireDefault(require("./choosing-players-and-mode.vue"));
 
 var _vuex = require("vuex");
 
@@ -10689,7 +10708,7 @@ var _default = {
   methods: _objectSpread({}, (0, _vuex.mapActions)(["resetGame"])),
   components: {
     Welcome: _welcome.default,
-    ChooseGameStyle: _chooseGameStyle.default
+    ChoosingPlayersAndMode: _choosingPlayersAndMode.default
   }
 };
 exports.default = _default;
@@ -10708,7 +10727,13 @@ exports.default = _default;
   return _c(
     "div",
     [
-      !this.$store.state.game_state ? [_c("Welcome")] : [_c("ChooseGameStyle")],
+      this.$store.state.game_state == "choosing_players_and_mode"
+        ? [_c("ChoosingPlayersAndMode")]
+        : this.$store.state.game_state == "playing"
+        ? [_vm._v("Playing!")]
+        : this.$store.state.game_state == "ended"
+        ? [_vm._v("Ended! Show winner")]
+        : [_c("Welcome")],
       _vm._v(" "),
       _c("button", { on: { click: _vm.resetGame } }, [
         _vm._v("DEBUG: Reset game")
@@ -10746,7 +10771,7 @@ render._withStripped = true
         
       }
     })();
-},{"./welcome.vue":"js/welcome.vue","./choose-game-style.vue":"js/choose-game-style.vue","vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
+},{"./welcome.vue":"js/welcome.vue","./choosing-players-and-mode.vue":"js/choosing-players-and-mode.vue","vuex":"node_modules/vuex/dist/vuex.esm.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -10795,7 +10820,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60860" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52764" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
