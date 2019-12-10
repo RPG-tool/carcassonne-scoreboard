@@ -15,8 +15,8 @@
       v-if="this.$store.state.current_game_mode > -1"
     >
       <ul class="player-list">
-        <li v-for="(player, idx) in $store.getters.activePlayers" v-bind:key="idx">
-          <PlayerSelectRow v-bind:idx="idx" v-bind:player_color="player.color"></PlayerSelectRow>
+        <li v-for="(player, idx) in $store.getters.availablePlayers" v-bind:key="idx">
+          <PlayerSelectRow v-bind:player="player"></PlayerSelectRow>
         </li>
       </ul>
       Players selected: {{ $store.state.players_selected }} ( {{ $store.state.players_selected.length }} )
@@ -53,14 +53,6 @@ export default {
   methods: {
     startGame() {
       this.$store.commit("SET_GAME_STATE", "playing");
-    },
-    getActivePlayerGroup(group_id) {
-      console.log(this.$store.state.current_game_mode);
-      if (this.$store.state.current_game_mode !== null) {
-        // return this.$store.getters.activePlayers;
-      } else {
-        console.log("Current game mode is null");
-      }
     }
   },
   components: {

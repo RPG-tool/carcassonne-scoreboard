@@ -9859,31 +9859,26 @@ var _default = new _vuex.default.Store({
       color: "yellow",
       score: 0,
       active: false,
-      is_checked: false,
       available_in: [1]
     }, {
       color: "grey",
       score: 0,
       active: false,
-      is_checked: false,
       available_in: [1]
     }, {
       color: "blue",
       score: 0,
       active: false,
-      is_checked: false,
       available_in: [1]
     }, {
       color: "black",
       score: 0,
       active: false,
-      is_checked: false,
       available_in: [0, 1]
     }, {
       color: "green",
       score: 0,
       active: false,
-      is_checked: false,
       available_in: [0, 1]
     }, {
       color: "red",
@@ -9894,13 +9889,11 @@ var _default = new _vuex.default.Store({
       color: "orange",
       score: 0,
       active: false,
-      is_checked: false,
       available_in: [0]
     }, {
       color: "white",
       score: 0,
       active: false,
-      is_checked: false,
       available_in: [0]
     }]
   },
@@ -9908,11 +9901,23 @@ var _default = new _vuex.default.Store({
     testA: function testA(state) {
       return state.players;
     },
-    activePlayers: function activePlayers(state) {
-      return state.players.filter(function (player) {
-        return player.active;
+    playerObjByColor: function playerObjByColor(state, color) {
+      return state.players.find(function (p) {
+        return p.color == color;
       });
     },
+    availablePlayers: function availablePlayers(state) {
+      return state.players.filter(function (player) {
+        return player.available_in.includes(state.current_game_mode);
+      });
+    },
+    // activePlayers: (state) => {
+    //   return state.players.filter(
+    //     (player) => {
+    //       return player.active
+    //     }
+    //   )
+    // },
     playerIsActive: function playerIsActive(state, player) {
       return state.players.find(function (p) {
         return p == player;
@@ -9940,7 +9945,7 @@ var _default = new _vuex.default.Store({
     },
     SET_GAME_MODE: function SET_GAME_MODE(state, current_game_mode) {
       state.players_selected = [];
-      state.current_game_mode = parseInt(current_game_mode, 10); // Actuliza tb la lista de players activos
+      state.current_game_mode = parseInt(current_game_mode, 10); // Actualiza tb la lista de players activos
 
       state.players.forEach(function (player, idx) {
         if (player.available_in.includes(state.current_game_mode)) {
@@ -10366,7 +10371,6 @@ exports.default = void 0;
 //
 //
 //
-//
 var _default = {
   data: function data() {
     return {// player_score: 0
@@ -10375,17 +10379,18 @@ var _default = {
   computed: {
     update_cb_status: {
       get: function get() {
-        return false; // return this.$store.state.obj.message;
+        // return false;
+        return this.$store.getters.playerObjByColor(this.player.color).active;
       },
       set: function set(value) {
         this.$store.commit("UPDATE_CHECKBOX", {
           value: value,
-          player_color: this.player_color
+          player: this.player
         });
       }
     }
   },
-  props: ["idx", "player_color"],
+  props: ["player"],
   mounted: function mounted() {},
   methods: {}
 };
@@ -10406,68 +10411,64 @@ exports.default = _default;
     "div",
     {
       staticClass: "player-select-row",
-      attrs: { id: "player-select-" + _vm.player_color }
+      attrs: { id: "player-select-" + _vm.player.color }
     },
     [
-      _c("label", { attrs: { for: "player-color-" + _vm.player_color } }, [
+      _c("label", { attrs: { for: "player-color-" + _vm.player.color } }, [
         _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.update_cb_status,
-              expression: "update_cb_status"
+              value: _vm.player.update_cb_status,
+              expression: "player.update_cb_status"
             }
           ],
           attrs: {
             type: "checkbox",
             name:
               "player-color-" +
-              _vm.player_color +
+              _vm.player.color +
               "-" +
               _vm.$store.state.current_game_mode,
             id:
               "player-color-" +
-              _vm.player_color +
+              _vm.player.color +
               "-" +
               _vm.$store.state.current_game_mode,
-            "data-color": _vm.player_color,
-            "data-idx": _vm.idx
+            "data-color": _vm.player.color
           },
           domProps: {
-            checked: Array.isArray(_vm.update_cb_status)
-              ? _vm._i(_vm.update_cb_status, null) > -1
-              : _vm.update_cb_status
+            checked: Array.isArray(_vm.player.update_cb_status)
+              ? _vm._i(_vm.player.update_cb_status, null) > -1
+              : _vm.player.update_cb_status
           },
           on: {
             change: function($event) {
-              var $$a = _vm.update_cb_status,
+              var $$a = _vm.player.update_cb_status,
                 $$el = $event.target,
                 $$c = $$el.checked ? true : false
               if (Array.isArray($$a)) {
                 var $$v = null,
                   $$i = _vm._i($$a, $$v)
                 if ($$el.checked) {
-                  $$i < 0 && (_vm.update_cb_status = $$a.concat([$$v]))
+                  $$i < 0 &&
+                    _vm.$set(_vm.player, "update_cb_status", $$a.concat([$$v]))
                 } else {
                   $$i > -1 &&
-                    (_vm.update_cb_status = $$a
-                      .slice(0, $$i)
-                      .concat($$a.slice($$i + 1)))
+                    _vm.$set(
+                      _vm.player,
+                      "update_cb_status",
+                      $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                    )
                 }
               } else {
-                _vm.update_cb_status = $$c
+                _vm.$set(_vm.player, "update_cb_status", $$c)
               }
             }
           }
         }),
-        _vm._v(
-          "\n    ( " +
-            _vm._s(_vm.idx) +
-            " ) " +
-            _vm._s(_vm.player_color) +
-            "\n    "
-        ),
+        _vm._v("\n    " + _vm._s(_vm.player.color) + "\n    "),
         _c("br")
       ])
     ]
@@ -10566,14 +10567,6 @@ var _default = {
   methods: {
     startGame: function startGame() {
       this.$store.commit("SET_GAME_STATE", "playing");
-    },
-    getActivePlayerGroup: function getActivePlayerGroup(group_id) {
-      console.log(this.$store.state.current_game_mode);
-
-      if (this.$store.state.current_game_mode !== null) {// return this.$store.getters.activePlayers;
-      } else {
-        console.log("Current game mode is null");
-      }
     }
   },
   components: {
@@ -10665,15 +10658,14 @@ exports.default = _default;
             _c(
               "ul",
               { staticClass: "player-list" },
-              _vm._l(_vm.$store.getters.activePlayers, function(player, idx) {
+              _vm._l(_vm.$store.getters.availablePlayers, function(
+                player,
+                idx
+              ) {
                 return _c(
                   "li",
                   { key: idx },
-                  [
-                    _c("PlayerSelectRow", {
-                      attrs: { idx: idx, player_color: player.color }
-                    })
-                  ],
+                  [_c("PlayerSelectRow", { attrs: { player: player } })],
                   1
                 )
               }),
@@ -11280,7 +11272,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56289" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54324" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

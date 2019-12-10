@@ -1,15 +1,14 @@
 <template>
-  <div class="player-select-row" :id="'player-select-' + player_color">
-    <label :for="'player-color-' + player_color">
+  <div class="player-select-row" :id="'player-select-' + player.color">
+    <label :for="'player-color-' + player.color">
       <input
-        v-model="update_cb_status"
+        v-model="player.update_cb_status"
         type="checkbox"
-        :name="'player-color-' + player_color +'-'+ $store.state.current_game_mode"
-        :id="'player-color-' + player_color +'-'+ $store.state.current_game_mode"
-        :data-color="player_color"
-        :data-idx="idx"
+        :name="'player-color-' + player.color +'-'+ $store.state.current_game_mode"
+        :id="'player-color-' + player.color +'-'+ $store.state.current_game_mode"
+        :data-color="player.color"
       />
-      ( {{ idx }} ) {{ player_color }}
+      {{ player.color }}
       <br />
     </label>
   </div>
@@ -25,18 +24,18 @@ export default {
   computed: {
     update_cb_status: {
       get() {
-        return false;
-        // return this.$store.state.obj.message;
+        // return false;
+        return this.$store.getters.playerObjByColor(this.player.color).active;
       },
       set(value) {
         this.$store.commit("UPDATE_CHECKBOX", {
           value: value,
-          player_color: this.player_color
+          player: this.player
         });
       }
     }
   },
-  props: ["idx", "player_color"],
+  props: ["player"],
   mounted: function() {},
   methods: {}
 };

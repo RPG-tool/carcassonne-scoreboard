@@ -27,35 +27,30 @@ export default new Vuex.Store({
         color: "yellow",
         score: 0,
         active: false,
-        is_checked: false,
         available_in: [1]
       },
       {
         color: "grey",
         score: 0,
         active: false,
-        is_checked: false,
         available_in: [1]
       },
       {
         color: "blue",
         score: 0,
         active: false,
-        is_checked: false,
         available_in: [1]
       },
       {
         color: "black",
         score: 0,
         active: false,
-        is_checked: false,
         available_in: [0, 1]
       },
       {
         color: "green",
         score: 0,
         active: false,
-        is_checked: false,
         available_in: [0, 1]
       },
       {
@@ -68,27 +63,33 @@ export default new Vuex.Store({
         color: "orange",
         score: 0,
         active: false,
-        is_checked: false,
         available_in: [0]
       },
       {
         color: "white",
         score: 0,
         active: false,
-        is_checked: false,
         available_in: [0]
       }
     ]
   },
   getters: {
     testA: state => state.players,
-    activePlayers: (state) => {
+    playerObjByColor: (state, color) => state.players.find(p => p.color == color),
+    availablePlayers: (state) => {
       return state.players.filter(
         (player) => {
-          return player.active
+          return player.available_in.includes(state.current_game_mode)
         }
       )
     },
+    // activePlayers: (state) => {
+    //   return state.players.filter(
+    //     (player) => {
+    //       return player.active
+    //     }
+    //   )
+    // },
     playerIsActive: (state, player) => state.players.find(p => p == player).active
   },
   mutations: {
@@ -103,7 +104,7 @@ export default new Vuex.Store({
     SET_GAME_MODE(state, current_game_mode) {
       state.players_selected = [];
       state.current_game_mode = parseInt(current_game_mode, 10);
-      // Actuliza tb la lista de players activos
+      // Actualiza tb la lista de players activos
       state.players.forEach((player, idx) => {
         if (player.available_in.includes(state.current_game_mode)) {
           player.active = true;
