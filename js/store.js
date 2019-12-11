@@ -101,7 +101,7 @@ export default new Vuex.Store({
 
     RESET_PLAYERS_SCORE: state => state.players.forEach(player => player.score = 0),
 
-    RESET_PLAYERS_STATUS: state => state.players = state.players.map(player => player.active = false),
+    RESET_PLAYERS_STATUS: state => state.players.forEach(player => player.active = false),
 
     SET_GAME_MODE(state, current_game_mode) {
       state.current_game_mode = parseInt(current_game_mode, 10);

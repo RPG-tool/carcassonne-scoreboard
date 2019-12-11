@@ -22,6 +22,7 @@
       Players selected: {{ $store.getters.activePlayers.length }}
       <hr />
     </template>
+    <button :disabled="$store.getters.activePlayers.length < 1" @click="uncheckAll">Uncheck All</button>
     <button
       :disabled="this.$store.state.current_game_mode < 0 || $store.getters.activePlayers.length < 2"
       @click="startGame"
@@ -53,6 +54,9 @@ export default {
   methods: {
     startGame() {
       this.$store.commit("SET_GAME_STATE", "playing");
+    },
+    uncheckAll() {
+      this.$store.commit("RESET_PLAYERS_STATUS");
     }
   },
   components: {
