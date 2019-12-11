@@ -2,7 +2,7 @@
   <div class="player-select-row" :id="'player-select-' + player.color">
     <label :for="'player-color-' + player.color">
       <input
-        v-model="player.update_cb_status"
+        v-model="active"
         type="checkbox"
         :name="'player-color-' + player.color +'-'+ $store.state.current_game_mode"
         :id="'player-color-' + player.color +'-'+ $store.state.current_game_mode"
@@ -22,13 +22,13 @@ export default {
     };
   },
   computed: {
-    update_cb_status: {
+    active: {
       get() {
         // return false;
-        return this.$store.getters.playerObjByColor(this.player.color).active;
+        return this.player.active;
       },
       set(value) {
-        this.$store.commit("UPDATE_CHECKBOX", {
+        this.$store.commit("ACTIVATE_PLAYER", {
           value: value,
           player: this.player
         });

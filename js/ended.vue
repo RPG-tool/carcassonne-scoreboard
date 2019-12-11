@@ -21,27 +21,15 @@ export default {
   },
   computed: {
     getSortedListByScore() {
-      return [
-        {
-          color: "yellow",
-          score: 28,
-          active: false,
-          is_checked: false,
-          available_in: [1]
-        },
-        {
-          color: "grey",
-          score: 26,
-          active: false,
-          is_checked: false,
-          available_in: [1]
-        }
-      ];
+      return this.$store.getters.activePlayers.sort(
+        (a, b) => a.score > b.score
+      );
     }
   },
   watch: {},
   methods: {
     startNewGame() {
+      this.$store.commit("RESET_PLAYER_SCORE");
       this.$store.commit("SET_GAME_STATE", "choosing_players_and_mode");
     }
   },

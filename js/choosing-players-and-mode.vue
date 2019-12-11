@@ -19,11 +19,11 @@
           <PlayerSelectRow v-bind:player="player"></PlayerSelectRow>
         </li>
       </ul>
-      Players selected: {{ $store.state.players_selected }} ( {{ $store.state.players_selected.length }} )
+      Players selected: {{ $store.getters.activePlayers.length }}
       <hr />
     </template>
     <button
-      :disabled="this.$store.state.current_game_mode < 0 || $store.state.players_selected.length < 2"
+      :disabled="this.$store.state.current_game_mode < 0 || $store.getters.activePlayers.length < 2"
       @click="startGame"
     >Start game</button>
   </div>

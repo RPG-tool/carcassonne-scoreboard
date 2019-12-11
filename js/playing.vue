@@ -4,12 +4,10 @@
     <br />
     Vuex store value: {{ $store.state.current_game_mode }}
     <ul class="player-list">
-      <li v-for="(player_color, idx) in $store.state.players_selected" v-bind:key="idx">
-        <PlayerScoreRow v-bind:idx="idx" v-bind:player_color="player_color"></PlayerScoreRow>
+      <li v-for="(player, idx) in $store.getters.activePlayers" v-bind:key="idx">
+        <PlayerScoreRow v-bind:player="player"></PlayerScoreRow>
       </li>
     </ul>
-    Players selected: {{ $store.state.players_selected }} ( {{ $store.state.players_selected.length }} )
-    <hr />
 
     <button @click="stopGame">Stop game</button>
   </div>
