@@ -97,9 +97,11 @@ export default new Vuex.Store({
 
     INIT_GAME: state => state.game_state = 'choosing_players_and_mode',
 
-    RESET_PLAYER_SCORE: state => state.players.forEach(player => player.score = 0),
+    RESET_PLAYER_SCORE: (state, player) => state.players.find(p => p.color == player.color).score = 0,
 
-    RESET_PLAYER_STATUS: state => state.players = state.players.map(player => player.active = false),
+    RESET_PLAYERS_SCORE: state => state.players.forEach(player => player.score = 0),
+
+    RESET_PLAYERS_STATUS: state => state.players = state.players.map(player => player.active = false),
 
     SET_GAME_MODE(state, current_game_mode) {
       state.current_game_mode = parseInt(current_game_mode, 10);
@@ -109,20 +111,23 @@ export default new Vuex.Store({
       state.game_state = game_state;
     },
 
-    UPDATE_PLAYER_SCORE(state, data) {
-      console.log(data);
+    UPDATE_PLAYER_SCORE(state, { value, player }) {
+      let new_score = player.score + parseInt(value, 10);
+      if (new_score < 0) {
+        new_score = 0;
+      }
+      state.players.find(p => p.color == player.color).score = new_score;
     },
 
-    ACTIVATE_PLAYER(state, data) {
-      const { value, player } = data;
+    ACTIVATE_PLAYER(state, { value, player }) {
       state.players.find(p => p.color == player.color).active = value;
     }
   },
   actions: {
     initializeGame: (ctx) => {
       ctx.commit('INIT_GAME');
-      ctx.commit('RESET_PLAYER_SCORE');
-      ctx.commit('RESET_PLAYER_STATUS');
+      ctx.commit('RESET_PLAYERS_SCORE');
+      ctx.commit('RESET_PLAYERS_STATUS');
     },
     resetGame: (ctx) => {
       ctx.commit('RESET_GAME');

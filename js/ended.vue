@@ -29,7 +29,7 @@ export default {
   watch: {},
   methods: {
     startNewGame() {
-      this.$store.commit("RESET_PLAYER_SCORE");
+      this.$store.commit("RESET_PLAYERS_SCORE");
       this.$store.commit("SET_GAME_STATE", "choosing_players_and_mode");
     }
   },
