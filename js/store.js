@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   plugins: [
-    // createPersistedState() // Guarda en LocalStorage
+    createPersistedState() // Guarda en LocalStorage
   ],
   state: {
     // Posible states

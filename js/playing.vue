@@ -27,7 +27,18 @@ export default {
   },
   methods: {
     stopGame() {
-      this.$store.commit("SET_GAME_STATE", "ended");
+      this.$dialog
+        .confirm("Please confirm to end the current game", {
+          okText: "Stop current game",
+          cancelText: "Continue playing"
+        })
+        .then(dialog => {
+          console.log("Clicked on proceed");
+          this.$store.commit("SET_GAME_STATE", "ended");
+        })
+        .catch(function() {
+          console.log("Clicked on cancel");
+        });
     }
   },
   components: {
