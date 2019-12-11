@@ -10,6 +10,7 @@ export default new Vuex.Store({
   ],
   state: {
     // Posible states
+    // "about" -> Pantalla inicial
     // "welcome" -> Pantalla inicial
     // "choosing_players_and_mode" -> Eligiedo jugadores y modo de juego
     // "playing" -> Juego corriendo, partida normal

@@ -8,7 +8,7 @@
         <PlayerScoreRow v-bind:player="player"></PlayerScoreRow>
       </li>
     </ul>
-    <button @click="stopGame">Stop game</button>
+    <button @click="finishGame">Finish game</button>
   </div>
 </template>
 
@@ -25,10 +25,10 @@ export default {
     // console.log(this.$store.getters.activePlayers);
   },
   methods: {
-    stopGame() {
+    finishGame() {
       this.$dialog
         .confirm("Please confirm to end the current game", {
-          okText: "Stop game",
+          okText: "Finish game",
           cancelText: "Continue playing"
         })
         .then(dialog => {

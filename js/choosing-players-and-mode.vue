@@ -12,19 +12,19 @@
     <br />
     Computed property value: {{ current_game_mode }}
     <template
-      v-if="this.$store.state.current_game_mode > -1"
+      v-if="$store.state.current_game_mode > -1"
     >
       <ul class="player-list">
-        <li v-for="(player, idx) in $store.getters.availablePlayers" v-bind:key="idx">
+        <li v-for="(player, idx) in availablePlayers" v-bind:key="idx">
           <PlayerSelectRow v-bind:player="player"></PlayerSelectRow>
         </li>
       </ul>
-      Players selected: {{ $store.getters.activePlayers.length }}
+      Players selected: {{ activePlayers.length }}
       <hr />
     </template>
-    <button :disabled="$store.getters.activePlayers.length < 1" @click="uncheckAll">Uncheck All</button>
+    <button :disabled="activePlayers.length < 1" @click="uncheckAll">Uncheck All</button>
     <button
-      :disabled="this.$store.state.current_game_mode < 0 || $store.getters.activePlayers.length < 2"
+      :disabled="$store.state.current_game_mode < 0 || activePlayers.length < 2"
       @click="startGame"
     >Start game</button>
   </div>
@@ -32,12 +32,15 @@
 
 <script>
 import PlayerSelectRow from "./player-select-row";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {};
   },
   prop: {},
   computed: {
+    ...mapGetters(["availablePlayers", "activePlayers"]),
     current_game_mode: {
       get() {
         return this.$store.state.current_game_mode;

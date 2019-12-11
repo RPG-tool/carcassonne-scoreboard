@@ -1,12 +1,11 @@
 <template>
   <div class="player-select-row" :id="'player-select-' + player.color">
-    <label :for="'player-color-' + player.color">
+    <label>
       <input
         v-model="active"
         type="checkbox"
         :name="'player-color-' + player.color +'-'+ $store.state.current_game_mode"
         :id="'player-color-' + player.color +'-'+ $store.state.current_game_mode"
-        :data-color="player.color"
       />
       {{ player.color }}
       <br />
