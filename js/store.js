@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
+import { Howl, Howler } from "howler";
 
 Vue.use(Vuex);
 
@@ -71,7 +72,10 @@ export default new Vuex.Store({
         active: false,
         available_in: [0]
       }
-    ]
+    ],
+    sounds: {
+
+    }
   },
   getters: {
     availablePlayers: (state) => {
@@ -122,6 +126,12 @@ export default new Vuex.Store({
 
     ACTIVATE_PLAYER(state, { value, player }) {
       state.players.find(p => p.color == player.color).active = value;
+    },
+
+    INITIALICE_SOUNDS(state) {
+      state.sounds.start = new Howl({
+        src: ["./sounds/start-01.mp3"]
+      })
     }
   },
   actions: {
