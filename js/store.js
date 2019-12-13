@@ -73,7 +73,7 @@ export default new Vuex.Store({
         available_in: [0]
       }
     ],
-    sounds: {
+    snd: {
 
     }
   },
@@ -100,7 +100,13 @@ export default new Vuex.Store({
       state.players_selected = [];
     },
 
-    INIT_GAME: state => state.game_state = 'choosing_players_and_mode',
+    INIT_GAME: (state) => {
+      state.game_state = 'choosing_players_and_mode';
+      //state.snd['start'] = "./static/start-01.mp3";
+      window.snd['start'] = new Howl({
+        src: ["./static/start-01.mp3"]
+      });
+    },
 
     RESET_PLAYER_SCORE: (state, player) => state.players.find(p => p.color == player.color).score = 0,
 
@@ -129,9 +135,10 @@ export default new Vuex.Store({
     },
 
     INITIALICE_SOUNDS(state) {
-      state.sounds.start = new Howl({
-        src: ["./sounds/start-01.mp3"]
-      })
+      console.log('Add sounds');
+      // state.sounds = new Howl({
+      //   src: ["./sounds/start-01.mp3"]
+      // })
     }
   },
   actions: {

@@ -34,6 +34,14 @@
 import PlayerSelectRow from "./player-select-row";
 import { mapGetters } from "vuex";
 
+// window.snd = new Howl({
+//   src: ["./sounds/start-01.mp3"]
+// });
+// window.blaster.once("load", function() {
+//   console.log("Sound play");
+//   blaster.play();
+// });
+
 export default {
   data() {
     return {};

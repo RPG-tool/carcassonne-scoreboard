@@ -33,7 +33,11 @@
     "vue-template-compiler": "^2.6.10"
   },
   "staticFiles": {
-    "staticPath": "static",
-    "watcherGlob": "**"
+    "staticPath": [
+      {
+        "staticPath": "static",
+        "staticOutDir": "static"
+      }
+    ]
   }
 }
