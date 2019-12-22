@@ -8,6 +8,7 @@
         :id="'player-color-' + player.color +'-'+ $store.state.current_game_mode"
       />
       {{ player.color }}
+      {{ player.name[$store.state.current_game_mode] }}
       <br />
     </label>
   </div>

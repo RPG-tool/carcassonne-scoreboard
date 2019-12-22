@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div>Choose game variant and number of players</div>
-    <label>
-      <input name="game-style" value="0" type="radio" id="rb-starwars" v-model="current_game_mode" /> Starwars
-    </label>
-    <label>
-      <input name="game-style" value="1" type="radio" id="rb-classic" v-model="current_game_mode" /> Classic
-    </label>
-    <br />
+    <div>Choose players</div>
     Vuex store value: {{ $store.state.current_game_mode }}
     <br />
     Computed property value: {{ current_game_mode }}
@@ -22,6 +15,7 @@
       Players selected: {{ activePlayers.length }}
       <hr />
     </template>
+    <button @click="goBack">Back</button>
     <button :disabled="activePlayers.length < 1" @click="uncheckAll">Uncheck All</button>
     <button
       :disabled="$store.state.current_game_mode < 0 || activePlayers.length < 2"
@@ -63,6 +57,9 @@ export default {
     // console.log(this.$store.getters.activePlayers);
   },
   methods: {
+    goBack() {
+      this.$store.commit("SET_GAME_STATE", "choose_mode");
+    },
     startGame() {
       this.$store.commit("SET_GAME_STATE", "playing");
     },

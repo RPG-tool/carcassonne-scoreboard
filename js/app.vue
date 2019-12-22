@@ -1,7 +1,10 @@
 <template>
   <div>
-    <template v-if="this.$store.state.game_state == 'choosing_players_and_mode'">
-      <ChoosingPlayersAndMode></ChoosingPlayersAndMode>
+    <template v-if="this.$store.state.game_state == 'choosing_mode'">
+      <ChoosingMode></ChoosingMode>
+    </template>
+    <template v-if="this.$store.state.game_state == 'choosing_players'">
+      <ChoosingPlayers></ChoosingPlayers>
     </template>
     <template v-else-if="this.$store.state.game_state == 'playing'">
       <Playing></Playing>
@@ -18,7 +21,8 @@
 
 <script>
 import Welcome from "./welcome.vue";
-import ChoosingPlayersAndMode from "./choosing-players-and-mode.vue";
+import ChoosingMode from "./choosing-mode.vue";
+import ChoosingPlayers from "./choosing-players.vue";
 import Playing from "./playing.vue";
 import Ended from "./ended.vue";
 import { mapMutations, mapState, mapActions } from "vuex";
@@ -42,7 +46,8 @@ export default {
   },
   components: {
     Welcome,
-    ChoosingPlayersAndMode,
+    ChoosingMode,
+    ChoosingPlayers,
     Playing,
     Ended
   }

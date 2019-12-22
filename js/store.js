@@ -13,7 +13,8 @@ export default new Vuex.Store({
     // Posible states
     // "about" -> Pantalla inicial
     // "welcome" -> Pantalla inicial
-    // "choosing_players_and_mode" -> Eligiedo jugadores y modo de juego
+    // "choosing_mode" -> Eligiedo modo de juego
+    // "choosing_players" -> Eligiedo jugadores
     // "playing" -> Juego corriendo, partida normal
     // "ended" -> Juego terminado, mostrar vencedor, volver a jugar
     game_state: 'welcome',
@@ -26,48 +27,80 @@ export default new Vuex.Store({
     players: [
       {
         color: "yellow",
+        name: [
+          '',
+          'Yellow'
+        ],
         score: 0,
         active: false,
         available_in: [1]
       },
       {
-        color: "grey",
+        color: "pink",
+        name: [
+          '',
+          'Pink'
+        ],
         score: 0,
         active: false,
         available_in: [1]
       },
       {
         color: "blue",
+        name: [
+          '',
+          'Blue'
+        ],
         score: 0,
         active: false,
         available_in: [1]
       },
       {
         color: "black",
+        name: [
+          'Darth Vader',
+          'Black'
+        ],
         score: 0,
         active: false,
         available_in: [0, 1]
       },
       {
         color: "green",
+        name: [
+          'Yoda',
+          'Green'
+        ],
         score: 0,
         active: false,
         available_in: [0, 1]
       },
       {
         color: "red",
+        name: [
+          'LukeSkywalker',
+          'Red'
+        ],
         score: 0,
         active: false,
         available_in: [0, 1]
       },
       {
         color: "orange",
+        name: [
+          'Boba Fett',
+          ''
+        ],
         score: 0,
         active: false,
         available_in: [0]
       },
       {
         color: "white",
+        name: [
+          'Stormtrooper',
+          ''
+        ],
         score: 0,
         active: false,
         available_in: [0]
@@ -101,7 +134,7 @@ export default new Vuex.Store({
     },
 
     INIT_GAME: (state) => {
-      state.game_state = 'choosing_players_and_mode';
+      state.game_state = 'choosing_mode';
       //state.snd['start'] = "./static/start-01.mp3";
       ['b-01', 'b-02', 'b-03', 'end-01-empire', 'end-02-luke', 'end-03-rebels', 'end-04-bounty', 'f-01', 'f-02', 'start-01'].forEach(item => {
         window.snd[item] = new Howl({
