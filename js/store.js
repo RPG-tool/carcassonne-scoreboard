@@ -130,7 +130,11 @@ export default new Vuex.Store({
     RESET_GAME: state => {
       state.game_state = 'welcome';
       state.current_game_mode = -1;
-      state.players_selected = [];
+      // state.players_selected = [];
+      state.game_modes.forEach((mode) => {
+        console.log(mode);
+        document.querySelector('body').classList.remove(mode);
+      })
     },
 
     INIT_GAME: (state) => {

@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$store.commit("SET_GAME_STATE", "choose_mode");
+      this.$store.commit("SET_GAME_STATE", "choosing_mode");
     },
     startGame() {
       this.$store.commit("SET_GAME_STATE", "playing");

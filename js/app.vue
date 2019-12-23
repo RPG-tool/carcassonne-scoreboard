@@ -3,7 +3,7 @@
     <template v-if="this.$store.state.game_state == 'choosing_mode'">
       <ChoosingMode></ChoosingMode>
     </template>
-    <template v-if="this.$store.state.game_state == 'choosing_players'">
+    <template v-else-if="this.$store.state.game_state == 'choosing_players'">
       <ChoosingPlayers></ChoosingPlayers>
     </template>
     <template v-else-if="this.$store.state.game_state == 'playing'">
