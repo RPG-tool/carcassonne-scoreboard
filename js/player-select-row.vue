@@ -1,9 +1,9 @@
 <template>
   <li
-    :class="['player-card', `player-select-${player.color}`, {'is-inactive':!player.active}]"
-    :id="'player-select-' + player.color"
+    :class="['player-card', `player-${player.color}`, {'is-inactive':!player.active}]"
+    :id="'player-' + player.color"
   >
-    <label>
+    <label class="player-content-wrapper">
       <div class="player-img">
         <img
           :src="`/static/img/${$store.state.current_game_mode}-${player.color}.png`"

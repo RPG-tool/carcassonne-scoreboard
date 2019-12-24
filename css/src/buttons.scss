@@ -2,6 +2,7 @@ a.btn,
 input[type=button],
 button.btn {
   height: 40px;
+  min-width: 220px;
   display: inline-block;
   padding: 8px 20px;
   margin: 0 4px;
@@ -37,4 +38,33 @@ button.btn {
 
   border-color: pink;
   color: pink;
+}
+
+.btn-score {
+  width: 40px; height: 40px;
+  border: 2px solid #FFFFFF;
+  border-radius: 4px;
+  background-color: transparent;
+
+  font-size: 28px;
+  text-align: center;
+  color: #fff;
+}
+
+//
+// Tablet
+//
+@include media($tablet) {
+  a.btn,
+  input[type=button],
+  button.btn {
+    min-width: 0;
+  }
+}
+
+//
+// Mobile
+//
+@include media($mobile) {
+
 }

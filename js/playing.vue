@@ -1,14 +1,20 @@
 <template>
-  <div>
-    Game mode {{ $store.state.game_modes[$store.state.current_game_mode] }}
-    <br />
-    Vuex store value: {{ $store.state.current_game_mode }}
-    <ul class="player-list">
-      <li v-for="(player, idx) in $store.getters.activePlayers" v-bind:key="idx">
-        <PlayerScoreRow v-bind:player="player"></PlayerScoreRow>
-      </li>
-    </ul>
-    <button @click="finishGame">Finish game</button>
+  <div
+    :class="['view-wrapper', 'view-choose-players', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
+  >
+    <header class="main-header"></header>
+
+    <main class="main-main">
+      <ul class="player-list">
+        <template v-for="(player, idx) in $store.getters.activePlayers">
+          <PlayerScoreRow v-bind:key="idx" v-bind:player="player"></PlayerScoreRow>
+        </template>
+      </ul>
+    </main>
+
+    <footer class="main-footer">
+      <button class="btn" @click="finishGame">Finish game</button>
+    </footer>
   </div>
 </template>
 
@@ -26,6 +32,7 @@ export default {
   },
   methods: {
     finishGame() {
+      window.snd["ui-click-switch"].play();
       this.$dialog
         .confirm("Please confirm to end the current game", {
           okText: "Finish game",
@@ -33,6 +40,7 @@ export default {
         })
         .then(dialog => {
           // console.log("Clicked on proceed");
+
           this.$store.commit("SET_GAME_STATE", "ended");
         })
         .catch(function() {

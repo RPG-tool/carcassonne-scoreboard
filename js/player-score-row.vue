@@ -1,36 +1,48 @@
 <template>
-  <div class="player-score" :id="'player-score-' + player.color">
-    <label :for="player.color">{{ player.color }} {{ player.score }}</label>
-    <!--button :disabled="player.score === 0" @click="playerScoreUpdate(-1)">-1</button-->
-    <!--input
-      readonly
-      :name="'main-player-score-' + player.color"
-      type="number"
-      class="score"
-      :value="player.score"
-      @click="showAddtionalScoreModal"
-    /-->
-    <!--button @click="playerScoreUpdate(1)">+1</button-->
-    <br />
-    <button
-      :disabled="player.score === 0 || player_aditional_score < 1"
-      @click="playerScoreUpdate(-1*player_aditional_score)"
-      title="Substract"
-    >−</button>
-    <input
-      :name="'aditional-player-score-'+player.color"
-      type="number"
-      class="additional-score"
-      min="0"
-      step="1"
-      v-model="player_aditional_score"
-    />
-    <button
-      :disabled="player_aditional_score < 1"
-      @click="playerScoreUpdate(player_aditional_score)"
-      title="Add"
-    >+</button>
-  </div>
+  <li
+    :class="['player-card', 'player-score', `player-${player.color}`]"
+    :id="'player-score-' + player.color"
+  >
+    <div class="player-content-wrapper">
+      <!-- {{ player.color }} {{ player.score }} -->
+      <div class="player-img">
+        <img
+          :src="`/static/img/${$store.state.current_game_mode}-${player.color}.png`"
+          :alt="player.name[$store.state.current_game_mode]"
+        />
+      </div>
+
+      <p class="player-name">{{ player.name[$store.state.current_game_mode] }}</p>
+
+      <div class="score-control">
+        <p class="score-title">Player score</p>
+        <p class="score-value">{{ player.score }}</p>
+        <label :for="'aditional-player-score-'+player.color">Enter value</label>
+        <div class="row">
+          <button
+            class="btn-score"
+            :disabled="player.score === 0 || player_aditional_score < 1"
+            @click="playerScoreUpdate(-1*player_aditional_score)"
+            title="Substract"
+          >−</button>
+          <input
+            class="additional-score"
+            :name="'aditional-player-score-'+player.color"
+            type="number"
+            min="0"
+            step="1"
+            v-model="player_aditional_score"
+          />
+          <button
+            class="btn-score"
+            :disabled="player_aditional_score < 1"
+            @click="playerScoreUpdate(player_aditional_score)"
+            title="Add"
+          >+</button>
+        </div>
+      </div>
+    </div>
+  </li>
 </template>
 
 <script>

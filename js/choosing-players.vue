@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['view-wrapper', 'view-choose-players', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
+    :class="['view-wrapper', 'view-playing', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
       <button class="btn left" @click="goBack">‹ Back</button>
@@ -69,9 +69,11 @@ export default {
     },
     startGame() {
       this.$store.commit("SET_GAME_STATE", "playing");
+      window.snd["ui-click-switch"].play();
     },
     uncheckAll() {
       this.$store.commit("RESET_PLAYERS_STATUS");
+      window.snd["ui-click-switch"].play();
     }
   },
   components: {

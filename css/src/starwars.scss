@@ -27,6 +27,7 @@
       150% auto;
 
     .player-name {
+      position: relative;
       font-family: $f-serif;
       font-weight: 700;
       font-size: 20px;
@@ -54,7 +55,7 @@
 
   }
 
-  .player-select-black {
+  .player-black {
     background-color: $c-sw-bg-black;
     background-image:
       url(/static/img/badge-empire.svg),
@@ -66,22 +67,51 @@
       url(/static/img/top-right-corner.svg),
       url(/static/img/badge-empire-black.svg);
     }
+    .score-control {
+      .additional-score {
+        background-color: $c-sw-bg-black;
+      }
+      .btn-score {
+        background-color: $c-sw-bg-black;
+      }
+    }
   }
-  .player-select-green {
+  .player-green {
     background-color: $c-sw-bg-green;
     background-image:
       url(/static/img/badge-rebel.svg),
       url(/static/img/top-right-corner.svg),
       url(/static/img/badge-rebel-black.svg);
+
+      .score-control {
+        color: #000;
+        .additional-score {
+          border-color: #000;
+          background-color: $c-sw-bg-green;
+        }
+        .btn-score {
+          border-color: #000;
+          color: #000;
+          background-color: $c-sw-bg-green;
+        }
+      }
   }
-  .player-select-red {
+  .player-red {
     background-color: $c-sw-bg-red;
     background-image:
       url(/static/img/badge-rebel.svg),
       url(/static/img/top-right-corner.svg),
       url(/static/img/badge-rebel-black.svg);
+    .score-control {
+      .additional-score {
+        background-color: $c-sw-bg-red;
+      }
+      .btn-score {
+        background-color: $c-sw-bg-red;
+      }
+    }
   }
-  .player-select-orange {
+  .player-orange {
     background-color: $c-sw-bg-orange;
     background-image:
       url(/static/img/badge-boba.svg),
@@ -91,19 +121,55 @@
       right 20px top 10px, // Badge
       top right, // Corner
       130% -5%; // Big badge BG
+    .score-control {
+      .additional-score {
+        background-color: $c-sw-bg-orange;
+      }
+      .btn-score {
+        background-color: $c-sw-bg-orange;
+      }
+    }
   }
-  .player-select-white {
+  .player-white {
     background-color: #fff;
     background-image:
       url(/static/img/badge-empire.svg),
       url(/static/img/top-right-corner.svg),
       url(/static/img/badge-empire-black.svg);
-      .player-name {
-        color: #000000;
-        text-shadow: 0 0 0 transparent;
+    .player-name {
+      color: #000000;
+      text-shadow: 0 0 0 transparent;
+    }
+    .cta {
+      color: #000000;
+    }
+    .score-control {
+      color: #000;
+      .additional-score {
+        background-color: #fff;
+        border-color: #000;
       }
-      .cta {
-        color: #000000;
+      .btn-score {
+        background-color: #fff;
+        border-color: #000;
+        color: #000;
       }
+    }
   }
+
+
+}
+
+//
+// Tablet
+//
+@include media($tablet) {
+
+}
+
+//
+// Mobile
+//
+@include media($mobile) {
+
 }
