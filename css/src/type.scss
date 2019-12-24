@@ -1,0 +1,30 @@
+// Fams
+$f-sans: Arial, sans-serif;
+$f-serif: Cinzel, Georgia, Times, 'Times New Roman', serif;
+
+// Sizes
+
+.screen-title {
+  padding-top: 4px;
+  font-family: $f-sans;
+  font-weight: 700;
+  font-size: 24px;
+  color: $c-ui-yellow;
+
+  text-align: center;
+  text-shadow: 0 3px 0 rgba(0,0,0,0.50);
+}
+
+//
+// Tablet
+//
+@include media($tablet) {
+
+}
+
+//
+// Mobile
+//
+@include media($mobile) {
+
+}

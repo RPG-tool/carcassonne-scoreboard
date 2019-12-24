@@ -19,6 +19,7 @@
   "homepage": "https://github.com/carloscabo/carcassonne-scoreboard#readme",
   "dependencies": {
     "howler": "^2.1.2",
+    "minireset.css": "0.0.6",
     "parcel-plugin-static-files-copy": "^2.2.1",
     "vue-hot-reload-api": "^2.3.4",
     "vuejs-dialog": "^1.4.1",

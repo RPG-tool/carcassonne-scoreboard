@@ -15,7 +15,7 @@
     <template v-else>
       <Welcome></Welcome>
     </template>
-    <button @click="resetGame">DEBUG: Reset game</button>
+    <button class="debug-btn btn" @click="resetGame">DEBUG: Reset game</button>
   </div>
 </template>
 

@@ -142,7 +142,7 @@ export default new Vuex.Store({
       //state.snd['start'] = "./static/start-01.mp3";
       ['b-01', 'b-02', 'b-03', 'end-01-empire', 'end-02-luke', 'end-03-rebels', 'end-04-bounty', 'f-01', 'f-02', 'start-01'].forEach(item => {
         window.snd[item] = new Howl({
-          src: [`./static/${item}.mp3`]
+          src: [`./static/snd/${item}.mp3`]
         });
       });
 

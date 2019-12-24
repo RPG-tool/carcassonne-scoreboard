@@ -2,10 +2,10 @@
   <div>
     <ul>
       <li>
-        <button>About</button>
+        <button class="btn">About</button>
       </li>
       <li>
-        <button @click="INIT_GAME">Start game</button>
+        <button class="btn" @click="INIT_GAME">Start game</button>
       </li>
     </ul>
   </div>

@@ -1,0 +1,11 @@
+@mixin media($breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@function flex-grid($columns, $container-columns: $max-columns, $gutter-width: $gutter) {
+  $width: $columns * $column + ($columns - 1) * $gutter-width;
+  $container-width: $container-columns * $column + ($container-columns - 1) * $gutter-width;
+  @return percentage($width / $container-width);
+}

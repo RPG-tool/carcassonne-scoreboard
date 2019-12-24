@@ -1,0 +1,33 @@
+a.btn,
+input[type=button],
+button.btn {
+  height: 40px;
+  display: inline-block;
+  padding: 8px 20px;
+  background: transparent;
+  border: 2px solid $c-classic-bg-yellow;
+  border-radius: 4px;
+  cursor: pointer;
+
+  font: 14px/1em $f-sans;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  color: $c-classic-bg-yellow;
+
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+}
+
+.debug-btn.btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  border-color: pink;
+  color: pink;
+}
