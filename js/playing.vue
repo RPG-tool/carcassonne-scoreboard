@@ -4,10 +4,10 @@
   >
     <header class="main-header">
       <p class="screen-title left">
-        Total time:
-        <span>00:00</span>
+        Total time
+        <span id="current-playing-time"></span>
       </p>
-      <button class="btn right timer">Start timer</button>
+      <button @click="startMiniTimer" id="mini-timer" class="btn right timer">Start timer</button>
     </header>
 
     <main class="main-main">
@@ -26,9 +26,13 @@
 
 <script>
 import PlayerScoreRow from "./player-score-row.vue";
+import Timer from "easytimer.js";
+
 export default {
   data() {
-    return {};
+    return {
+      miniTimer: false
+    };
   },
   prop: {},
   computed: {},
@@ -36,10 +40,18 @@ export default {
   created: function() {
     // console.log(this.$store.getters.activePlayers);
     // window.snd["start-01"].play();
+    var timer = new Timer(/* default config */);
+    timer.start(/* config */);
+    timer.addEventListener("secondsUpdated", function(e) {
+      document.getElementById(
+        "current-playing-time"
+      ).innerHTML = timer.getTimeValues().toString(["minutes", "seconds"]);
+    });
   },
   methods: {
     finishGame() {
       window.snd["ui-click-switch"].play();
+      var vm = this;
       this.$dialog
         .confirm("Please confirm to end the current game", {
           okText: "Finish game",
@@ -47,12 +59,34 @@ export default {
         })
         .then(dialog => {
           // console.log("Clicked on proceed");
-
+          if (vm.miniTimer.isRunning()) {
+            vm.miniTimer.stop();
+          }
           this.$store.commit("SET_GAME_STATE", "ended");
         })
         .catch(function() {
           // console.log("Clicked on cancel");
         });
+    },
+    startMiniTimer() {
+      var vm = this;
+      window.snd["ui-click-switch"].play();
+      if (this.miniTimer === false) {
+        this.miniTimer = new Timer(/* default config */);
+        this.miniTimer.start(/* config */);
+        this.miniTimer.addEventListener("secondsUpdated", function(e) {
+          document.getElementById(
+            "mini-timer"
+          ).innerHTML = vm.miniTimer
+            .getTimeValues()
+            .toString(["minutes", "seconds"]);
+        });
+      } else if (this.miniTimer.isRunning()) {
+        this.miniTimer.stop();
+        document.getElementById("mini-timer").innerHTML = "Start timer";
+      } else {
+        this.miniTimer.reset();
+      }
     }
   },
   components: {

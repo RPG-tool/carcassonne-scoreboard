@@ -32,7 +32,8 @@ export default new Vuex.Store({
         ],
         score: 0,
         active: false,
-        available_in: [1]
+        available_in: [1],
+        faction: 'empire'
       },
       {
         color: "pink",
@@ -62,7 +63,8 @@ export default new Vuex.Store({
         ],
         score: 0,
         active: false,
-        available_in: [0, 1]
+        available_in: [0, 1],
+        faction: 'empire'
       },
       {
         color: "green",
@@ -72,7 +74,8 @@ export default new Vuex.Store({
         ],
         score: 0,
         active: false,
-        available_in: [0, 1]
+        available_in: [0, 1],
+        faction: 'rebel'
       },
       {
         color: "red",
@@ -82,7 +85,8 @@ export default new Vuex.Store({
         ],
         score: 0,
         active: false,
-        available_in: [0, 1]
+        available_in: [0, 1],
+        faction: 'rebel'
       },
       {
         color: "orange",
@@ -92,7 +96,8 @@ export default new Vuex.Store({
         ],
         score: 0,
         active: false,
-        available_in: [0]
+        available_in: [0],
+        faction: 'bounty'
       },
       {
         color: "white",
@@ -102,7 +107,8 @@ export default new Vuex.Store({
         ],
         score: 0,
         active: false,
-        available_in: [0]
+        available_in: [0],
+        faction: 'empire'
       }
     ],
     snd: {
