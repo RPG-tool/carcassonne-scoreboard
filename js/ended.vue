@@ -3,16 +3,37 @@
     :class="['view-wrapper', 'view-winner', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
-      <p class="screen-title right">And the winner is...</p>
+      <!--p class="screen-title right">And the winner is...</p-->
     </header>
 
     <main class="main-main">
-      <ul class="player-list winner-list">
-        <li
-          v-for="(player, idx) in getSortedListByScore"
-          v-bind:key="idx"
-        >{{ idx }} {{ player.color }} {{ player.score }}</li>
-      </ul>
+      <p class="score-title">Ranking!</p>
+
+      <table class="score-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Color</th>
+            <th class="r">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(player, idx) in getSortedListByScore" v-bind:key="idx">
+            <td>
+              <div :class="['score-thumb', `score-thumb-${player.color}`]">
+                <img
+                  :src="`/static/img/${$store.state.current_game_mode}-${player.color}.png`"
+                  :alt="player.name[$store.state.current_game_mode]"
+                />
+              </div>
+            </td>
+            <td>{{ player.name[$store.state.current_game_mode] }}</td>
+            <td>{{ player.color }}</td>
+            <td class="score r">{{ player.score }}</td>
+          </tr>
+        </tbody>
+      </table>
     </main>
 
     <footer class="main-footer">

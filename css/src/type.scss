@@ -32,6 +32,39 @@ body {
   }
 }
 
+.score-title {
+  font-size: 92px;
+  color: $c-ui-yellow;
+  text-align: right;
+}
+
+.score-table {
+  width: 100%;
+  max-width: 640px;
+  border-collapse: collapse;
+  margin: 0 0 24px 0;
+
+  tr {
+    border-bottom: 2px solid $c-ui-yellow;
+  }
+  th,
+  td {
+    padding: 8px 8px;
+    background-color: rgba(0,0,0,0.5);
+    font-size: 24px;
+
+    &.r {
+      text-align: right;
+    }
+  }
+  th {
+    color: $c-ui-yellow;
+  }
+  td {
+
+  }
+}
+
 //
 // Tablet
 //
