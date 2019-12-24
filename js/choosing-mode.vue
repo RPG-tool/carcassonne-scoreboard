@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     choosePlayers() {
+      window.snd["ui-click-switch"].play();
       this.$store.commit("SET_GAME_STATE", "choosing_players");
     }
   },

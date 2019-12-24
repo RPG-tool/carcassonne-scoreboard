@@ -3,7 +3,7 @@
     :class="['view-wrapper', 'view-playing', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
-      <button class="btn left" @click="goBack">‹ Back</button>
+      <button class="btn left" @click="goBack">‹ Change mode</button>
       <p class="screen-title right">
         Select players
         <small>( {{ activePlayers.length }} )</small>
@@ -21,7 +21,7 @@
     </main>
 
     <footer class="main-footer">
-      <button class="btn" :disabled="activePlayers.length < 1" @click="uncheckAll">Uncheck All</button>
+      <button class="btn" :disabled="activePlayers.length < 1" @click="uncheckAll">Deselect All</button>
       <button
         class="btn"
         :disabled="$store.state.current_game_mode < 0 || activePlayers.length < 2"
@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     goBack() {
+      window.snd["ui-click-switch"].play();
       this.$store.commit("SET_GAME_STATE", "choosing_mode");
     },
     startGame() {
@@ -72,8 +73,8 @@ export default {
       window.snd["ui-click-switch"].play();
     },
     uncheckAll() {
-      this.$store.commit("RESET_PLAYERS_STATUS");
       window.snd["ui-click-switch"].play();
+      this.$store.commit("RESET_PLAYERS_STATUS");
     }
   },
   components: {

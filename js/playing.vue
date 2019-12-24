@@ -2,7 +2,13 @@
   <div
     :class="['view-wrapper', 'view-choose-players', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
-    <header class="main-header"></header>
+    <header class="main-header">
+      <p class="screen-title left">
+        Total time:
+        <span>00:00</span>
+      </p>
+      <button class="btn right timer">Start timer</button>
+    </header>
 
     <main class="main-main">
       <ul class="player-list">
@@ -29,6 +35,7 @@ export default {
   watch: {},
   created: function() {
     // console.log(this.$store.getters.activePlayers);
+    // window.snd["start-01"].play();
   },
   methods: {
     finishGame() {
