@@ -32,7 +32,7 @@ body {
   }
 }
 
-.score-title {
+.final-score-title {
   font-size: 92px;
   color: $c-ui-yellow;
   text-align: right;
@@ -49,7 +49,7 @@ body {
   }
   th,
   td {
-    padding: 8px 8px;
+    padding: 16px 8px;
     background-color: rgba(0,0,0,0.5);
     font-size: 24px;
 

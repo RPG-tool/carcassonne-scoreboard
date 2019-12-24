@@ -7,7 +7,7 @@
     </header>
 
     <main class="main-main">
-      <p class="score-title">Ranking!</p>
+      <p class="final-score-title">Ranking!</p>
 
       <table class="score-table">
         <thead>
@@ -28,7 +28,7 @@
                 />
               </div>
             </td>
-            <td>{{ player.name[$store.state.current_game_mode] }}</td>
+            <td>{{ idx }} - {{ player.name[$store.state.current_game_mode] }}</td>
             <td>{{ player.color }}</td>
             <td class="score r">{{ player.score }}</td>
           </tr>
