@@ -36,6 +36,8 @@
               min="0"
               step="1"
               v-model="player_aditional_score"
+              @click="selectAll"
+              @keyup="validateInput"
             />
             <button
               class="btn-score"
@@ -72,8 +74,16 @@ export default {
       });
       this.player_aditional_score = 1;
     },
+    validateInput: function(e) {
+      if (e.keyCode === 13) {
+        this.playerScoreUpdate(this.player_aditional_score);
+      }
+    },
     resetPlayerScore: function() {
       this.$store.commit("RESET_PLAYER_SCORE", this.player);
+    },
+    selectAll(e) {
+      e.toElement.select();
     }
   }
 };

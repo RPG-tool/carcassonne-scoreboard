@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['view-wrapper', 'view-choose-players', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
+    :class="['view-wrapper', 'view-choose-players', `players-${activePlayers.length}`, {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
       <p class="screen-title left">
@@ -25,27 +25,37 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import PlayerScoreRow from "./player-score-row.vue";
 import Timer from "easytimer.js";
 
 export default {
   data() {
     return {
-      miniTimer: false
+      total_timer: false,
+      mini_timer: false
     };
   },
   prop: {},
-  computed: {},
+  computed: {
+    ...mapGetters(["activePlayers", "playersScoreSum"])
+  },
   watch: {},
   created: function() {
     // console.log(this.$store.getters.activePlayers);
-    // window.snd["start-01"].play();
-    var timer = new Timer(/* default config */);
-    timer.start(/* config */);
-    timer.addEventListener("secondsUpdated", function(e) {
+    if (this.playersScoreSum === 0) {
+      // window.snd["start-01"].stop().play();
+    }
+
+    var vm = this;
+    this.total_timer = new Timer();
+    this.total_timer.start();
+    this.total_timer.addEventListener("secondsUpdated", function(e) {
       document.getElementById(
         "current-playing-time"
-      ).innerHTML = timer.getTimeValues().toString(["minutes", "seconds"]);
+      ).innerHTML = vm.total_timer
+        .getTimeValues()
+        .toString(["minutes", "seconds"]);
     });
   },
   methods: {
@@ -59,9 +69,7 @@ export default {
         })
         .then(dialog => {
           // console.log("Clicked on proceed");
-          if (vm.miniTimer.isRunning()) {
-            vm.miniTimer.stop();
-          }
+          vm.total_timer.removeEventListener("secondsUpdated", null, true);
           this.$store.commit("SET_GAME_STATE", "ended");
         })
         .catch(function() {

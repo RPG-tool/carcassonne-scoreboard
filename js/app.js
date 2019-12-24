@@ -27,7 +27,7 @@ let vm = new Vue({
       });
     });
     // Starwars
-    ['b-01', 'b-02', 'b-03', 'end-01-empire', 'end-02-luke', 'end-03-rebels', 'end-04-bounty', 'f-01', 'f-02', 'start-01'].forEach(item => {
+    ['b-01', 'b-02', 'b-03', 'end-empire', 'end-luke', 'end-rebels', 'end-bounty', 'f-01', 'f-02', 'start-01'].forEach(item => {
       window.snd[item] = new Howl({
         src: [`./static/snd/${item}.mp3`]
       });

@@ -33,7 +33,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [1],
-        faction: 'empire'
+        end_music: 'empire'
       },
       {
         color: "pink",
@@ -64,7 +64,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0, 1],
-        faction: 'empire'
+        end_music: 'empire'
       },
       {
         color: "green",
@@ -75,7 +75,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0, 1],
-        faction: 'rebel'
+        end_music: 'rebel'
       },
       {
         color: "red",
@@ -86,7 +86,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0, 1],
-        faction: 'rebel'
+        end_music: 'luke'
       },
       {
         color: "orange",
@@ -97,7 +97,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0],
-        faction: 'bounty'
+        end_music: 'bounty'
       },
       {
         color: "white",
@@ -108,7 +108,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0],
-        faction: 'empire'
+        end_music: 'empire'
       }
     ],
     snd: {
@@ -129,6 +129,13 @@ export default new Vuex.Store({
           return player.active
         }
       )
+    },
+    playersScoreSum: (state, getters) => {
+      let total_score_sum = 0;
+      getters.availablePlayers.forEach((p, idx) => {
+        total_score_sum += p.score;
+      })
+      return total_score_sum;
     }
   },
   mutations: {
