@@ -4,6 +4,7 @@ button.btn {
   height: 40px;
   display: inline-block;
   padding: 8px 20px;
+  margin: 0 4px;
   background: transparent;
   border: 2px solid $c-classic-bg-yellow;
   border-radius: 4px;
@@ -20,6 +21,12 @@ button.btn {
   &:hover {
     border-color: #fff;
     color: #fff;
+  }
+
+  &[disabled] {
+    color: $c-ui-disabled;
+    border-color: $c-ui-disabled;
+    cursor: not-allowed;
   }
 }
 

@@ -14,6 +14,7 @@
       background-position: 50%, 50%;
       background-repeat: no-repeat, repeat;
       background-size: 400px auto, auto;
+
     }
 
     &.starwars {
@@ -21,6 +22,10 @@
       background-position: 50% calc(50% - 64px), 50% calc(50% + 20px), 50% 50%;
       background-repeat: no-repeat, no-repeat, repeat;
       background-size: auto 64px, 288px auto, auto;
+    }
+
+    &.is-disabled {
+      filter: brightness(0.5) contrast(90%) grayscale(100%);
     }
 
     cursor: pointer;

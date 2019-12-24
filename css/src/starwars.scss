@@ -1,3 +1,89 @@
-body.starwars {
+.view-wrapper.starwars {
+  background-image: url(/static/img/bg-tile-starwars.jpg);
+  .main-header {
+    background-image: url(/static/img/logo-starwars.svg);
+    background-size: auto 64px ;
+  }
+
+//   $c-sw-bg-red: #FF2E1E;
+// $c-sw-bg-black: #71706A;
+// $c-sw-bg-green: #9DE21B;
+// $c-sw-bg-white: #FFFFFD;
+// $c-sw-bg-orange: #FFA006;
+
+    .player-card {
+      background-repeat:
+        no-repeat,
+        no-repeat,
+        no-repeat,
+        no-repeat;
+      background-position:
+        left bottom, // Character
+        right 10px top 10px, // Badge
+        top right, // Corner
+        130% -5%; // Big badge BG
+      background-size:
+        auto 95%,
+        auto 48px,
+        auto,
+        150% auto;
+
+      .player-name {
+        font-family: $f-serif;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 1px;
+        color: #FFF;
+        text-shadow: 0 3px 0 rgba(0,0,0,0.50);
+      }
+
+    }
+
+    .player-select-black {
+      background-color: $c-sw-bg-black;
+      background-image:
+        url(/static/img/vader.png),
+        url(/static/img/badge-empire.svg),
+        url(/static/img/top-right-corner.svg),
+        url(/static/img/badge-empire-black.svg);
+    }
+    .player-select-green {
+      background-color: $c-sw-bg-green;
+      background-image:
+        url(/static/img/yoda.png),
+        url(/static/img/badge-rebel.svg),
+        url(/static/img/top-right-corner.svg),
+        url(/static/img/badge-rebel-black.svg);
+    }
+    .player-select-red {
+      background-color: $c-sw-bg-red;
+      background-image:
+        url(/static/img/luke.png),
+        url(/static/img/badge-rebel.svg),
+        url(/static/img/top-right-corner.svg),
+        url(/static/img/badge-rebel-black.svg);
+    }
+    .player-select-orange {
+      background-color: $c-sw-bg-orange;
+      background-image:
+        url(/static/img/boba.png),
+        url(/static/img/badge-boba.svg),
+        url(/static/img/top-right-corner.svg),
+        url(/static/img/badge-boba-black.svg);
+      background-position:
+        left bottom, // Character
+        right 20px top 10px, // Badge
+        top right, // Corner
+        130% -5%; // Big badge BG
+    }
+    .player-select-white {
+      background-color: #fff;
+      background-image:
+        url(/static/img/stormtrooper.png),
+        url(/static/img/badge-empire.svg),
+        url(/static/img/top-right-corner.svg),
+        url(/static/img/badge-empire-black.svg);
+    }
+
 
 }

@@ -9,3 +9,39 @@
   $container-width: $container-columns * $column + ($container-columns - 1) * $gutter-width;
   @return percentage($width / $container-width);
 }
+
+// keyframes mixin
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+  @keyframes(scrollStarwarsBg) {
+    0% {
+      transform: translate3d(0,0,0);
+    }
+    100% {
+      transform: translate3d(0,-512px,0);
+    }
+  }
+
+
+
+  @keyframes(scrollClassicBg) {
+    0% {
+      transform: translate3d(0,0,0);
+    }
+    100% {
+      transform: translate3d(0,-768px,0);
+    }
+  }

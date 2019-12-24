@@ -29,17 +29,69 @@ body {
   padding: 12px;
   background-color: $c-ui-med-bg;
 
+  background-position: 50%;
+  background-repeat: no-repeat;
+
   text-align: center;
 }
 
 .main-main {
   width: 100%;
-  padding: 16px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  flex: 1 0;
   justify-content: center;
   align-items: center;
 
+  background-position: 50%;
+  background-repeat: repeat;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex: 1 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  .player-card {
+    display: block;
+    width: calc( 50% - 20px );
+    height: calc( 33.33% - 20px );
+    margin: 10px;
+
+    background: $c-ui-bg-disabled;
+    border: 4px solid $c-ui-med-bg;
+    ;
+    border-radius: 4px;
+
+    transition: all 0.35s ease-in-out;
+
+    label {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 12px 24px 24px 16px;
+      cursor: pointer;
+    }
+
+    input {
+      visibility: hidden;
+    }
+  }
 }
 
 //

@@ -1,8 +1,12 @@
 // Fams
 $f-sans: Arial, sans-serif;
-$f-serif: Cinzel, Georgia, Times, 'Times New Roman', serif;
+$f-serif: Cinzel, 'Cinzel', Georgia, Times, 'Times New Roman', serif;
 
-// Sizes
+body {
+  font-family: $f-sans;
+  font-size: 14px;
+  color: #ffffff;
+}
 
 .screen-title {
   padding-top: 4px;
@@ -13,6 +17,12 @@ $f-serif: Cinzel, Georgia, Times, 'Times New Roman', serif;
 
   text-align: center;
   text-shadow: 0 3px 0 rgba(0,0,0,0.50);
+
+  small {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 500;
+  }
 }
 
 //

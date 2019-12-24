@@ -6,7 +6,7 @@
 
     <main class="main-main">
       <label
-        :class="{'select-game':true, 'starwars':true, 'is-selected':($store.state.current_game_mode === 0)}"
+        :class="{'select-game':true, 'starwars':true, 'is-selected':($store.state.current_game_mode === 0), 'is-disabled':($store.state.current_game_mode !== 0)}"
         title="Carcassonne Starwars"
       >
         <input
@@ -15,13 +15,13 @@
           type="radio"
           id="rb-starwars"
           v-model="current_game_mode"
-        /> Starwars
+        />
       </label>
       <label
-        :class="{'select-game':true, 'classic':true, 'is-selected':($store.state.current_game_mode === 1)}"
+        :class="{'select-game':true, 'classic':true, 'is-selected':($store.state.current_game_mode === 1), 'is-disabled':($store.state.current_game_mode !== 1)}"
         title="Carcassonne Classic"
       >
-        <input name="game-style" value="1" type="radio" id="rb-classic" v-model="current_game_mode" /> Classic
+        <input name="game-style" value="1" type="radio" id="rb-classic" v-model="current_game_mode" />
       </label>
       <!-- Vuex store value: {{ $store.state.current_game_mode }} -->
       <!-- Computed property value: {{ current_game_mode }} -->
@@ -39,6 +39,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { Howl, Howler } from "howler";
 
 // window.snd = new Howl({
 //   src: ["./sounds/start-01.mp3"]
@@ -60,12 +61,16 @@ export default {
       },
       set(value) {
         this.$store.commit("SET_GAME_MODE", value);
+        window.snd["ui-click-switch"].play();
       }
     }
   },
   watch: {},
   created: function() {
     // console.log(this.$store.getters.activePlayers);
+    // window.snd["ui-click-switch"] = new Howl({
+    //   src: ["./static/snd/ui-click-switch.mp3"]
+    // });
   },
   methods: {
     choosePlayers() {

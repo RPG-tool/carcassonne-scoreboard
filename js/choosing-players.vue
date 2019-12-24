@@ -1,26 +1,33 @@
 <template>
-  <div>
-    <div>Choose players</div>
-    Vuex store value: {{ $store.state.current_game_mode }}
-    <br />
-    Computed property value: {{ current_game_mode }}
-    <template
-      v-if="$store.state.current_game_mode > -1"
-    >
-      <ul class="player-list">
-        <li v-for="(player, idx) in availablePlayers" v-bind:key="idx">
-          <PlayerSelectRow v-bind:player="player"></PlayerSelectRow>
-        </li>
-      </ul>
-      Players selected: {{ activePlayers.length }}
-      <hr />
-    </template>
-    <button @click="goBack">Back</button>
-    <button :disabled="activePlayers.length < 1" @click="uncheckAll">Uncheck All</button>
-    <button
-      :disabled="$store.state.current_game_mode < 0 || activePlayers.length < 2"
-      @click="startGame"
-    >Start game</button>
+  <div
+    :class="['view-wrapper', 'view-choose-players', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
+  >
+    <header class="main-header">
+      <button class="btn left" @click="goBack">‹ Back</button>
+      <p class="screen-title right">
+        Select players
+        <small>( {{ activePlayers.length }} )</small>
+      </p>
+    </header>
+
+    <main class="main-main">
+      <template v-if="$store.state.current_game_mode > -1">
+        <ul class="player-list">
+          <template v-for="(player, idx) in availablePlayers">
+            <PlayerSelectRow v-bind:key="idx" v-bind:player="player"></PlayerSelectRow>
+          </template>
+        </ul>
+      </template>
+    </main>
+
+    <footer class="main-footer">
+      <button class="btn" :disabled="activePlayers.length < 1" @click="uncheckAll">Uncheck All</button>
+      <button
+        class="btn"
+        :disabled="$store.state.current_game_mode < 0 || activePlayers.length < 2"
+        @click="startGame"
+      >Start game</button>
+    </footer>
   </div>
 </template>
 
