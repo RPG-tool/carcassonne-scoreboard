@@ -167,6 +167,7 @@ export default new Vuex.Store({
 
     ACTIVATE_PLAYER(state, { value, player }) {
       state.players.find(p => p.color == player.color).active = value;
+      window.snd['ui-click-switch'].play();
     },
 
     INITIALICE_SOUNDS(state) {

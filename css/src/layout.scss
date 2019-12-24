@@ -81,15 +81,40 @@ body {
     transition: all 0.35s ease-in-out;
 
     label {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
       width: 100%;
       height: 100%;
       padding: 12px 24px 24px 16px;
       cursor: pointer;
     }
 
+    .player-img {
+      height: 90%;
+      position: absolute;
+      left: 0; bottom: 0;
+      overflow: hidden;
+
+      transform: translate(0, 0);
+      transition: all 0.35s ease-in-out;
+      img {
+        display: block;
+        height: 100%;
+        transition: all 0.35s ease-in-out;
+      }
+    }
+
     input {
       visibility: hidden;
+    }
+
+    .cta {
+      position: relative;
+      align-self: flex-end;
+      font-size: 16px;
+      font-weight: 600;
     }
   }
 }

@@ -1,12 +1,18 @@
 <template>
   <li
-    :class="['player-card', `player-select-${player.color}`, {'is-active':player.active}]"
+    :class="['player-card', `player-select-${player.color}`, {'is-inactive':!player.active}]"
     :id="'player-select-' + player.color"
   >
     <label>
+      <div class="player-img">
+        <img
+          :src="`/static/img/${$store.state.current_game_mode}-${player.color}.png`"
+          :alt="player.name[$store.state.current_game_mode]"
+        />
+      </div>
+
       <p class="player-name">{{ player.name[$store.state.current_game_mode] }}</p>
-      <p v-if="player.active" class="cta">Ready!</p>
-      <p v-else class="cta">Click to select player</p>
+
       <input
         v-model="active"
         type="checkbox"
@@ -15,6 +21,11 @@
       />
       <!-- {{ player.color }}
       -->
+      <p v-if="player.active" class="cta">Ready!</p>
+      <p v-else class="cta">
+        Click to
+        <br />select player
+      </p>
     </label>
   </li>
 </template>
