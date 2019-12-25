@@ -21,7 +21,7 @@
         </div>
 
         <div class="score-control">
-          <label :for="'aditional-player-score-'+player.color">Enter value</label>
+          <label :for="'aditional-player-score-'+player.color" class="score-title">Enter value</label>
           <div class="row">
             <button
               class="btn-score"

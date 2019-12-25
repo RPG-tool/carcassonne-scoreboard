@@ -3,9 +3,12 @@
     :class="['view-wrapper', 'view-playing', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
-      <button class="btn left" @click="goBack">‹ Change mode</button>
-      <p class="screen-title right">
-        Select players
+      <button class="btn left cap-on-mobile" @click="goBack">
+        ‹
+        <span class="hide-on-mobile">Change</span> mode
+      </button>
+      <p class="screen-title right cap-on-mobile">
+        <span class="hide-on-mobile">Select</span>players
         <small>( {{ activePlayers.length }} )</small>
       </p>
     </header>

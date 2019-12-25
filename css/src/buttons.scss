@@ -72,5 +72,13 @@ button.btn {
 // Mobile
 //
 @include media($mobile) {
-
+  a.btn,
+  input[type=button],
+  button.btn {
+    height: 32px;
+    padding: 6px 10px;
+  }
+  .btn-score {
+    width: 36px; height: 36px;
+  }
 }

@@ -95,5 +95,12 @@ body {
 // Mobile
 //
 @include media($mobile) {
+  .screen-title {
+    padding-top: 6px;
+    font-size: 18px;
+  }
 
+  .cap-on-mobile {
+    text-transform: capitalize;
+  }
 }

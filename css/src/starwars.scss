@@ -46,7 +46,7 @@
         color: #ffffff;
       }
       .player-img {
-        transform: translate(100px, 0);
+        transform: translate( calc( 100% ), 0);
         img {
           filter: grayscale(100%) contrast(0) brightness(0.20);
         }
@@ -185,5 +185,23 @@
 // Mobile
 //
 @include media($mobile) {
+  .view-wrapper.starwars {
+    .main-header {
+      background-size: auto 48px ;
+    }
+    .player-card {
+      background-position:
+        right 5px top 4px, // Badge
+        top right, // Corner
+        -80% top; // Big badge BG
+      background-size:
+        auto 20px,
+        auto 40px,
+        auto 220%;
 
+      .player-name {
+        font-size: 14px;
+      }
+    }
+  }
 }
