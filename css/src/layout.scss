@@ -226,14 +226,14 @@ body {
   .player-list {
     .player-card {
       width: calc( 50% - 8px );
-      height: calc( 33.33% - 8px );
+      height: calc( 33.33% - 4px );
       margin: 2px;
       border-width: 2px;
       .player-img {
         height: 100%;
       }
       .player-content-wrapper { // label
-        padding: 3px 8px 6px 80px;
+        padding: 3px 8px 1px 90px;
       }
       .cta {
         font-size: 12px;
@@ -242,6 +242,11 @@ body {
         }
       }
     }
+  }
+
+  .score-thumb {
+    width: 24px;
+    height: 24px;
   }
 
   .score-control-block {
@@ -256,6 +261,23 @@ body {
 
     .score-title {
       font-size: 10px;
+    }
+  }
+}
+
+//
+// Mobile landscape
+//
+@media only screen and (max-width: $mobile) and (orientation: portrait) {
+  .main-main {
+  }
+  .player-list {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    .player-card {
+      width: 100%;
+      height: calc( 16.66%- 4px );
     }
   }
 }

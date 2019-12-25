@@ -82,6 +82,14 @@ body {
   td {
 
   }
+
+  tbody {
+    tr {
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
 }
 
 //
@@ -102,5 +110,19 @@ body {
 
   .cap-on-mobile {
     text-transform: capitalize;
+  }
+
+  .final-score-title {
+    font-size: 32px;
+  }
+
+  .score-table {
+    max-width: 90%;
+    margin: 0 0 8px 0;
+    th,
+    td {
+      padding: 4px 4px;
+      font-size: 12px;
+    }
   }
 }

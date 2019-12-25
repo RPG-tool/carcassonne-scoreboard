@@ -57,7 +57,7 @@
         background-image: url(/static/img/logo-carcassonne.png), url(/static/img/bg-tile-classic.png);
         background-position: 50%, 50%;
         background-repeat: no-repeat, repeat;
-        background-size: 90% auto, auto;
+        background-size: 320px auto, auto;
 
       }
 
@@ -70,3 +70,23 @@
     }
   }
 }
+
+//
+// Mobile landscape
+//
+@media only screen and (max-width: $mobile) and (orientation: landscape) {
+  .view-choose-game-mode {
+    .select-game {
+      &.classic {
+        background-size: 280px auto, auto;
+      }
+      &.starwars {
+        background-image: url(/static/img/logo-carcassonne.png), url(/static/img/logo-starwars.svg), url(/static/img/bg-tile-starwars.jpg);
+        background-position: 25% center, 75% center, 50%, 50% 50%;
+        background-repeat: no-repeat, no-repeat, repeat;
+        background-size: auto 64px, auto 95%, auto;
+      }
+    }
+  }
+}
+
