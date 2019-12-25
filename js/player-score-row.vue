@@ -1,6 +1,6 @@
 <template>
   <li
-    :class="['player-card', 'player-score', `player-${player.color}`]"
+    :class="['player-card', 'player-score', `player-${player.color}`, {'leader': (getTopScore === player.score && player.score > 0)}]"
     :id="'player-score-' + player.color"
   >
     <div class="player-content-wrapper">
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data: function() {
     return {
@@ -63,7 +64,9 @@ export default {
   mounted: function() {
     // this.$root.$on("resetPlayerScore", this.resetPlayerScore);
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["getTopScore"])
+  },
   methods: {
     playerScoreUpdate: function(value) {
       const player = this.player;

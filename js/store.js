@@ -132,6 +132,14 @@ export default new Vuex.Store({
         total_score_sum += p.score;
       })
       return total_score_sum;
+    },
+    getTopScore: (state, getters) => {
+      return Math.max.apply(
+        Math,
+        getters.activePlayers.map(function (obj) {
+          return obj.score;
+        })
+      );
     }
   },
   mutations: {

@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -79,14 +79,7 @@ export default {
         (a, b) => b.score - a.score
       );
     },
-    getTopScore() {
-      return Math.max.apply(
-        Math,
-        this.$store.getters.activePlayers.map(function(obj) {
-          return obj.score;
-        })
-      );
-    }
+    ...mapGetters(["getTopScore"])
   },
   watch: {},
   methods: {
