@@ -55,7 +55,14 @@ import { mapMutations } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      winner_song: false
+    };
+  },
+  created: function() {
+    var first = this.getSortedListByScore[0];
+    console.log(this.$store.state.players);
+    console.log(first.end_music);
   },
   computed: {
     getSortedListByScore() {

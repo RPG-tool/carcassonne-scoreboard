@@ -16,7 +16,7 @@ export default new Vuex.Store({
     // "choosing_players" -> Eligiedo jugadores
     // "playing" -> Juego corriendo, partida normal
     // "ended" -> Juego terminado, mostrar vencedor, volver a jugar
-    game_state: 'welcome',
+    game_state: "welcome",
     game_modes: ["starwars", "classic"],
     current_game_mode: -1, // 0 -> sw, 1 -> classic
     /* playerGroups: [
@@ -25,6 +25,7 @@ export default new Vuex.Store({
     ], */
     players: [
       {
+        music: "empire",
         color: "yellow",
         name: [
           '',
@@ -32,8 +33,7 @@ export default new Vuex.Store({
         ],
         score: 0,
         active: false,
-        available_in: [1],
-        end_music: 'empire'
+        available_in: [1]
       },
       {
         color: "pink",
@@ -64,7 +64,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0, 1],
-        end_music: 'empire'
+        end_music: "empire"
       },
       {
         color: "green",
@@ -108,12 +108,9 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0],
-        end_music: 'empire'
+        end_music: "empire"
       }
-    ],
-    snd: {
-
-    }
+    ]
   },
   getters: {
     availablePlayers: (state) => {
@@ -142,18 +139,11 @@ export default new Vuex.Store({
     RESET_GAME: state => {
       state.game_state = 'welcome';
       state.current_game_mode = -1;
-      // state.players_selected = [];
-      state.game_modes.forEach((mode) => {
-        console.log(mode);
-        document.querySelector('body').classList.remove(mode);
-      })
     },
 
     INIT_GAME: (state) => {
       state.game_state = 'choosing_mode';
       //state.snd['start'] = "./static/start-01.mp3";
-
-
     },
 
     RESET_PLAYER_SCORE: (state, player) => state.players.find(p => p.color == player.color).score = 0,
