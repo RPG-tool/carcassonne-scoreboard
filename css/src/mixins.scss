@@ -26,22 +26,32 @@
   }
 }
 
-  @keyframes(scrollStarwarsBg) {
-    0% {
-      transform: translate3d(0,0,0);
-    }
-    100% {
-      transform: translate3d(0,-512px,0);
-    }
+@keyframes(scrollStarwarsBg) {
+  0% {
+    transform: translate3d(0,0,0);
   }
-
-
-
-  @keyframes(scrollClassicBg) {
-    0% {
-      transform: translate3d(0,0,0);
-    }
-    100% {
-      transform: translate3d(0,-768px,0);
-    }
+  100% {
+    transform: translate3d(0,-512px,0);
   }
+}
+
+@keyframes(scrollClassicBg) {
+  0% {
+    transform: translate3d(0,0,0);
+  }
+  100% {
+    transform: translate3d(0,-768px,0);
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+@-webkit-keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}

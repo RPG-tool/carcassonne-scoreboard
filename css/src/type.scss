@@ -51,6 +51,15 @@ body {
       td {
         font-weight: 700;
         color: $c-ui-yellow;
+
+        .cell-data {
+          -webkit-animation: pulse 1s infinite ease-in-out;
+          -o-animation: pulse 1s infinite ease-in-out;
+          -ms-animation: pulse 1s infinite ease-in-out;
+          -moz-animation: pulse 1s infinite ease-in-out;
+          animation: pulse 1s infinite ease-in-out;
+        }
+
       }
     }
   }

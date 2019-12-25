@@ -25,7 +25,6 @@ export default new Vuex.Store({
     ], */
     players: [
       {
-        music: "empire",
         color: "yellow",
         name: [
           '',
@@ -75,7 +74,7 @@ export default new Vuex.Store({
         score: 0,
         active: false,
         available_in: [0, 1],
-        end_music: 'rebel'
+        end_music: 'rebels'
       },
       {
         color: "red",

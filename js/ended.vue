@@ -56,12 +56,21 @@ import { mapMutations } from "vuex";
 export default {
   data() {
     return {
-      winner_song: false
+      winner_tune: false
     };
   },
   created: function() {
-    var first = this.getSortedListByScore[0];
-    console.log(this.$store.state.players);
+    const first = this.getSortedListByScore[0];
+    if (this.$store.state.current_game_mode === 0) {
+      // SW
+      // console.log(first.end_music);
+      this.winner_tune = new Howl({
+        src: [`./static/snd/end-${first.end_music}.mp3`]
+      });
+      this.winner_tune.play();
+    } else {
+      // Classic
+    }
     console.log(first.end_music);
   },
   computed: {
@@ -82,6 +91,8 @@ export default {
   watch: {},
   methods: {
     startNewGame() {
+      this.winner_tune.stop();
+      window.snd["ui-click-switch"].play();
       this.$store.commit("RESET_PLAYERS_SCORE");
       this.$store.commit("SET_GAME_STATE", "choosing_players");
     }
