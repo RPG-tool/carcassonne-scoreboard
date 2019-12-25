@@ -19,19 +19,27 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(player, idx) in getSortedListByScore" v-bind:key="idx">
-            <td>
-              <div :class="['score-thumb', `score-thumb-${player.color}`]">
-                <img
-                  :src="`/static/img/${$store.state.current_game_mode}-${player.color}.png`"
-                  :alt="player.name[$store.state.current_game_mode]"
-                />
-              </div>
-            </td>
-            <td>{{ idx }} - {{ player.name[$store.state.current_game_mode] }}</td>
-            <td>{{ player.color }}</td>
-            <td class="score r">{{ player.score }}</td>
-          </tr>
+          <template v-for="(player, idx) in getSortedListByScore">
+            <tr v-bind:key="idx" :class="{'winner':(getTopScore === player.score)}">
+              <td>
+                <div :class="['score-thumb', `score-thumb-${player.color}`]">
+                  <img
+                    :src="`/static/img/${$store.state.current_game_mode}-${player.color}.png`"
+                    :alt="player.name[$store.state.current_game_mode]"
+                  />
+                </div>
+              </td>
+              <td>
+                <span class="cell-data">{{ player.name[$store.state.current_game_mode] }}</span>
+              </td>
+              <td>
+                <span class="cell-data">{{ player.color }}</span>
+              </td>
+              <td class="score r">
+                <span class="cell-data">{{ player.score }}</span>
+              </td>
+            </tr>
+          </template>
         </tbody>
       </table>
     </main>
@@ -52,7 +60,15 @@ export default {
   computed: {
     getSortedListByScore() {
       return this.$store.getters.activePlayers.sort(
-        (a, b) => a.score > b.score
+        (a, b) => b.score - a.score
+      );
+    },
+    getTopScore() {
+      return Math.max.apply(
+        Math,
+        this.$store.getters.activePlayers.map(function(obj) {
+          return obj.score;
+        })
       );
     }
   },

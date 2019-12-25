@@ -33,7 +33,7 @@ body {
 }
 
 .final-score-title {
-  font-size: 92px;
+  font-size: 72px;
   color: $c-ui-yellow;
   text-align: right;
 }
@@ -42,16 +42,26 @@ body {
   width: 100%;
   max-width: 640px;
   border-collapse: collapse;
-  margin: 0 0 24px 0;
+  margin: 0 0 16px 0;
 
   tr {
     border-bottom: 2px solid $c-ui-yellow;
+
+    &.winner {
+      td {
+        font-weight: 700;
+        color: $c-ui-yellow;
+      }
+    }
   }
   th,
   td {
-    padding: 16px 8px;
+    padding: 12px 4px;
     background-color: rgba(0,0,0,0.5);
+
     font-size: 24px;
+    font-weight: 500;
+    color: $c-sw-bg-white;
 
     &.r {
       text-align: right;
