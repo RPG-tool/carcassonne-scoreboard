@@ -70,7 +70,13 @@ export default {
   methods: {
     playerScoreUpdate: function(value) {
       const player = this.player;
-      window.snd["b-0" + (Math.floor(Math.random() * (4 - 1)) + 1)].play();
+
+      let rnd_idx = Math.floor(
+        Math.random() *
+          window.snd.coin[this.$store.state.current_game_mode].length
+      );
+      window.snd.coin[this.$store.state.current_game_mode][rnd_idx].play();
+
       this.$store.commit("UPDATE_PLAYER_SCORE", {
         value,
         player

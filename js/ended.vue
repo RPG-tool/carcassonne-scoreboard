@@ -62,14 +62,16 @@ export default {
     const first = this.getSortedListByScore[0];
     if (this.$store.state.current_game_mode === 0) {
       // SW
-      // console.log(first.end_music);
       this.winner_tune = new Howl({
-        src: [`./static/snd/end-${first.end_music}.mp3`]
+        src: [`./static/snd/0-end-${first.end_music}.mp3`]
       });
-      this.winner_tune.play();
     } else {
       // Classic
+      this.winner_tune = new Howl({
+        src: ["./static/snd/1-end.mp3"]
+      });
     }
+    this.winner_tune.play();
     console.log(first.end_music);
   },
   computed: {
@@ -83,6 +85,7 @@ export default {
   watch: {},
   methods: {
     startNewGame() {
+      this.winner_tune.stop();
       window.snd["click"].play();
       this.$store.commit("RESET_PLAYERS_SCORE");
       this.$store.commit("SET_GAME_STATE", "choosing_players");

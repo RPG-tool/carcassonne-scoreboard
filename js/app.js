@@ -20,18 +20,29 @@ let vm = new Vue({
     // console.log('a is: ' + this.a)
     console.log('App created!');
 
-    // CommonUI sounds
+    // Common UI sounds
     ['click'].forEach(item => {
       window.snd[item] = new Howl({
         src: [`./static/snd/${item}.mp3`]
       });
     });
-    // Starwars
-    ['b-01', 'b-02', 'b-03', 'end-empire', 'end-luke', 'end-rebels', 'end-bounty', 'f-01', 'f-02', 'start-01'].forEach(item => {
-      window.snd[item] = new Howl({
-        src: [`./static/snd/${item}.mp3`]
-      });
-    });
+
+    // Coin sounds
+    window.snd.coin = [
+      [
+        new Howl({ src: ['./static/snd/0-blaster-01.mp3'] }),
+        new Howl({ src: ['./static/snd/0-blaster-02.mp3'] }),
+        new Howl({ src: ['./static/snd/0-blaster-03.mp3'] })
+      ],
+      [
+        new Howl({ src: ['./static/snd/1-coin.mp3'] })
+      ]
+    ];
+    // ['0-coin-1', '0-coins-2', 'b-03', 'end-empire', 'end-luke', 'end-rebels', 'end-bounty', '0-start'].forEach(item => {
+    //   window.snd[item] = new Howl({
+    //     src: [`./static/snd/${item}.mp3`]
+    //   });
+    // });
   }
 });
 

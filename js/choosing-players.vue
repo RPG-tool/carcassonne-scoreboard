@@ -76,7 +76,7 @@ export default {
       window.snd["click"].play();
     },
     uncheckAll() {
-      window.snd["clickh"].play();
+      window.snd["click"].play();
       this.$store.commit("RESET_PLAYERS_STATUS");
     }
   },

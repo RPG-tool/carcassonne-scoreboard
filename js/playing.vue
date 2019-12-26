@@ -57,11 +57,7 @@ export default {
   },
   watch: {},
   created: function() {
-    // console.log(this.$store.getters.activePlayers);
-    if (this.playersScoreSum === 0) {
-      // window.snd["start-01"].stop().play();
-    }
-
+    // Start timer
     if (typeof window.total_timer === "undefined") {
       window.total_timer = new Timer();
       window.total_timer.start();
