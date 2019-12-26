@@ -77,12 +77,14 @@ export default {
           animation: "none"
         })
         .then(dialog => {
+          console.log("Timer");
+          console.log(window.mini_timer);
           if (typeof window.mini_timer !== "undefined") {
             window.mini_timer.removeEventListener(
               "secondsUpdated",
               updateMiniTimer
             );
-            window.mini_timer = null;
+            window.mini_timer = undefined;
           }
           this.$store.commit("SET_GAME_STATE", "ended");
         })
@@ -92,7 +94,6 @@ export default {
     },
     startMiniTimer() {
       window.snd["click"].play();
-
       if (
         typeof window.mini_timer === "undefined" ||
         window.mini_timer === null

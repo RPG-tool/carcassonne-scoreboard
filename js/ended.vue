@@ -72,7 +72,6 @@ export default {
       });
     }
     this.winner_tune.play();
-    console.log(first.end_music);
   },
   computed: {
     getSortedListByScore() {
