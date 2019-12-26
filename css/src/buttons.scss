@@ -19,6 +19,8 @@ button.btn {
 
   transition: all 0.25s ease-in-out;
 
+  -webkit-appearance:none;
+
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -52,10 +54,13 @@ button.btn {
   border: 2px solid #FFFFFF;
   border-radius: 4px;
   background-color: transparent;
+  padding: 0 0 8px 0;
 
   font-size: 28px;
   text-align: center;
   color: #fff;
+
+  -webkit-appearance: none;
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -68,6 +73,16 @@ button.btn {
     color: rgba(255,255,255,0.5);
     border-color: rgba(255,255,255,0.5);
     cursor: not-allowed;
+  }
+}
+
+.iOS-device {
+  .btn-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
   }
 }
 

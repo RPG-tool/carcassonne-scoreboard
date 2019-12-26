@@ -28,7 +28,9 @@
               :disabled="player.score === 0 || player_aditional_score < 1"
               @click="playerScoreUpdate(-1*player_aditional_score)"
               title="Substract"
-            >−</button>
+            >
+              <span>−</span>
+            </button>
             <input
               class="additional-score"
               :name="'aditional-player-score-'+player.color"
@@ -44,7 +46,9 @@
               :disabled="player_aditional_score < 1"
               @click="playerScoreUpdate(player_aditional_score)"
               title="Add"
-            >+</button>
+            >
+              <span>+</span>
+            </button>
           </div>
         </div>
       </div>

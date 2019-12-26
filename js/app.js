@@ -41,14 +41,10 @@ let vm = new Vue({
   }
 });
 
-// window.resetHeight = function () {
-//   // reset the body height to that of the inner browser
-//   document.getElementById("app-viewport").style.height = window.innerHeight + "px";
-// }
-// // reset the height whenever the window's resized
-// window.addEventListener("resize", window.resetHeight);
-// // called to initially set the height.
-// resetHeight();
+var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+if (iOS) {
+  document.getElementsByTagName("body")[0].setAttribute("class", "iOS-device");
+}
 
 let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
