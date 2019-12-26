@@ -135,12 +135,18 @@
 // Tablet
 //
 @include media($tablet) {
+  .view-wrapper.classic {
 
+  }
 }
 
 //
 // Mobile
 //
 @include media($mobile) {
-
+  .view-wrapper.classic {
+    .main-header {
+      background-size: auto 64px ;
+    }
+  }
 }

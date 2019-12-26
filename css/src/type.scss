@@ -48,10 +48,17 @@ body {
     font-size: 72px;
     color: #fff;
     text-align: center;
+    margin-bottom: -16px;
+  }
+
+  thead {
+    tr {
+      border-color: #fff;
+    }
   }
 
   tr {
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #444;
 
     &.winner {
       td {
@@ -124,6 +131,7 @@ body {
     margin: 0 0 8px 0;
     caption {
       font-size: 32px;
+      margin-bottom: -8px;
     }
     th,
     td {
