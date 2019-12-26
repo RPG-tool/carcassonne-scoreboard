@@ -44,6 +44,7 @@ export default {
         return this.player.active;
       },
       set(value) {
+        window.snd["click"].play();
         this.$store.commit("ACTIVATE_PLAYER", {
           value: value,
           player: this.player

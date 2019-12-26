@@ -29,12 +29,27 @@ import { mapGetters } from "vuex";
 import PlayerScoreRow from "./player-score-row.vue";
 import Timer from "easytimer.js";
 
+function updateTotalTimer() {
+  let el = document.getElementById("current-playing-time");
+  if (el !== null) {
+    el.innerHTML = window.total_timer
+      .getTimeValues()
+      .toString(["minutes", "seconds"]);
+  }
+}
+
+function updateMiniTimer() {
+  let el = document.getElementById("mini-timer");
+  if (el !== null) {
+    el.innerHTML = window.mini_timer
+      .getTimeValues()
+      .toString(["minutes", "seconds"]);
+  }
+}
+
 export default {
   data() {
-    return {
-      total_timer: false,
-      mini_timer: false
-    };
+    return {};
   },
   prop: {},
   computed: {
@@ -47,20 +62,17 @@ export default {
       // window.snd["start-01"].stop().play();
     }
 
-    var vm = this;
-    this.total_timer = new Timer();
-    this.total_timer.start();
-    this.total_timer.addEventListener("secondsUpdated", function(e) {
-      document.getElementById(
-        "current-playing-time"
-      ).innerHTML = vm.total_timer
-        .getTimeValues()
-        .toString(["minutes", "seconds"]);
-    });
+    if (typeof window.total_timer === "undefined") {
+      window.total_timer = new Timer();
+      window.total_timer.start();
+      window.total_timer.addEventListener("secondsUpdated", updateTotalTimer);
+    } else {
+      window.total_timer.reset();
+    }
   },
   methods: {
     finishGame() {
-      window.snd["ui-click-switch"].play();
+      window.snd["click"].play();
       var vm = this;
       this.$dialog
         .confirm("Please confirm to end the current game", {
@@ -69,8 +81,13 @@ export default {
           animation: "none"
         })
         .then(dialog => {
-          // console.log("Clicked on proceed");
-          vm.total_timer.removeEventListener("secondsUpdated", null, true);
+          if (typeof window.mini_timer !== "undefined") {
+            window.mini_timer.removeEventListener(
+              "secondsUpdated",
+              updateMiniTimer
+            );
+            window.mini_timer = null;
+          }
           this.$store.commit("SET_GAME_STATE", "ended");
         })
         .catch(function() {
@@ -78,23 +95,24 @@ export default {
         });
     },
     startMiniTimer() {
-      var vm = this;
-      window.snd["ui-click-switch"].play();
-      if (this.miniTimer === false) {
-        this.miniTimer = new Timer(/* default config */);
-        this.miniTimer.start(/* config */);
-        this.miniTimer.addEventListener("secondsUpdated", function(e) {
-          document.getElementById(
-            "mini-timer"
-          ).innerHTML = vm.miniTimer
-            .getTimeValues()
-            .toString(["minutes", "seconds"]);
-        });
-      } else if (this.miniTimer.isRunning()) {
-        this.miniTimer.stop();
+      window.snd["click"].play();
+
+      if (
+        typeof window.mini_timer === "undefined" ||
+        window.mini_timer === null
+      ) {
+        window.mini_timer = new Timer();
+        window.mini_timer.start();
+        window.mini_timer.addEventListener("secondsUpdated", updateMiniTimer);
+      } else if (window.mini_timer.isRunning()) {
+        window.mini_timer.stop();
+        // window.mini_timer.removeEventListener(
+        //   "secondsUpdated",
+        //   updateMiniTimer
+        // );
         document.getElementById("mini-timer").innerHTML = "Start timer";
       } else {
-        this.miniTimer.reset();
+        window.mini_timer.reset();
       }
     }
   },

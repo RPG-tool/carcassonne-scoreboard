@@ -83,8 +83,7 @@ export default {
   watch: {},
   methods: {
     startNewGame() {
-      this.winner_tune.stop();
-      window.snd["ui-click-switch"].play();
+      window.snd["click"].play();
       this.$store.commit("RESET_PLAYERS_SCORE");
       this.$store.commit("SET_GAME_STATE", "choosing_players");
     }

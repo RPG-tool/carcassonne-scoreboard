@@ -20,8 +20,8 @@ let vm = new Vue({
     // console.log('a is: ' + this.a)
     console.log('App created!');
 
-    // UI sounds
-    ['ui-click-switch'].forEach(item => {
+    // CommonUI sounds
+    ['click'].forEach(item => {
       window.snd[item] = new Howl({
         src: [`./static/snd/${item}.mp3`]
       });

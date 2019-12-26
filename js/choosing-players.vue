@@ -68,15 +68,15 @@ export default {
   },
   methods: {
     goBack() {
-      window.snd["ui-click-switch"].play();
+      window.snd["click"].play();
       this.$store.commit("SET_GAME_STATE", "choosing_mode");
     },
     startGame() {
       this.$store.commit("SET_GAME_STATE", "playing");
-      window.snd["ui-click-switch"].play();
+      window.snd["click"].play();
     },
     uncheckAll() {
-      window.snd["ui-click-switch"].play();
+      window.snd["clickh"].play();
       this.$store.commit("RESET_PLAYERS_STATUS");
     }
   },

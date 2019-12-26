@@ -62,20 +62,17 @@ export default {
       },
       set(value) {
         this.$store.commit("SET_GAME_MODE", value);
-        window.snd["ui-click-switch"].play();
+        window.snd["click"].play();
       }
     }
   },
   watch: {},
   created: function() {
     // console.log(this.$store.getters.activePlayers);
-    // window.snd["ui-click-switch"] = new Howl({
-    //   src: ["./static/snd/ui-click-switch.mp3"]
-    // });
   },
   methods: {
     choosePlayers() {
-      window.snd["ui-click-switch"].play();
+      window.snd["click"].play();
       this.$store.commit("SET_GAME_STATE", "choosing_players");
     }
   },

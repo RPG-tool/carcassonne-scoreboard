@@ -21,6 +21,7 @@
 
       transform: translate(0, 0);
       transition: all 0.35s ease-in-out;
+
       img {
         display: block;
         height: 100%;
@@ -147,6 +148,17 @@
   .view-wrapper.classic {
     .main-header {
       background-size: auto 64px ;
+    }
+    .player-card {
+      .player-name {
+        font-size: 14px;
+        margin-top: 3px;
+      }
+      .player-img {
+        img {
+          filter: drop-shadow( -2px 4px 4px rgba(0,0,0,0.50));
+        }
+      }
     }
   }
 }
