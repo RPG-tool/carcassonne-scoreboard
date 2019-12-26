@@ -65,7 +65,8 @@ export default {
       this.$dialog
         .confirm("Please confirm to end the current game", {
           okText: "Finish game",
-          cancelText: "Continue playing"
+          cancelText: "Continue playing",
+          animation: "none"
         })
         .then(dialog => {
           // console.log("Clicked on proceed");

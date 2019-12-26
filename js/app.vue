@@ -12,15 +12,12 @@
     <template v-else-if="this.$store.state.game_state == 'ended'">
       <Ended></Ended>
     </template>
-    <template v-else>
-      <Welcome></Welcome>
-    </template>
+    <template v-else>SOmehing went wrong!</template>
     <button class="debug-btn btn" @click="resetGame">DEBUG: Reset game</button>
   </div>
 </template>
 
 <script>
-import Welcome from "./welcome.vue";
 import ChoosingMode from "./choosing-mode.vue";
 import ChoosingPlayers from "./choosing-players.vue";
 import Playing from "./playing.vue";
@@ -45,7 +42,6 @@ export default {
     // ...mapMutations(["INIT_GAME"])
   },
   components: {
-    Welcome,
     ChoosingMode,
     ChoosingPlayers,
     Playing,

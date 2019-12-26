@@ -19,6 +19,13 @@ button.btn {
 
   transition: all 0.25s ease-in-out;
 
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+
   &:hover {
     border-color: #fff;
     color: #fff;
@@ -49,6 +56,13 @@ button.btn {
   font-size: 28px;
   text-align: center;
   color: #fff;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 
   &[disabled] {
     color: rgba(255,255,255,0.5);

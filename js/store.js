@@ -10,13 +10,11 @@ export default new Vuex.Store({
   ],
   state: {
     // Posible states
-    // "about" -> Pantalla inicial
-    // "welcome" -> Pantalla inicial
     // "choosing_mode" -> Eligiedo modo de juego
     // "choosing_players" -> Eligiedo jugadores
     // "playing" -> Juego corriendo, partida normal
     // "ended" -> Juego terminado, mostrar vencedor, volver a jugar
-    game_state: "welcome",
+    game_state: "choosing_mode",
     game_modes: ["starwars", "classic"],
     current_game_mode: -1, // 0 -> sw, 1 -> classic
     /* playerGroups: [
@@ -144,7 +142,7 @@ export default new Vuex.Store({
   },
   mutations: {
     RESET_GAME: state => {
-      state.game_state = 'welcome';
+      state.game_state = 'choosing_mode';
       state.current_game_mode = -1;
     },
 

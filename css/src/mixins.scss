@@ -56,6 +56,18 @@
   100% { opacity: 0.7; }
 }
 
+@keyframes pulse_border {
+  0% { border-color: $c-ui-med-bg; }
+  50% { border-color: #fff; }
+  100% { border-color: $c-ui-med-bg; }
+}
+
+@-webkit-keyframes pulse_border {
+  0% { border-color: $c-ui-med-bg; }
+  50% { border-color: #fff; }
+  100% { border-color: $c-ui-med-bg; }
+}
+
 //
 // Mobile
 //

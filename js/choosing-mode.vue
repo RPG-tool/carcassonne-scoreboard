@@ -1,6 +1,7 @@
 <template>
   <div class="view-wrapper view-choose-game-mode">
     <header class="main-header">
+      <!--button class="btn left">?</button-->
       <p class="screen-title">Click to select game mode</p>
     </header>
 

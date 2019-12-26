@@ -83,6 +83,14 @@ body {
 
     transition: all 0.35s ease-in-out;
 
+    &.leader {
+      -webkit-animation: pulse_border 2s infinite ease-in-out;
+      -o-animation: pulse_border 2s infinite ease-in-out;
+      -ms-animation: pulse_border 2s infinite ease-in-out;
+      -moz-animation: pulse_border 2s infinite ease-in-out;
+      animation: pulse_border 2s infinite ease-in-out;
+    }
+
     .player-content-wrapper { // label
       display: flex;
       flex-direction: column;

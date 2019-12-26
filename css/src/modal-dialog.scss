@@ -1,3 +1,25 @@
+.dg-btn {
+  @extend .btn;
+}
+
+.dg-container {
+  padding: 16px;
+}
+
+.dg-main-content {
+  background-color: $c-ui-dark-bg !important;
+  color: #fff;
+  border: 2px solid $c-ui-bg-disabled;
+}
+
+.dg-content-cont--floating {
+  top: 35% !important;
+}
+
+.dg-content-body {
+  border-bottom: 0 !important;
+}
+
 //
 // Tablet
 //
