@@ -38,11 +38,6 @@ let vm = new Vue({
         new Howl({ src: ['./static/snd/1-coin.mp3'] })
       ]
     ];
-    // ['0-coin-1', '0-coins-2', 'b-03', 'end-empire', 'end-luke', 'end-rebels', 'end-bounty', '0-start'].forEach(item => {
-    //   window.snd[item] = new Howl({
-    //     src: [`./static/snd/${item}.mp3`]
-    //   });
-    // });
   }
 });
 
