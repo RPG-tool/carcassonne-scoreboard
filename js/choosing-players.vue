@@ -1,5 +1,6 @@
 <template>
   <div
+    id="app-viewport"
     :class="['view-wrapper', 'view-playing', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
@@ -37,14 +38,6 @@
 <script>
 import PlayerSelectRow from "./player-select-row";
 import { mapGetters } from "vuex";
-
-// window.snd = new Howl({
-//   src: ["./sounds/start-01.mp3"]
-// });
-// window.blaster.once("load", function() {
-//   console.log("Sound play");
-//   blaster.play();
-// });
 
 export default {
   data() {

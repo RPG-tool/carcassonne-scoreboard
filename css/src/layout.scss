@@ -1,12 +1,11 @@
 html {
-  height: 100%;
-  min-height: 100%;
+  width: 100%;
+  // height: 100%;
 }
 
 body {
+  width: 100%;
   position: relative;
-  height: 100%;
-  min-height: 100%;
 }
 
 .view-wrapper {
@@ -17,7 +16,9 @@ body {
 
   width: 100%;
   height: 100%;
-
+  max-height: -moz-available; /* WebKit-based browsers will ignore this. */
+  max-height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  max-height: fill-available;
 }
 
 .main-footer,
@@ -42,6 +43,7 @@ body {
   width: 100%;
   max-width: 1024px;
   height: calc( 100vh - 128px );
+  height: calc(var(--vh, 1vh) * 100 - 128px);
   padding: 10px;
 
   margin: 0 auto;
@@ -156,6 +158,12 @@ body {
     font-size: 24px;
     color: inherit;
     text-align: center;
+
+    -moz-appearance:textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   }
 }
 
@@ -214,6 +222,7 @@ body {
   }
   .main-main {
     height: calc( 100vh - 96px );
+    height: calc(var(--vh, 1vh) * 100 - 96px);
     padding: 4px;
   }
 
