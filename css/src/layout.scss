@@ -272,15 +272,13 @@ body {
 // Mobile vertical
 //
 @media only screen and (max-width: $mobile) and (orientation: portrait) {
-  .main-main {
-  }
   .player-list {
     flex-direction: column;
     justify-content: flex-start;
     flex-wrap: nowrap;
     .player-card {
       width: 100%;
-      height: calc( 16.66%- 4px );
+      min-height: calc( 16.66%- 4px );
     }
   }
   .view-wrapper.players-2,

@@ -46,9 +46,20 @@ if (iOS) {
   document.getElementsByTagName("body")[0].setAttribute("class", "iOS-device");
 }
 
-let vh = window.innerHeight * 0.01;
-// Then we set the value in the --vh custom property to the root of the document
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+function calculateVh() {
+  console.log('Recalculate --vh');
+  let vh = window.innerHeight * 0.01;
+  // Then we set the value in the --vh custom property to the root of the document
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+calculateVh();
+
+window.addEventListener("orientationchange", function () {
+  calculateVh()
+}, false);
+window.addEventListener("resize", function () {
+  calculateVh()
+}, false);
 
 // $(document).ready(function () {
 //   // La magia aquí
