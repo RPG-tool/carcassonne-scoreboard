@@ -224,7 +224,7 @@ body {
       margin: 2px;
       border-width: 2px;
       .player-content-wrapper { // label
-        padding: 3px 8px 1px 90px;
+        padding: 3px 8px 1px 100px;
       }
       .cta {
         font-size: 12px;
@@ -257,7 +257,7 @@ body {
 }
 
 //
-// Mobile landscape
+// Mobile vertical
 //
 @media only screen and (max-width: $mobile) and (orientation: portrait) {
   .main-main {
@@ -271,4 +271,27 @@ body {
       height: calc( 16.66%- 4px );
     }
   }
+  .view-wrapper.players-2,
+  .view-wrapper.players-3 {
+    .player-list {
+      .player-card {
+        .player-content-wrapper {
+          padding: 3px 8px 16px 45%;
+        }
+      }
+    }
+    .score-control-block {
+      flex-direction: column;
+    }
+  }
+  .view-wrapper.players-4 {
+    .player-list {
+      .player-card {
+        .player-content-wrapper {
+          padding: 3px 8px 4px 35%;
+        }
+      }
+    }
+  }
 }
+
