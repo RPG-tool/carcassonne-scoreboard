@@ -7,9 +7,8 @@
     </header>
 
     <main class="main-main">
-      <p class="final-score-title">Ranking!</p>
-
       <table class="score-table">
+        <caption>Ranking</caption>
         <thead>
           <tr>
             <th></th>

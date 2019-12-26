@@ -32,20 +32,26 @@ body {
   }
 }
 
-.final-score-title {
-  font-size: 72px;
-  color: $c-ui-yellow;
-  text-align: right;
-}
 
 .score-table {
   width: 100%;
   max-width: 640px;
   border-collapse: collapse;
   margin: 0 0 16px 0;
+  border-radius: 8px;
+  overflow: hidden;
+
+  border: 8px solid rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.5);
+
+  caption {
+    font-size: 72px;
+    color: #fff;
+    text-align: center;
+  }
 
   tr {
-    border-bottom: 2px solid $c-ui-yellow;
+    border-bottom: 2px solid #fff;
 
     &.winner {
       td {
@@ -66,7 +72,6 @@ body {
   th,
   td {
     padding: 12px 4px;
-    background-color: rgba(0,0,0,0.5);
 
     font-size: 24px;
     font-weight: 500;
@@ -74,10 +79,12 @@ body {
 
     &.r {
       text-align: right;
+      padding-right: 16px;
     }
   }
   th {
-    color: $c-ui-yellow;
+    color: #fff;
+    font-weight: 700;
   }
   td {
 
@@ -112,13 +119,12 @@ body {
     text-transform: capitalize;
   }
 
-  .final-score-title {
-    font-size: 32px;
-  }
-
-  .score-table {
+    .score-table {
     max-width: 90%;
     margin: 0 0 8px 0;
+    caption {
+      font-size: 32px;
+    }
     th,
     td {
       padding: 4px 4px;

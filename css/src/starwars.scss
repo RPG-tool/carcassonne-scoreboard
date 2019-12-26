@@ -36,6 +36,21 @@
       text-shadow: 0 3px 0 rgba(0,0,0,0.50);
     }
 
+    .player-img {
+      height: 90%;
+      position: absolute;
+      left: 0; bottom: 0;
+      overflow: hidden;
+
+      transform: translate(0, 0);
+      transition: all 0.35s ease-in-out;
+      img {
+        display: block;
+        height: 100%;
+        transition: all 0.35s ease-in-out;
+      }
+    }
+
     &.is-inactive {
       background-color: #444;
       .player-name {
@@ -198,7 +213,9 @@
         auto 20px,
         auto 40px,
         auto 220%;
-
+      .player-img {
+        height: 100%;
+      }
       .player-name {
         margin-top: 2px;
         font-size: 12px;

@@ -9,6 +9,7 @@ export default new Vuex.Store({
     createPersistedState() // Guarda en LocalStorage
   ],
   state: {
+    debug_mode: false,
     // Posible states
     // "choosing_mode" -> Eligiedo modo de juego
     // "choosing_players" -> Eligiedo jugadores

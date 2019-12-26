@@ -13,7 +13,8 @@
 }
 
 .dg-content-cont--floating {
-  top: 35% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
 }
 
 .dg-content-body {

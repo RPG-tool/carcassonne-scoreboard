@@ -71,6 +71,14 @@ button.btn {
   }
 }
 
+.dg-main-content {
+  a.btn,
+  input[type=button],
+  button.btn {
+    min-width: 0;
+  }
+}
+
 //
 // Tablet
 //

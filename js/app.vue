@@ -13,7 +13,11 @@
       <Ended></Ended>
     </template>
     <template v-else>SOmehing went wrong!</template>
-    <button class="debug-btn btn" @click="resetGame">DEBUG: Reset game</button>
+    <button
+      v-if="this.$store.state.debug_mode"
+      class="debug-btn btn"
+      @click="resetGame"
+    >DEBUG: Reset game</button>
   </div>
 </template>
 

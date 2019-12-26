@@ -102,21 +102,6 @@ body {
       overflow: hidden;
     }
 
-    .player-img {
-      height: 90%;
-      position: absolute;
-      left: 0; bottom: 0;
-      overflow: hidden;
-
-      transform: translate(0, 0);
-      transition: all 0.35s ease-in-out;
-      img {
-        display: block;
-        height: 100%;
-        transition: all 0.35s ease-in-out;
-      }
-    }
-
     input[type=checkbox] {
       visibility: hidden;
     }
@@ -237,9 +222,6 @@ body {
       height: calc( 33.33% - 4px );
       margin: 2px;
       border-width: 2px;
-      .player-img {
-        height: 100%;
-      }
       .player-content-wrapper { // label
         padding: 3px 8px 1px 90px;
       }
