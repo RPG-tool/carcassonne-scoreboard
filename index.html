@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta version="0.8-beta">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Carcassonne Scoreboard</title>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-  <style>
-    #main-app {
-      max-width: 640px;
-    }
-  </style>
+  <title>Carcassonne Scoreboard</title>
+  <meta property="og:site_name" content="Carcassonne Scoreboard">
+  <meta property="og:title" content="Carcassonne Scoreboard">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gamescore.app">
+  <meta property="og:image" content="/static/img/open-graph-image-1200x630.jpg">
+  <meta property="og:description"
+  content="Web application designed to manage the player's scores in Carcassonne and Carcassonne StarWars plays.">
+
+  <link href="//fonts.googleapis.com/css?family=Cinzel:400,700&display=swap" rel="stylesheet">
+
+  <link href="/static/img/favicon.png" rel="icon" type="image/png" />
 </head>
 
 <body>
-  <h1>Carcassonne Scoreboard</h1>
   <div id="main-app">
-    <choose-players v-bind:class=available_game_modes[current_game_mode]
-      v-bind:all_player_colors="filtered_player_colors()">
-    </choose-players>
 
-    <hr>
-
-    <button v-on:click="toggleGameMode">Toggle game mode</button>
-    <button v-on:click="playerUpdateTest">Add player</button>
-    <button v-on:click="resetAllScoresTest">Reset all scores</button>
 
   </div>
-
-
-
-  <!-- <div id="player-scores-container">
-    <player-score-tab></player-score-tab>
-  </div> -->
-
 </body>
-<script src="/js/app.js"> </script>
-
+<script src="./js/app.js"></script>
 </html>

@@ -1,0 +1,121 @@
+a.btn,
+input[type=button],
+button.btn {
+  height: 40px;
+  min-width: 220px;
+  display: inline-block;
+  padding: 8px 20px;
+  margin: 0 4px;
+  background: transparent;
+  border: 2px solid $c-classic-bg-yellow;
+  border-radius: 4px;
+  cursor: pointer;
+
+  font: 14px/1em $f-sans;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  color: $c-classic-bg-yellow;
+
+  transition: all 0.25s ease-in-out;
+
+  -webkit-appearance:none;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+
+  &:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+
+  &[disabled] {
+    color: $c-ui-disabled;
+    border-color: $c-ui-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.debug-btn.btn {
+  position: absolute;
+  right: 10px;
+  bottom: 50px;
+
+  border-color: pink;
+  color: pink;
+}
+
+.btn-score {
+  width: 40px; height: 40px;
+  border: 2px solid #FFFFFF;
+  border-radius: 4px;
+  background-color: transparent;
+  padding: 0 0 8px 0;
+
+  font-size: 28px;
+  text-align: center;
+  color: #fff;
+
+  -webkit-appearance: none;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+
+  &[disabled] {
+    color: rgba(255,255,255,0.5);
+    border-color: rgba(255,255,255,0.5);
+    cursor: not-allowed;
+  }
+}
+
+.iOS-device {
+  .btn-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+
+.dg-main-content {
+  a.btn,
+  input[type=button],
+  button.btn {
+    min-width: 0;
+  }
+}
+
+//
+// Tablet
+//
+@include media($tablet) {
+  a.btn,
+  input[type=button],
+  button.btn {
+    min-width: 0;
+  }
+}
+
+//
+// Mobile
+//
+@include media($mobile) {
+  a.btn,
+  input[type=button],
+  button.btn {
+    height: 32px;
+    padding: 6px 10px;
+  }
+  .btn-score {
+    width: 36px; height: 36px;
+  }
+}

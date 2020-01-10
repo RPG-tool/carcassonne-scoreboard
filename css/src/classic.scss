@@ -1,0 +1,164 @@
+.view-wrapper.classic {
+  background-image: url(/static/img/bg-tile-classic.jpg);
+
+  .main-header {
+    background-image: url(/static/img/logo-carcassonne.png);
+    background-size: auto 80px ;
+  }
+
+  .player-card {
+
+    .player-name {
+      font-size: 28px;
+      color: #FFF;
+      text-shadow: 0 3px 0 rgba(0,0,0,0.50);
+    }
+
+    .player-img {
+      height: 60%;
+      position: absolute;
+      left: 12px; bottom: 12px;
+
+      transform: translate(0, 0);
+      transition: all 0.35s ease-in-out;
+
+      img {
+        display: block;
+        height: 100%;
+        transition: all 0.35s ease-in-out;
+        -webkit-filter: drop-shadow(-5px 10px 10px rgba(0,0,0,0.50));
+        filter: drop-shadow(-5px 10px 10px rgba(0,0,0,0.50)) grayscale(0%);
+        opacity: 1;
+      }
+    }
+
+    &.is-inactive {
+      background-color: #444;
+      .player-img {
+        transform: translate( 0, 35%);
+        img {
+          filter: grayscale(25%);
+          opacity: 0.5;
+        }
+      }
+      .player-name {
+        color: #fff;
+        text-shadow: 0 0 0 transparent;
+      }
+      .cta {
+        color: #fff;
+      }
+    }
+  }
+
+  .player-black {
+    background-color: $c-classic-bg-black;
+  }
+  .player-pink {
+    background-color: $c-classic-bg-pink;
+  }
+  .player-red {
+    background-color: $c-classic-bg-red;
+  }
+  .player-yellow {
+    background-color: $c-classic-bg-yellow;
+    .player-name {
+      color: #000000;
+      text-shadow: 0 0 0 transparent;
+    }
+    .cta {
+      color: #000000;
+    }
+    .score-control-block {
+      color: #000;
+      .additional-score {
+        border-color: #000;
+      }
+      .btn-score {
+        border-color: #000;
+        color: #000;
+      }
+    }
+  }
+  .player-green {
+    background-color: $c-classic-bg-green;
+    .player-name {
+      color: #000000;
+      text-shadow: 0 0 0 transparent;
+    }
+    .cta {
+      color: #000000;
+    }
+    .score-control-block {
+      color: #000;
+      .additional-score {
+        border-color: #000;
+      }
+      .btn-score {
+        border-color: #000;
+        color: #000;
+      }
+    }
+  }
+  .player-blue {
+    background-color: $c-classic-bg-blue;
+  }
+
+  .score-thumb {
+    img {
+      transform: translate(-3px, 7px) scale( 1.1 );
+    }
+  }
+}
+
+
+
+.score-thumb-yellow {
+  background-color: $c-classic-bg-yellow;
+}
+.score-thumb-pink {
+  background-color: $c-classic-bg-pink;
+}
+.score-thumb-blue {
+  background-color: $c-classic-bg-blue;
+}
+.score-thumb-black {
+  background-color: $c-classic-bg-black;
+}
+.score-thumb-green {
+  background-color: $c-classic-bg-green;
+}
+.score-thumb-red {
+  background-color: $c-classic-bg-red;
+}
+
+//
+// Tablet
+//
+@include media($tablet) {
+  .view-wrapper.classic {
+
+  }
+}
+
+//
+// Mobile
+//
+@include media($mobile) {
+  .view-wrapper.classic {
+    .main-header {
+      background-size: auto 64px ;
+    }
+    .player-card {
+      .player-name {
+        font-size: 14px;
+        margin-top: 3px;
+      }
+      .player-img {
+        img {
+          filter: drop-shadow( -2px 4px 4px rgba(0,0,0,0.50));
+        }
+      }
+    }
+  }
+}

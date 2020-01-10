@@ -1,0 +1,45 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carloscabo/carcassonne-scoreboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carloscabo/carcassonne-scoreboard/issues"
+  },
+  "homepage": "https://github.com/carloscabo/carcassonne-scoreboard#readme",
+  "dependencies": {
+    "easytimer.js": "^4.1.1",
+    "howler": "^2.1.2",
+    "minireset.css": "0.0.6",
+    "parcel-plugin-static-files-copy": "^2.2.1",
+    "vue-hot-reload-api": "^2.3.4",
+    "vuejs-dialog": "^1.4.1",
+    "vuex": "^3.1.2",
+    "vuex-persistedstate": "^2.7.0"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.0.2",
+    "cssnano": "^4.1.10",
+    "sass": "^1.23.7",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "staticFiles": {
+    "staticPath": [
+      {
+        "staticPath": "static",
+        "staticOutDir": "static"
+      }
+    ]
+  }
+}

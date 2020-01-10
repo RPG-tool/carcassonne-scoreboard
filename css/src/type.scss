@@ -1,0 +1,142 @@
+// Fams
+$f-sans: Arial, sans-serif;
+$f-serif: Cinzel, 'Cinzel', Georgia, Times, 'Times New Roman', serif;
+
+body {
+  font-family: $f-sans;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.screen-title {
+  padding-top: 4px;
+  font-family: $f-sans;
+  font-weight: 700;
+  font-size: 24px;
+  color: $c-ui-yellow;
+
+  text-align: center;
+  text-shadow: 0 3px 0 rgba(0,0,0,0.50);
+
+  small {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+}
+
+.player-card {
+  .cta {
+    text-align: right;
+  }
+}
+
+
+.score-table {
+  width: 100%;
+  max-width: 640px;
+  border-collapse: collapse;
+  margin: 0 0 16px 0;
+  border-radius: 8px;
+  overflow: hidden;
+
+  border: 8px solid rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.5);
+
+  caption {
+    font-size: 72px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: -16px;
+  }
+
+  thead {
+    tr {
+      border-color: #fff;
+    }
+  }
+
+  tr {
+    border-bottom: 2px solid #444;
+
+    &.winner {
+      td {
+        font-weight: 700;
+        color: $c-ui-yellow;
+
+        .cell-data {
+          -webkit-animation: pulse 1s infinite ease-in-out;
+          -o-animation: pulse 1s infinite ease-in-out;
+          -ms-animation: pulse 1s infinite ease-in-out;
+          -moz-animation: pulse 1s infinite ease-in-out;
+          animation: pulse 1s infinite ease-in-out;
+        }
+
+      }
+    }
+  }
+  th,
+  td {
+    padding: 12px 4px;
+
+    font-size: 24px;
+    font-weight: 500;
+    color: $c-sw-bg-white;
+
+    &.r {
+      text-align: right;
+      padding-right: 16px;
+    }
+  }
+  th {
+    color: #fff;
+    font-weight: 700;
+  }
+  td {
+
+  }
+
+  tbody {
+    tr {
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+//
+// Tablet
+//
+@include media($tablet) {
+
+}
+
+//
+// Mobile
+//
+@include media($mobile) {
+  .screen-title {
+    padding-top: 6px;
+    font-size: 18px;
+  }
+
+  .cap-on-mobile {
+    text-transform: capitalize;
+  }
+
+    .score-table {
+    max-width: 90%;
+    margin: 0 0 8px 0;
+    caption {
+      font-size: 32px;
+      margin-bottom: -8px;
+    }
+    th,
+    td {
+      padding: 4px 4px;
+      font-size: 12px;
+    }
+  }
+}
