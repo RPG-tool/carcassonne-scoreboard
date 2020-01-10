@@ -33,7 +33,7 @@
         class="btn"
         :disabled="$store.state.current_game_mode < 0"
         @click="choosePlayers"
-      >Choose players</button>
+      >Select players</button>
     </footer>
   </div>
 </template>

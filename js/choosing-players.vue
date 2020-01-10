@@ -9,7 +9,7 @@
         <span class="hide-on-mobile">Change</span> mode
       </button>
       <p class="screen-title right cap-on-mobile">
-        <span class="hide-on-mobile">Select</span>players
+        <span class="hide-on-mobile">Select</span> players
         <small>( {{ activePlayers.length }} )</small>
       </p>
     </header>
