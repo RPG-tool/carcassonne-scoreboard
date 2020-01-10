@@ -9,6 +9,8 @@ button.btn {
   background: transparent;
   border: 2px solid $c-classic-bg-yellow;
   border-radius: 4px;
+
+  touch-action: manipulation;
   cursor: pointer;
 
   font: 14px/1em $f-sans;
@@ -60,6 +62,7 @@ button.btn {
   text-align: center;
   color: #fff;
 
+  touch-action: manipulation;
   -webkit-appearance: none;
 
   -webkit-touch-callout: none; /* iOS Safari */

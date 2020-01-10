@@ -13,7 +13,7 @@ Specially designed to be used in mobile devices and tablets. It works on desktop
 ## Installation
 
 ```sh
-npm install my-crazy-module --save
+npm install
 ```
 
 ## Run local server
@@ -37,7 +37,7 @@ parcel build index.html
 
 ## Meta
 
-Your Name – [@putuko](https://twitter.com/putuko) – carloscabo AT gmail DOT com
+Carlos Cabo – [@putuko](https://twitter.com/putuko) – carloscabo AT gmail DOT com
 
 Distributed under the XYZ license. See ``LICENSE`` for more information.
 
