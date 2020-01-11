@@ -4,6 +4,32 @@
   }
 }
 
+@mixin tablet() {
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet-landscape() {
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : landscape) {
+    @content;
+  }
+}
+
+@mixin tablet-portrait() {
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : portrait) {
+    @content;
+  }
+}
+
 @function flex-grid($columns, $container-columns: $max-columns, $gutter-width: $gutter) {
   $width: $columns * $column + ($columns - 1) * $gutter-width;
   $container-width: $container-columns * $column + ($container-columns - 1) * $gutter-width;
