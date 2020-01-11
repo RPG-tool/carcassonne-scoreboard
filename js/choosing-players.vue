@@ -6,10 +6,10 @@
     <header class="main-header">
       <button class="btn left cap-on-mobile" @click="goBack">
         ‹
-        <span class="hide-on-mobile">Change</span> mode
+        <span class="hide-on-mobile">Change&nbsp;</span>mode
       </button>
       <p class="screen-title right cap-on-mobile">
-        <span class="hide-on-mobile">Select</span> players
+        <span class="hide-on-mobile">Select&nbsp;</span>players
         <small>( {{ activePlayers.length }} )</small>
       </p>
     </header>
