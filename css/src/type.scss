@@ -8,7 +8,7 @@ html {
 
 body {
   font-family: $f-sans;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 700;
   color: #ffffff;
 }
@@ -17,7 +17,7 @@ body {
   padding-top: 4px;
   font-family: $f-sans;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 16px;
   color: $c-ui-yellow;
 
   text-align: center;
@@ -35,7 +35,6 @@ body {
     text-align: right;
   }
 }
-
 
 .score-table {
   width: 100%;
@@ -111,36 +110,36 @@ body {
 }
 
 //
-// Tablet
+// Orientacion apaisada / Landscape mobile
 //
-@include media($tablet) {
+@media screen and (orientation: landscape) {
 
 }
 
 //
-// Mobile
+// Tablet
 //
-@include media($mobile) {
-  .screen-title {
-    padding-top: 6px;
-    font-size: 18px;
-  }
+@media screen and (min-width: 768px) {
 
-  .cap-on-mobile {
-    text-transform: capitalize;
-  }
+}
 
-    .score-table {
-    max-width: 90%;
-    margin: 0 0 8px 0;
-    caption {
-      font-size: 32px;
-      margin-bottom: -8px;
-    }
-    th,
-    td {
-      padding: 4px 4px;
-      font-size: 12px;
-    }
-  }
+//
+// Tablet Horizontal
+//
+@media screen and (min-width: 768px) and (orientation: landscape) {
+
+}
+
+//
+// Tablet vertical
+//
+@media screen and (min-width: 768px) and (orientation: portrait) {
+
+}
+
+//
+// Desktop (> 1024)
+//
+@media only screen and (min-width: 1024px) {
+
 }
