@@ -18,13 +18,14 @@
       no-repeat,
       no-repeat;
     background-position:
-      right 10px top 10px, // Badge
+      right 5px top 4px, // Badge
       top right, // Corner
-      130% -5%; // Big badge BG
+      -80% top; // Big badge BG
     background-size:
-      auto 48px,
-      auto,
-      150% auto;
+      auto 20px,
+      auto 40px,
+      auto 220%;
+
 
     .player-name {
       position: relative;
@@ -201,34 +202,54 @@
   background-color: #fff;
 }
 
-//
-// Tablet
-//
-@include media($tablet) {
+/*
+background-position:
+right 10px top 10px, // Badge
+top right, // Corner
+130% -5%; // Big badge BG
+background-size:
+auto 48px,
+auto,
+150% auto;
+*/
 
-}
-
 //
-// Mobile
+// Orientacion apaisada / Landscape mobile
 //
-@include media($mobile) {
+@media screen and (orientation: landscape) {
   .view-wrapper.starwars {
-    .main-header {
-      background-size: auto 48px ;
-    }
     .player-card {
-      background-position:
-        right 5px top 4px, // Badge
-        top right, // Corner
-        -80% top; // Big badge BG
-      background-size:
-        auto 20px,
-        auto 40px,
-        auto 220%;
-      .player-img {
-        height: 100%;
+      .player-name {
+        font-size: 0;
       }
     }
   }
 }
 
+//
+// Tablet
+//
+@media screen and (min-width: 768px) {
+
+}
+
+//
+// Tablet Horizontal
+//
+@media screen and (min-width: 768px) and (orientation: landscape) {
+
+}
+
+//
+// Tablet vertical
+//
+@media screen and (min-width: 768px) and (orientation: portrait) {
+
+}
+
+//
+// Desktop (> 1024)
+//
+@media only screen and (min-width: 1024px) {
+
+}

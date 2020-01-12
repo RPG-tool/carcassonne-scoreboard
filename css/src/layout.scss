@@ -135,13 +135,13 @@ body {
   }
   .player-card {
     width: calc( 50% - 4px );
-    height: calc( ( 100% - 8px ) / 3 );
+    max-height: calc( ( 100% - 8px ) / 3 );
   }
   .players-4,
   .players-3,
   .players-2 {
     .player-card {
-      height: calc( ( 100% - 8px ) / 2 );
+      max-height: calc( ( 100% - 8px ) / 2 );
     }
   }
 }
