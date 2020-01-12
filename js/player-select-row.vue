@@ -22,10 +22,7 @@
       <!-- {{ player.color }}
       -->
       <p v-if="player.active" class="cta">Ready!</p>
-      <p v-else class="cta">
-        Click to
-        <br />select player
-      </p>
+      <p v-else class="cta">Click to select player</p>
     </label>
   </li>
 </template>

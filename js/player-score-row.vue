@@ -14,9 +14,9 @@
 
       <p class="player-name">{{ player.name[$store.state.current_game_mode] }}</p>
 
-      <div class="score-control-block">
+      <div class="score-control-wrapper">
         <div class="score-current">
-          <p class="score-title">Player score</p>
+          <p class="score-title">Score</p>
           <p class="score-value">{{ player.score }}</p>
         </div>
 
