@@ -126,9 +126,6 @@ body {
 // Orientacion apaisada / Landscape mobile
 //
 @media screen and (orientation: landscape) {
-  body {
-    background-color: pink;
-  }
   .player-list {
     flex-direction: row;
     flex-wrap: wrap;
@@ -158,13 +155,7 @@ body {
   .main-footer,
   .main-header {
     height: 64px;
-    padding: 16px;
-  }
-  .view-wrapper {
-    background: pink !important;
-  }
-  .main-main {
-
+    padding: 10px;
   }
   .player-list {
     flex-direction: row;

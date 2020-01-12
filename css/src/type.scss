@@ -21,7 +21,7 @@ body {
   padding-top: 8px;
   font-family: $f-sans;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
   color: $c-ui-yellow;
 
   text-align: center;
@@ -42,9 +42,9 @@ body {
 
 .score-table {
   width: 100%;
-  max-width: 640px;
+  max-width: 90%;
   border-collapse: collapse;
-  margin: 0 0 16px 0;
+  margin: 0;
   border-radius: 8px;
   overflow: hidden;
 
@@ -52,10 +52,10 @@ body {
   background-color: rgba(0,0,0,0.5);
 
   caption {
-    font-size: 72px;
+    font-size: 32px;
+    margin-bottom: 4x;
     color: #fff;
     text-align: center;
-    margin-bottom: -16px;
   }
 
   thead {
@@ -85,9 +85,9 @@ body {
   }
   th,
   td {
-    padding: 12px 4px;
+    padding: 4px 4px;
+    font-size: 12px;
 
-    font-size: 24px;
     font-weight: 500;
     color: $c-sw-bg-white;
 
@@ -117,7 +117,11 @@ body {
 // Orientacion apaisada / Landscape mobile
 //
 @media screen and (orientation: landscape) {
-
+  .score-table {
+    caption {
+      display: none;
+    }
+  }
 }
 
 //
@@ -126,6 +130,25 @@ body {
 @media screen and (min-width: 768px) {
   .cap-on-mobile {
     text-transform: none;
+  }
+  .screen-title {
+    padding-top: 4px;
+    font-size: 24px;
+  }
+  .score-table {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 0 16px 0;
+
+    caption {
+      display: table-caption;
+      font-size: 72px;
+    }
+    th,
+    td {
+      padding: 12px 4px;
+      font-size: 24px;
+    }
   }
 }
 

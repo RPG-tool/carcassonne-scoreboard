@@ -56,8 +56,8 @@
 }
 
 .score-thumb {
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background-color: red;
   overflow: hidden;
@@ -74,7 +74,10 @@
 // Tablet
 //
 @media screen and (min-width: 768px) {
-
+  .score-thumb {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 //
