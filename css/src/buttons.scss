@@ -12,18 +12,23 @@ button.btn {
   border: 2px solid $c-classic-bg-yellow;
   border-radius: 4px;
 
-  touch-action: manipulation;
-  cursor: pointer;
-
   font: 14px/1em $f-sans;
   font-weight: 700;
   text-decoration: none;
   text-align: center;
   color: $c-classic-bg-yellow;
+  > * {
+    text-align: center;
+  }
 
   transition: all 0.25s ease-in-out;
 
-  -webkit-appearance:none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-user-modify: read-write-plaintext-only;
+
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  cursor: pointer;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -39,8 +44,7 @@ button.btn {
   } */
 
   &[disabled] {
-    color: $c-ui-disabled;
-    border-color: $c-ui-disabled;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 }
@@ -55,15 +59,23 @@ button.btn {
 }
 
 .btn-score {
+  display: block;
   width: 48px; height: 48px;
   border: 2px solid #FFFFFF;
   border-radius: 4px;
   background-color: transparent;
   padding: 0 0 8px 0;
 
-  font-size: 28px;
-  text-align: center;
-  color: #fff;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 0px;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: auto 28px ;
+
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-user-modify: read-write-plaintext-only;
 
   touch-action: manipulation;
   -webkit-appearance: none;
@@ -75,9 +87,15 @@ button.btn {
   -ms-user-select: none;
   user-select: none;
 
+  &.btn-add {
+    background-image: url(/static/img/plus-solid-white.svg);
+  }
+  &.btn-substract {
+    background-image: url(/static/img/minus-solid-white.svg);
+  }
+
   &[disabled] {
-    color: rgba(255,255,255,0.5);
-    border-color: rgba(255,255,255,0.5);
+    opacity: 0.3;
     cursor: not-allowed;
   }
 }

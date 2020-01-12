@@ -24,13 +24,11 @@
           <label :for="'aditional-player-score-'+player.color" class="score-title">Enter value</label>
           <div class="row">
             <button
-              class="btn-score"
+              class="btn-score btn-substract"
               :disabled="player.score === 0 || player_aditional_score < 1"
               @click="playerScoreUpdate(-1*player_aditional_score)"
               title="Substract"
-            >
-              <span>−</span>
-            </button>
+            ></button>
             <input
               class="additional-score"
               :name="'aditional-player-score-'+player.color"
@@ -42,13 +40,11 @@
               @keyup="validateInput"
             />
             <button
-              class="btn-score"
+              class="btn-score btn-add"
               :disabled="player_aditional_score < 1"
               @click="playerScoreUpdate(player_aditional_score)"
               title="Add"
-            >
-              <span>+</span>
-            </button>
+            ></button>
           </div>
         </div>
       </div>

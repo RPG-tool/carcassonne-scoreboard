@@ -1,15 +1,21 @@
+
+//
+// Mobile first
+//
+
 .view-wrapper.classic {
   background-image: url(/static/img/bg-tile-classic.jpg);
 
   .main-header {
     background-image: url(/static/img/logo-carcassonne.png);
-    background-size: auto 80px ;
+    background-size: auto 64px ;
+    background-position: 50% calc(50% + 2px);
   }
 
   .player-card {
 
     .player-name {
-      font-size: 28px;
+      font-size: 14px;
       color: #FFF;
       text-shadow: 0 3px 0 rgba(0,0,0,0.50);
     }
@@ -17,7 +23,7 @@
     .player-img {
       height: 60%;
       position: absolute;
-      left: 12px; bottom: 12px;
+      left: 12px; bottom: 22px;
 
       transform: translate(0, 0);
       transition: all 0.35s ease-in-out;
@@ -77,6 +83,12 @@
       .btn-score {
         border-color: #000;
         color: #000;
+        &.btn-add {
+          background-image: url(/static/img/plus-solid-black.svg);
+        }
+        &.btn-substract {
+          background-image: url(/static/img/minus-solid-black.svg);
+        }
       }
     }
   }
@@ -97,6 +109,12 @@
       .btn-score {
         border-color: #000;
         color: #000;
+        &.btn-add {
+          background-image: url(/static/img/plus-solid-black.svg);
+        }
+        &.btn-substract {
+          background-image: url(/static/img/minus-solid-black.svg);
+        }
       }
     }
   }
@@ -110,8 +128,6 @@
     }
   }
 }
-
-
 
 .score-thumb-yellow {
   background-color: $c-classic-bg-yellow;
@@ -132,33 +148,38 @@
   background-color: $c-classic-bg-red;
 }
 
-//
-// Tablet
-//
-@include media($tablet) {
-  .view-wrapper.classic {
 
-  }
+//
+// Orientacion apaisada / Landscape mobile
+//
+@media screen and (orientation: landscape) {
+
 }
 
 //
-// Mobile
+// Tablet
 //
-@include media($mobile) {
-  .view-wrapper.classic {
-    .main-header {
-      background-size: auto 64px ;
-    }
-    .player-card {
-      .player-name {
-        font-size: 14px;
-        margin-top: 3px;
-      }
-      .player-img {
-        img {
-          filter: drop-shadow( -2px 4px 4px rgba(0,0,0,0.50));
-        }
-      }
-    }
-  }
+@media screen and (min-width: 768px) {
+
+}
+
+//
+// Tablet Horizontal
+//
+@media screen and (min-width: 768px) and (orientation: landscape) {
+
+}
+
+//
+// Tablet vertical
+//
+@media screen and (min-width: 768px) and (orientation: portrait) {
+
+}
+
+//
+// Desktop (> 1024)
+//
+@media only screen and (min-width: 1024px) {
+
 }
