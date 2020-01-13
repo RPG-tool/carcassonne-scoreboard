@@ -202,17 +202,6 @@
   background-color: #fff;
 }
 
-/*
-background-position:
-right 10px top 10px, // Badge
-top right, // Corner
-130% -5%; // Big badge BG
-background-size:
-auto 48px,
-auto,
-150% auto;
-*/
-
 //
 // Orientacion apaisada / Landscape mobile
 //
@@ -230,7 +219,13 @@ auto,
 // Tablet
 //
 @media screen and (min-width: 768px) {
-
+  .view-wrapper.starwars {
+    .player-card {
+      .player-name {
+        font-size: 24px;
+      }
+    }
+  }
 }
 
 //
@@ -244,7 +239,13 @@ auto,
 // Tablet vertical
 //
 @media screen and (min-width: 768px) and (orientation: portrait) {
-
+  .view-wrapper.starwars {
+    .player-card {
+      .player-img {
+        height: 80%;
+      }
+    }
+  }
 }
 
 //

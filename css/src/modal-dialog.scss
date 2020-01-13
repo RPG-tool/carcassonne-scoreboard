@@ -1,5 +1,6 @@
 .dg-btn {
   @extend .btn;
+  min-width: 0;
 }
 
 .dg-container {
@@ -22,15 +23,36 @@
 }
 
 //
-// Tablet
+// Orientacion apaisada / Landscape mobile
 //
-@include media($tablet) {
+@media screen and (orientation: landscape) {
 
 }
 
 //
-// Mobile
+// Tablet
 //
-@include media($mobile) {
+@media screen and (min-width: 768px) {
+
+}
+
+//
+// Tablet Horizontal
+//
+@media screen and (min-width: 768px) and (orientation: landscape) {
+
+}
+
+//
+// Tablet vertical
+//
+@media screen and (min-width: 768px) and (orientation: portrait) {
+
+}
+
+//
+// Desktop (> 1024)
+//
+@media only screen and (min-width: 1024px) {
 
 }

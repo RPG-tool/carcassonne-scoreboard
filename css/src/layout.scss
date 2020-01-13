@@ -100,9 +100,6 @@ body {
     position: relative;
     align-self: flex-end;
     margin-top: auto;
-
-    font-size: 12px;
-    font-weight: 600;
   }
 }
 
@@ -155,7 +152,7 @@ body {
   .main-footer,
   .main-header {
     height: 64px;
-    padding: 10px;
+    padding: 12px;
   }
   .player-list {
     flex-direction: row;

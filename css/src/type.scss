@@ -36,6 +36,8 @@ body {
 
 .player-card {
   .cta {
+    font-size: 12px;
+    font-weight: 600;
     text-align: right;
   }
 }
@@ -132,8 +134,11 @@ body {
     text-transform: none;
   }
   .screen-title {
-    padding-top: 4px;
+    padding-top: 6px;
     font-size: 24px;
+    small {
+      font-size: 18px;
+    }
   }
   .score-table {
     width: 100%;
@@ -148,6 +153,11 @@ body {
     td {
       padding: 12px 4px;
       font-size: 24px;
+    }
+  }
+  .player-card {
+    .cta {
+      font-size: 18px;
     }
   }
 }
