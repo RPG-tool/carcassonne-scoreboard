@@ -138,5 +138,17 @@
 // Desktop (> 1024)
 //
 @media only screen and (min-width: 1024px) {
-
+  .player-card[data-ratio="1:1"] {
+    .score-control-wrapper {
+      flex-direction: column;
+      align-self: flex-end;
+      .score-value {
+        font-size: 80px;
+      }
+      .score-control {
+        padding-left: 0;
+        padding-top: 32px;
+      }
+    }
+  }
 }
