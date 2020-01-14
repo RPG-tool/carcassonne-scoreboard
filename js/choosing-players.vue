@@ -4,14 +4,16 @@
     :class="['view-wrapper', 'view-playing', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
-      <button class="btn left cap-on-mobile" @click="goBack">
-        ‹
-        <span class="hide-on-mobile">Change&nbsp;</span>mode
-      </button>
-      <p class="screen-title right cap-on-mobile">
-        <span class="hide-on-mobile">Select&nbsp;</span>players
-        <small>( {{ activePlayers.length }} )</small>
-      </p>
+      <div class="wrapper">
+        <button class="btn left cap-on-mobile" @click="goBack">
+          ‹
+          <span class="hide-on-mobile">Change&nbsp;</span>mode
+        </button>
+        <p class="screen-title right cap-on-mobile">
+          <span class="hide-on-mobile">Select&nbsp;</span>players
+          <small>( {{ activePlayers.length }} )</small>
+        </p>
+      </div>
     </header>
 
     <main class="main-main">
@@ -25,12 +27,14 @@
     </main>
 
     <footer class="main-footer">
-      <button class="btn" :disabled="activePlayers.length < 1" @click="uncheckAll">Deselect All</button>
-      <button
-        class="btn"
-        :disabled="$store.state.current_game_mode < 0 || activePlayers.length < 2"
-        @click="startGame"
-      >Start game</button>
+      <div class="wrapper">
+        <button class="btn" :disabled="activePlayers.length < 1" @click="uncheckAll">Deselect All</button>
+        <button
+          class="btn"
+          :disabled="$store.state.current_game_mode < 0 || activePlayers.length < 2"
+          @click="startGame"
+        >Start game</button>
+      </div>
     </footer>
   </div>
 </template>
