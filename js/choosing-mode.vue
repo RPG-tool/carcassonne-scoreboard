@@ -1,8 +1,11 @@
 <template>
-  <div id="app-viewport" class="view-wrapper view-choose-game-mode">
+  <div
+    id="app-viewport"
+    :class="['view-wrapper', 'view-choose-game-mode', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
+  >
     <header class="main-header">
       <!--button class="btn left">?</button-->
-      <p class="screen-title">Click to select game mode</p>
+      <p class="screen-title">Select game mode</p>
     </header>
 
     <main class="main-main">

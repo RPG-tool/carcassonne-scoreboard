@@ -20,6 +20,12 @@ body {
   max-height: -moz-available; /* WebKit-based browsers will ignore this. */
   max-height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
   max-height: fill-available;
+
+  &.view-choose-game-mode {
+    .main-header {
+      background-image: none !important;
+    }
+  }
 }
 
 .main-footer,
@@ -106,7 +112,7 @@ body {
 
 .player-content-wrapper { // label
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   width: 100%; height: 100%;
   padding: 5px 5px 5px 5px;
@@ -116,8 +122,9 @@ body {
 }
 
 .player-name {
+  position: absolute;
   z-index: 1;
-  align-self: flex-end;
+  line-height: 0.9em;
 }
 
 //
@@ -132,11 +139,24 @@ body {
     width: calc( 50% - 4px );
     max-height: calc( ( 100% - 8px ) / 3 );
   }
-  .players-4,
+  .players-2,
   .players-3,
-  .players-2 {
+  .players-4 {
     .player-card {
       max-height: calc( ( 100% - 8px ) / 2 );
+    }
+  }
+  .view-wrapper.classic,
+  .view-wrapper.starwars {
+    &.players-5,
+    &.players-6 {
+      .player-card {
+        .player-name {
+          margin-top: -10px;
+          visibility: hidden;
+          font-size: 0;
+        }
+      }
     }
   }
 }

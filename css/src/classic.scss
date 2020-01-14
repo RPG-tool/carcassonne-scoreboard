@@ -8,7 +8,7 @@
 
   .main-header {
     background-image: url(/static/img/logo-carcassonne.png);
-    background-size: auto 64px ;
+    background-size: auto 48px ;
     background-position: 50% calc(50% + 2px);
   }
 
@@ -22,7 +22,7 @@
     .player-img {
       height: 60%;
       position: absolute;
-      left: 12px; bottom: 22px;
+      left: 10px; bottom: 4px;
 
       transform: translate(0, 0);
       transition: all 0.35s ease-in-out;
@@ -152,7 +152,9 @@
 // Orientacion apaisada / Landscape mobile
 //
 @media screen and (orientation: landscape) {
+  .view-wrapper.classic {
 
+  }
 }
 
 //
@@ -160,7 +162,13 @@
 //
 @media screen and (min-width: 768px) {
   .view-wrapper.classic {
+    .main-header {
+      background-size: auto 64px ;
+    }
     .player-card {
+      .player-img {
+        left: 16px; bottom: 20px;
+      }
       .player-name {
         font-size: 28px;
       }
