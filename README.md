@@ -63,9 +63,8 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 - Review Firefox / Opera mobile
 - Review in iPhone 7
 - UX / UI
-  - Show leader player in other way than blinking
-  - Add control to aneble / disable sound
-  - Review button / action position (top / bottom bar)
+  - Show leader player in other way than blinking (?)
+  - Add control to enable / disable sound
 - Preload final music
-- Borrar 1 en el focusout?
+- Empty score input on focus in? (restore 1 on focus out?)
 
