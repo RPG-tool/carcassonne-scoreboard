@@ -67,4 +67,3 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
   - Add control to enable / disable sound
 - Preload final music
 - Empty score input on focus in? (restore 1 on focus out?)
-
