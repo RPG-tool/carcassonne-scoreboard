@@ -11,8 +11,8 @@
   color: #fff;
 
   .score-value {
-    margin-top: -8px;
-    font-size: 72px;
+    margin-top: -10px;
+    font-size: 64px;
     text-shadow: 0 4px 0 rgba(0,0,0,0.50);
   }
   label {

@@ -19,6 +19,7 @@
   "homepage": "https://github.com/carloscabo/carcassonne-scoreboard#readme",
   "dependencies": {
     "easytimer.js": "^4.1.1",
+    "fastclick": "^1.0.6",
     "howler": "^2.1.2",
     "minireset.css": "0.0.6",
     "parcel-plugin-static-files-copy": "^2.2.1",

@@ -59,7 +59,7 @@ button.btn {
 
 .btn-score {
   display: block;
-  width: 48px; height: 48px;
+  width: $b-mobile; height: $b-mobile;
   border: 2px solid #FFFFFF;
   border-radius: 4px;
   background-color: transparent;
@@ -137,7 +137,7 @@ button.btn {
 @media screen and (min-width: 768px) and (orientation: landscape) {
   .btn-score {
     display: block;
-    width: 64px; height: 64px;
+    width: $b-tablet; height: $b-tablet;
   }
 }
 

@@ -13,7 +13,6 @@
   }
 
   .player-card {
-
     .player-name {
       font-size: 14px;
       color: #FFF;
@@ -160,7 +159,13 @@
 // Tablet
 //
 @media screen and (min-width: 768px) {
-
+  .view-wrapper.classic {
+    .player-card {
+      .player-name {
+        font-size: 28px;
+      }
+    }
+  }
 }
 
 //
