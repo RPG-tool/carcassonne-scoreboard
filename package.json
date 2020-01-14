@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "parcel ./index.html",
     "build": "parcel build ./index.html",
     "predeploy": "rm -rf dist && parcel build ./index.html --no-source-maps --public-url ./",
     "deploy": "gh-pages -d dist"
