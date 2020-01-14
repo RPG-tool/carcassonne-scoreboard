@@ -3,6 +3,8 @@ import VuejsDialog from 'vuejs-dialog';
 import store from './store';
 import app from './app.vue';
 import { Howl, Howler } from "howler";
+import fastclick from 'fastclick';
+fastclick.attach(document.body);
 
 import '../css/app.scss';
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';

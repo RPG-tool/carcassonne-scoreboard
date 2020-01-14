@@ -36,7 +36,6 @@
               min="0"
               step="1"
               v-model="player_aditional_score"
-              @click="selectAll"
               @keyup="validateInput"
             />
             <button
@@ -90,9 +89,6 @@ export default {
     },
     resetPlayerScore: function() {
       this.$store.commit("RESET_PLAYER_SCORE", this.player);
-    },
-    selectAll(e) {
-      e.toElement.select();
     }
   }
 };
