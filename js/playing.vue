@@ -3,11 +3,13 @@
     :class="['view-wrapper', 'view-choose-players', `players-${activePlayers.length}`, {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
-      <p class="screen-title left cap-on-mobile">
-        <span class="hide-on-mobile">Total</span>time
-        <span id="current-playing-time"></span>
-      </p>
-      <button @click="startMiniTimer" id="mini-timer" class="btn right timer">Start timer</button>
+      <div class="wrapper">
+        <p class="screen-title left cap-on-mobile">
+          <span class="hide-on-mobile">Total&nbsp;</span>time
+          <span id="current-playing-time"></span>
+        </p>
+        <button @click="startMiniTimer" id="mini-timer" class="btn right timer">Start timer</button>
+      </div>
     </header>
 
     <main class="main-main">
@@ -19,7 +21,9 @@
     </main>
 
     <footer class="main-footer">
-      <button class="btn" @click="finishGame">Finish game</button>
+      <div class="wrapper">
+        <button class="btn" @click="finishGame">Finish game</button>
+      </div>
     </footer>
   </div>
 </template>

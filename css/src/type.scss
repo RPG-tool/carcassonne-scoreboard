@@ -2,26 +2,33 @@
 $f-sans: Arial, sans-serif;
 $f-serif: Cinzel, 'Cinzel', Georgia, Times, 'Times New Roman', serif;
 
+html {
+
+}
+
 body {
   font-family: $f-sans;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 700;
-  font-size: 1.25rem;
   color: #ffffff;
 }
 
+.cap-on-mobile {
+  text-transform: capitalize;
+}
+
 .screen-title {
-  padding-top: 4px;
+  padding-top: 8px;
   font-family: $f-sans;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 18px;
   color: $c-ui-yellow;
 
   text-align: center;
   text-shadow: 0 3px 0 rgba(0,0,0,0.50);
 
   small {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 20px;
     font-weight: 500;
   }
@@ -29,16 +36,17 @@ body {
 
 .player-card {
   .cta {
+    font-size: 12px;
+    font-weight: 600;
     text-align: right;
   }
 }
 
-
 .score-table {
   width: 100%;
-  max-width: 640px;
+  max-width: 90%;
   border-collapse: collapse;
-  margin: 0 0 16px 0;
+  margin: 0;
   border-radius: 8px;
   overflow: hidden;
 
@@ -46,10 +54,10 @@ body {
   background-color: rgba(0,0,0,0.5);
 
   caption {
-    font-size: 72px;
+    font-size: 32px;
+    margin-bottom: 4x;
     color: #fff;
     text-align: center;
-    margin-bottom: -16px;
   }
 
   thead {
@@ -79,9 +87,9 @@ body {
   }
   th,
   td {
-    padding: 12px 4px;
+    padding: 4px 4px;
+    font-size: 12px;
 
-    font-size: 24px;
     font-weight: 500;
     color: $c-sw-bg-white;
 
@@ -108,36 +116,69 @@ body {
 }
 
 //
+// Orientacion apaisada / Landscape mobile
+//
+@media screen and (orientation: landscape) {
+  .score-table {
+    caption {
+      display: none;
+    }
+  }
+}
+
+//
 // Tablet
 //
-@include media($tablet) {
+@media screen and (min-width: 768px) {
+  .cap-on-mobile {
+    text-transform: none;
+  }
+  .screen-title {
+    padding-top: 6px;
+    font-size: 24px;
+    small {
+      font-size: 18px;
+    }
+  }
+  .score-table {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 0 16px 0;
+
+    caption {
+      display: table-caption;
+      font-size: 72px;
+    }
+    th,
+    td {
+      padding: 12px 4px;
+      font-size: 24px;
+    }
+  }
+  .player-card {
+    .cta {
+      font-size: 18px;
+    }
+  }
+}
+
+//
+// Tablet Horizontal
+//
+@media screen and (min-width: 768px) and (orientation: landscape) {
 
 }
 
 //
-// Mobile
+// Tablet vertical
 //
-@include media($mobile) {
-  .screen-title {
-    padding-top: 6px;
-    font-size: 18px;
-  }
+@media screen and (min-width: 768px) and (orientation: portrait) {
 
-  .cap-on-mobile {
-    text-transform: capitalize;
-  }
+}
 
-    .score-table {
-    max-width: 90%;
-    margin: 0 0 8px 0;
-    caption {
-      font-size: 32px;
-      margin-bottom: -8px;
-    }
-    th,
-    td {
-      padding: 4px 4px;
-      font-size: 12px;
-    }
-  }
+//
+// Desktop (> 1024)
+//
+@media only screen and (min-width: 1024px) {
+
 }

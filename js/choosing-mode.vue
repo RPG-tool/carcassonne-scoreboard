@@ -1,8 +1,13 @@
 <template>
-  <div id="app-viewport" class="view-wrapper view-choose-game-mode">
+  <div
+    id="app-viewport"
+    :class="['view-wrapper', 'view-choose-game-mode', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
+  >
     <header class="main-header">
-      <!--button class="btn left">?</button-->
-      <p class="screen-title">Click to select game mode</p>
+      <div class="wrapper">
+        <!--button class="btn left">?</button-->
+        <p class="screen-title">Select game mode</p>
+      </div>
     </header>
 
     <main class="main-main">
@@ -29,11 +34,13 @@
     </main>
 
     <footer class="main-footer">
-      <button
-        class="btn"
-        :disabled="$store.state.current_game_mode < 0"
-        @click="choosePlayers"
-      >Select players</button>
+      <div class="wrapper">
+        <button
+          class="btn"
+          :disabled="$store.state.current_game_mode < 0"
+          @click="choosePlayers"
+        >Select players</button>
+      </div>
     </footer>
   </div>
 </template>

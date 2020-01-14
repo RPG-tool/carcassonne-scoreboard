@@ -1,5 +1,39 @@
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 @mixin media($breakpoint) {
   @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet-landscape() {
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : landscape) {
+    @content;
+  }
+}
+
+@mixin tablet-portrait() {
+  @media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation : portrait) {
     @content;
   }
 }

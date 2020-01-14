@@ -49,16 +49,34 @@ if (iOS) {
 function calculateVh() {
   console.log('Recalculate --vh');
   let vh = window.innerHeight * 0.01;
+  let $body = document.getElementsByTagName("body")[0];
   // Then we set the value in the --vh custom property to the root of the document
   document.documentElement.style.setProperty('--vh', `${vh}px`);
+  $body.setAttribute('data-width', window.innerWidth);
+  $body.setAttribute('data-height', window.innerHeight);
 }
 calculateVh();
 
+function calculatePlayerCardsAspectRatio() {
+  const $cards = document.getElementsByClassName("player-card");
+  if ($cards.length) {
+    const $first = $cards[0];
+    const ratio = Math.floor($first.offsetWidth / $first.offsetHeight);
+    console.log(`Card's ratio: ${ratio}`);
+    Array.from($cards).forEach(el => {
+      el.setAttribute('data-ratio', `${ratio}:1`);
+    });
+  }
+}
+calculatePlayerCardsAspectRatio();
+
 window.addEventListener("orientationchange", function () {
-  calculateVh()
+  calculateVh();
+  calculatePlayerCardsAspectRatio();
 }, false);
 window.addEventListener("resize", function () {
-  calculateVh()
+  calculateVh();
+  calculatePlayerCardsAspectRatio();
 }, false);
 
 // $(document).ready(function () {

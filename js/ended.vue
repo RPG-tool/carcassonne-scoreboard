@@ -3,7 +3,9 @@
     :class="['view-wrapper', 'view-winner', {'starwars':($store.state.current_game_mode === 0), 'classic':($store.state.current_game_mode === 1)}]"
   >
     <header class="main-header">
-      <!--p class="screen-title right">And the winner is...</p-->
+      <div class="wrapper">
+        <!-- <p class="screen-title">And the winner is...</p> -->
+      </div>
     </header>
 
     <main class="main-main">
@@ -44,7 +46,9 @@
     </main>
 
     <footer class="main-footer">
-      <button class="btn" @click="startNewGame">Start new game</button>
+      <div class="wrapper">
+        <button class="btn" @click="startNewGame">Start new game</button>
+      </div>
     </footer>
   </div>
 </template>

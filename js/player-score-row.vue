@@ -14,9 +14,9 @@
 
       <p class="player-name">{{ player.name[$store.state.current_game_mode] }}</p>
 
-      <div class="score-control-block">
+      <div class="score-control-wrapper">
         <div class="score-current">
-          <p class="score-title">Player score</p>
+          <p class="score-title">Score</p>
           <p class="score-value">{{ player.score }}</p>
         </div>
 
@@ -24,13 +24,11 @@
           <label :for="'aditional-player-score-'+player.color" class="score-title">Enter value</label>
           <div class="row">
             <button
-              class="btn-score"
+              class="btn-score btn-substract"
               :disabled="player.score === 0 || player_aditional_score < 1"
               @click="playerScoreUpdate(-1*player_aditional_score)"
               title="Substract"
-            >
-              <span>−</span>
-            </button>
+            ></button>
             <input
               class="additional-score"
               :name="'aditional-player-score-'+player.color"
@@ -38,17 +36,14 @@
               min="0"
               step="1"
               v-model="player_aditional_score"
-              @click="selectAll"
               @keyup="validateInput"
             />
             <button
-              class="btn-score"
+              class="btn-score btn-add"
               :disabled="player_aditional_score < 1"
               @click="playerScoreUpdate(player_aditional_score)"
               title="Add"
-            >
-              <span>+</span>
-            </button>
+            ></button>
           </div>
         </div>
       </div>
@@ -94,9 +89,6 @@ export default {
     },
     resetPlayerScore: function() {
       this.$store.commit("RESET_PLAYER_SCORE", this.player);
-    },
-    selectAll(e) {
-      e.toElement.select();
     }
   }
 };
