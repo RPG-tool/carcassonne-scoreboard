@@ -66,3 +66,6 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
   - Show leader player in other way than blinking
   - Add control to aneble / disable sound
   - Review button / action position (top / bottom bar)
+- Preload final music
+- Borrar 1 en el focusout?
+
