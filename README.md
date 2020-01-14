@@ -8,7 +8,7 @@ Small web application designed to manage the player's scores in Carcassonne and 
 
 Specially designed to be used in mobile devices and tablets. It works on desktop computers also but it is not so fancy.
 
-![](screenshot.png)
+![](https://repository-images.githubusercontent.com/225129639/ab351100-3704-11ea-992c-7ea7cecf24d5)
 
 ## Installation
 
