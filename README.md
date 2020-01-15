@@ -1,4 +1,4 @@
-# Carcassonne Scoreboard (http://gamescore.app)
+# Carcassonne Scoreboard (https://gamescore.app)
 
 [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
