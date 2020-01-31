@@ -1,9 +1,5 @@
 # Carcassonne Scoreboard (https://gamescore.app)
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
-
 Small web application designed to manage the player's scores in Carcassonne and Carcassonne StarWars plays.
 
 Specially designed to be used in mobile devices and tablets. It works on desktop computers also but it is not so fancy.
@@ -30,10 +26,19 @@ parcel index.html
 parcel build index.html
 ```
 
+## Update app
+
+App is stored in Git Hub pages. To deply 
+
+```sh
+npm run build
+npm run deploy
+```
+
 ## Release History
 
 * 0.0.1
-    * First release
+  * First release
 
 ## Meta
 
