@@ -1,4 +1,4 @@
-# Carcassonne Scoreboard (https://gamescore.app)
+# Carcassonne Scoreboard (https://carcassonne.netlify.app/)
 
 Small web application designed to manage the player's scores in Carcassonne and Carcassonne StarWars plays.
 
